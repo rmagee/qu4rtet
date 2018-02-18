@@ -1,0 +1,5 @@
+[run]
+include = qu4rtet/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin
