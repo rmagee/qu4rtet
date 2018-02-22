@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
 
-ROOT_DIR = environ.Path(__file__) - 3  # (qu4rtet/config/settings/base.py - 3 = qu4rtet/)
+ROOT_DIR = environ.Path(
+    __file__) - 3  # (qu4rtet/config/settings/base.py - 3 = qu4rtet/)
 APPS_DIR = ROOT_DIR.path('qu4rtet')
 
 # Load operating system environment variables and then prepare to use them
@@ -56,8 +57,14 @@ LOCAL_APPS = [
     # custom users app
     'qu4rtet.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'quartet_manifest.apps.QuartetManifestConfig',
+    'quartet_epcis.apps.QuartetEPCISConfig',
+    'quartet_capture.apps.QuartetCaptureConfig',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth.registration',
+    'drf_openapi',
 ]
-
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -93,7 +100,8 @@ FIXTURE_DIRS = (
 
 # EMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
-EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
+                    default='django.core.mail.backends.smtp.EmailBackend')
 
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -114,7 +122,6 @@ DATABASES = {
     'default': env.db('DATABASE_URL', default='postgres:///qu4rtet'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
-
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -254,7 +261,8 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
-ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
+ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION',
+                                      True)
 ACCOUNT_ADAPTER = 'qu4rtet.users.adapters.AccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'qu4rtet.users.adapters.SocialAccountAdapter'
 
@@ -269,7 +277,8 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 
 ########## CELERY
 INSTALLED_APPS += ['qu4rtet.taskapp.celery.CeleryConfig']
-CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='django://')
+CELERY_BROKER_URL = env('CELERY_BROKER_URL',
+                        default='amqp://guest@localhost//')
 if CELERY_BROKER_URL == 'django://':
     CELERY_RESULT_BACKEND = 'redis://'
 else:
@@ -282,3 +291,8 @@ ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning'
+}
+
+AUTOCOMMIT = False

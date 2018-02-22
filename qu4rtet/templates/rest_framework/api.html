@@ -1,0 +1,21 @@
+{% extends "rest_framework/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    QU4RTET API
+{% endblock title %}
+{% block style %}
+{{ block.super }}
+  <link rel="icon"
+      type="image/png"
+      href="{% static "images/favicon.ico" %}">
+{% endblock %}
+{% block bootstrap_navbar_variant %}{% endblock %}
+{% block branding %}
+  <a class='navbar-brand' rel="nofollow" href='/'>
+	   <img src="{% static 'images/qu4rtet-logo-medium.png' %}"/>
+	 </a>
+{% endblock branding %}
+{% block breadcrumbs %}{% endblock %}
+{% block bootstrap_theme %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+{% endblock %}

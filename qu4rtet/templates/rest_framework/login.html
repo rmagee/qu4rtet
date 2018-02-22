@@ -1,0 +1,10 @@
+{% extends "rest_framework/login.html" %}
+{% load staticfiles %}
+{% block branding %}
+  <div>
+  <img style="margin-left: auto;margin-right: auto; display: block;"
+       src="{% static "images/QU4RTET-small.png" %}">{% endblock %}
+</div>
+{% block bootstrap_theme %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}"/>
+{% endblock %}

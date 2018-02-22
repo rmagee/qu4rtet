@@ -20,15 +20,15 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key only used for development and testing.
-SECRET_KEY = env('DJANGO_SECRET_KEY', default='gLvAMdTEIWtTHVHTcAfivd0loFluxWtBez3Hy72TRqJ2qeit59')
+SECRET_KEY = env('DJANGO_SECRET_KEY',
+                 default='gLvAMdTEIWtTHVHTcAfivd0loFluxWtBez3Hy72TRqJ2qeit59')
 
 # Mail settings
 # ------------------------------------------------------------------------------
 
 EMAIL_PORT = 1025
 
-EMAIL_HOST = env('EMAIL_HOST', default='mailhog')
-
+EMAIL_HOST = env('EMAIL_HOST', default='localhost')
 
 # CACHING
 # ------------------------------------------------------------------------------
@@ -46,9 +46,9 @@ INSTALLED_APPS += ['debug_toolbar', ]
 
 INTERNAL_IPS = ['127.0.0.1', '10.0.2.2', ]
 
-
 import socket
 import os
+
 # tricks to have debug toolbar when developing with docker
 if os.environ.get('USE_DOCKER') == 'yes':
     ip = socket.gethostbyname(socket.gethostname())
@@ -76,3 +76,10 @@ CELERY_ALWAYS_EAGER = True
 
 # Your local stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+import logging
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    handlers=[logging.StreamHandler()]
+)
+

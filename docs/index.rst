@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to QU4RTET's documentation!
+QU4RTET The Open Source Level-4 System
 ====================================================================
 
 Contents:
@@ -15,6 +15,7 @@ Contents:
    deploy
    docker_ec2
    tests
+   api
 
 
 
