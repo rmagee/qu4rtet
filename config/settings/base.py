@@ -59,6 +59,7 @@ LOCAL_APPS = [
     'quartet_capture.apps.QuartetCaptureConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_auth',
     'rest_auth.registration',
     'drf_openapi',
 ]
