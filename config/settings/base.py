@@ -17,7 +17,7 @@ APPS_DIR = ROOT_DIR.path('qu4rtet')
 env = environ.Env()
 
 # .env file, should load only in development environment
-READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=False)
+READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=True)
 
 if READ_DOT_ENV_FILE:
     # Operating System Environment variables have precedence over variables defined in the .env file,
@@ -49,14 +49,11 @@ THIRD_PARTY_APPS = [
     'crispy_forms',  # Form layouts
     'allauth',  # registration
     'allauth.account',  # registration
-    'allauth.socialaccount',  # registration
 ]
 
 # Apps specific for this project go here.
 LOCAL_APPS = [
     # custom users app
-    'qu4rtet.users.apps.UsersConfig',
-    # Your stuff: custom apps go here
     'quartet_manifest.apps.QuartetManifestConfig',
     'quartet_epcis.apps.QuartetEPCISConfig',
     'quartet_capture.apps.QuartetCaptureConfig',
@@ -268,10 +265,6 @@ SOCIALACCOUNT_ADAPTER = 'qu4rtet.users.adapters.SocialAccountAdapter'
 
 # Custom user app defaults
 # Select the correct user model
-AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'users:redirect'
-LOGIN_URL = 'account_login'
-
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 
@@ -296,3 +289,4 @@ REST_FRAMEWORK = {
 }
 
 AUTOCOMMIT = False
+

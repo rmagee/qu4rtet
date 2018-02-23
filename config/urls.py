@@ -13,6 +13,7 @@ schema_view = get_schema_view(title='QU4RTET API',
 urlpatterns = [
                   # Django Admin, use {% url 'admin:index' %}
                   url(r'^$', APIRoot.as_view()),
+                  url(r'^accounts/', include('allauth.urls')),
                   url(r'^schema/', schema_view, name='schema'),
                   url(settings.ADMIN_URL, admin.site.urls),
                   url(r'^manifest/', include('quartet_manifest.urls',

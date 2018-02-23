@@ -13,9 +13,9 @@ from .base import *  # noqa
 
 # DEBUG
 # ------------------------------------------------------------------------------
-DEBUG = env.bool('DJANGO_DEBUG', default=True)
+DEBUG = env.bool('DJANGO_DEBUG', default=False)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
-
+print('Debug set to: %s' % env.bool('DJANGO_DEBUG', False))
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -71,8 +71,11 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 ########## CELERY
 # In development, all tasks will be executed locally by blocking until the task returns
-CELERY_ALWAYS_EAGER = True
+CELERY_ALWAYS_EAGER = env.bool('CELERY_ALWAYS_EAGER', True)
 ########## END CELERY
+
+# When not running in debug mode
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
 
 # Your local stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
@@ -82,4 +85,7 @@ logging.basicConfig(
     level=logging.DEBUG,
     handlers=[logging.StreamHandler()]
 )
+
+pil_logger = logging.getLogger('PIL.Image')
+pil_logger.setLevel(logging.INFO)
 
