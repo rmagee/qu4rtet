@@ -6,24 +6,33 @@ from django.views import defaults as default_views
 from rest_framework.schemas import get_schema_view
 from qu4rtet.api.renderers import SwaggerRenderer
 from qu4rtet.api.views import APIRoot
+from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_schema_view(title='QU4RTET API',
-                              renderer_classes=[SwaggerRenderer])
+                               renderer_classes=[SwaggerRenderer])
 
+swagger_view = get_swagger_view(title='QU4RTET API')
 urlpatterns = [
                   # Django Admin, use {% url 'admin:index' %}
                   url(r'^$', APIRoot.as_view()),
-                  url(r'^accounts/', include('allauth.urls')),
                   url(r'^schema/', schema_view, name='schema'),
+                  url(r'^swagger', swagger_view, name='swagger'),
                   url(settings.ADMIN_URL, admin.site.urls),
                   url(r'^manifest/', include('quartet_manifest.urls',
                                              namespace='manifest')),
                   url(r'^capture/', include('quartet_capture.urls',
                                             namespace='quartet-capture')),
+                  url(r'^epcis/', include('quartet_epcis.urls')),
                   url(r'^api-auth/', include('rest_framework.urls')),
-                  url(r'^rest-auth/', include('rest_auth.urls'))
+                  url(r'^rest-auth/', include('rest_auth.urls')),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+registration = getattr(settings, 'ENABLE_REGISTRATION', None)
+
+if registration:
+    urlpatterns.append(url(r'^rest-auth/registration/',
+                           include('rest_auth.registration.urls')))
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit

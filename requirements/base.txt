@@ -51,5 +51,6 @@ markdown
 # Your custom requirements go here
 djangorestframework
 django-rest-auth
+django-rest-swagger
 lxml
 

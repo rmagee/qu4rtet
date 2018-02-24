@@ -61,6 +61,7 @@ LOCAL_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
+    'rest_framework_swagger',
     'drf_openapi',
 ]
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

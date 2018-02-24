@@ -18,8 +18,13 @@ from rest_framework.views import APIView
 
 class APIRoot(APIView):
     '''
-    The schema exposed via this root API will output a swagger/OpenAPI
-    definition of each of the APIs installed in on this QU4RTET system.
+    To enumerate all of the API options available on this QU4RTET
+    instance, use the swagger or schema options below.
+
+    The swagger option will expose all of the APIs available via
+    a swagger UI interface.  If you'd like to generate a swagger
+    schema to use for client generation and such, use the schema
+    API to retrieve the schema.
 
     For more on Swagger and Open API see:
 
@@ -33,6 +38,7 @@ class APIRoot(APIView):
     def get(self, request, format=None):
         return Response({
             'schema': reverse('schema', request=request, format=format),
+            'swagger': reverse('swagger', request=request, format=format)
         })
 
     def get_view_name(self):

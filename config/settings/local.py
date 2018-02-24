@@ -89,3 +89,5 @@ logging.basicConfig(
 pil_logger = logging.getLogger('PIL.Image')
 pil_logger.setLevel(logging.INFO)
 
+# allow restful registration API endpoints
+ENABLE_REGISTRATION=True
