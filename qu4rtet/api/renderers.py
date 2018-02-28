@@ -14,7 +14,7 @@
 # Copyright 2018 SerialLab LLC.  All rights reserved.
 from rest_framework import renderers
 from openapi_codec import OpenAPICodec
-
+from rest_framework_swagger.renderers import OpenAPIRenderer
 
 class SwaggerRenderer(renderers.BaseRenderer):
     '''
@@ -28,5 +28,9 @@ class SwaggerRenderer(renderers.BaseRenderer):
         return codec.dump(data)
 
 
-class JSONOpenAPIRenderer(renderers.OpenAPIRenderer):
+class JSONOpenAPIRenderer(OpenAPIRenderer):
+    '''
+    Swagger-js sends the Accept header as application/json by default.
+    See: https://github.com/marcgibbons/django-rest-swagger/issues/701
+    '''
     media_type = 'application/json'
