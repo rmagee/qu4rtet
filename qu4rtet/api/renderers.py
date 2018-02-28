@@ -26,3 +26,7 @@ class SwaggerRenderer(renderers.BaseRenderer):
     def render(self, data, media_type=None, renderer_context=None):
         codec = OpenAPICodec()
         return codec.dump(data)
+
+
+class JSONOpenAPIRenderer(renderers.OpenAPIRenderer):
+    media_type = 'application/json'

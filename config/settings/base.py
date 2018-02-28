@@ -63,6 +63,7 @@ LOCAL_APPS = [
     'rest_auth.registration',
     'rest_framework_swagger',
     'drf_openapi',
+    'corsheaders',
 ]
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -72,6 +73,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -280,6 +282,8 @@ else:
     CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 ########## END CELERY
 
+# CORS specific
+CORS_ORIGIN_ALLOW_ALL = env('CORS_ORIGIN_ALLOW_ALL', default=True)
 
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
 ADMIN_URL = r'^admin/'
@@ -291,4 +295,3 @@ REST_FRAMEWORK = {
 }
 
 AUTOCOMMIT = False
-
