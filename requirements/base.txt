@@ -54,3 +54,8 @@ django-rest-auth
 django-rest-swagger
 lxml
 
+-e git+git@gitlab.com:serial-lab/EParseCIS.git#egg=eparsecis
+-e git+git@gitlab.com:serial-lab/EPCPyYes.git#egg=epcpyyes
+-e git+git@gitlab.com:serial-lab/quartet_capture.git#egg=quartet_capture
+-e git+git@gitlab.com:serial-lab/quartet_epcis.git#egg=quartet_epcis
+
