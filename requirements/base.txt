@@ -58,4 +58,6 @@ lxml
 -e git+git@gitlab.com:serial-lab/EPCPyYes.git#egg=epcpyyes
 -e git+git@gitlab.com:serial-lab/quartet_capture.git#egg=quartet_capture
 -e git+git@gitlab.com:serial-lab/quartet_epcis.git#egg=quartet_epcis
+-e git+git@gitlab.com:serial-lab/serialbox.git#egg=serialbox
+-e git+git@gitlab.com:serial-lab/random-flavorpack.git#egg=random_flavorpack
 
