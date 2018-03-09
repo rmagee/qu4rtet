@@ -63,6 +63,8 @@ LOCAL_APPS = [
     'rest_auth.registration',
     'rest_framework_swagger',
     'drf_openapi',
+    'serialbox',
+    'random_flavorpack'
 ]
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -291,4 +293,3 @@ REST_FRAMEWORK = {
 }
 
 AUTOCOMMIT = False
-
