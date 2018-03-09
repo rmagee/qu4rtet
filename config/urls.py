@@ -4,12 +4,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import defaults as default_views
 from rest_framework.schemas import get_schema_view
-from qu4rtet.api.renderers import SwaggerRenderer
+from qu4rtet.api.renderers import SwaggerRenderer, JSONOpenAPIRenderer
 from qu4rtet.api.views import APIRoot
 from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_schema_view(title='QU4RTET API',
-                               renderer_classes=[SwaggerRenderer])
+                               renderer_classes=[SwaggerRenderer, JSONOpenAPIRenderer])
 
 swagger_view = get_swagger_view(title='QU4RTET API')
 urlpatterns = [
