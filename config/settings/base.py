@@ -268,7 +268,6 @@ ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION',
                                       True)
 #ACCOUNT_ADAPTER = 'qu4rtet.users.adapters.AccountAdapter'
 #SOCIALACCOUNT_ADAPTER = 'qu4rtet.users.adapters.SocialAccountAdapter'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Custom user app defaults
 # Select the correct user model
