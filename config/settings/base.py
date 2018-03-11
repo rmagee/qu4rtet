@@ -266,8 +266,9 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION',
                                       True)
-ACCOUNT_ADAPTER = 'qu4rtet.users.adapters.AccountAdapter'
-SOCIALACCOUNT_ADAPTER = 'qu4rtet.users.adapters.SocialAccountAdapter'
+#ACCOUNT_ADAPTER = 'qu4rtet.users.adapters.AccountAdapter'
+#SOCIALACCOUNT_ADAPTER = 'qu4rtet.users.adapters.SocialAccountAdapter'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Custom user app defaults
 # Select the correct user model
@@ -293,7 +294,10 @@ ADMIN_URL = r'^admin/'
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning'
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.BasicAuthentication',]
 }
+
+
 
 AUTOCOMMIT = False
