@@ -1,0 +1,24 @@
+stages:
+  - deploy
+
+before_script:
+  - bash
+  - eval `ssh-agent -s`
+  - mkdir -p ~/.ssh
+  - ssh-add <(echo "$SERIALBOX_SSH_KEY") 2>/dev/null
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  - apt-get install -y git
+  - export PYTHONPATH=$PYTHONPATH:$CI_PROJECT_DIR
+  - pip install -r ./requirements/requirements_base.txt
+  - pip install -r ./requirements/requirements_production.txt
+
+deploy:
+    stage: deploy
+    image: docker:latest
+    services:
+    - docker:dind
+    script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker build -t registry.gitlab.com/serial-lab/qu4rtet:latest .
+    - docker push registry.gitlab.com/serial-lab/qu4rtet:latest
+    environment: production

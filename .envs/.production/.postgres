@@ -1,0 +1,5 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_DB=qu4rtet
+POSTGRES_USER=qu4rtet
+POSTGRES_PASSWORD=onetwothreefour4321

@@ -1,0 +1,43 @@
+# General
+# ------------------------------------------------------------------------------
+# DJANGO_READ_DOT_ENV_FILE=True
+DJANGO_SETTINGS_MODULE=config.settings.production
+DJANGO_SECRET_KEY=HvNVgWONKdwP6zt9dB0cpehTk9Juj09oSRo3iiWnlT383Kmi4r635hjBd9QHTO6q
+DJANGO_ADMIN_URL=^izvqJ5Ak82SiVw32j9u2bGKoRC8i0xAL/
+DJANGO_ALLOWED_HOSTS=.serial-lab.com
+
+# Security
+# ------------------------------------------------------------------------------
+# TIP: better off using DNS, however, redirect is OK too
+DJANGO_SECURE_SSL_REDIRECT=False
+
+# Email
+# ------------------------------------------------------------------------------
+MAILGUN_API_KEY=
+DJANGO_SERVER_EMAIL=
+MAILGUN_DOMAIN=
+
+# AWS
+# ------------------------------------------------------------------------------
+DJANGO_AWS_ACCESS_KEY_ID=
+DJANGO_AWS_SECRET_ACCESS_KEY=
+DJANGO_AWS_STORAGE_BUCKET_NAME=
+
+# django-allauth
+# ------------------------------------------------------------------------------
+DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
+
+# Gunicorn
+# ------------------------------------------------------------------------------
+WEB_CONCURRENCY=4
+
+# Sentry
+# ------------------------------------------------------------------------------
+DJANGO_SENTRY_DSN=
+
+# opbeat
+# ------------------------------------------------------------------------------
+DJANGO_OPBEAT_ORGANIZATION_ID=
+DJANGO_OPBEAT_APP_ID=
+DJANGO_OPBEAT_SECRET_TOKEN=
+

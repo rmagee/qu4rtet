@@ -15,7 +15,7 @@ from .base import *  # noqa
 # ------------------------------------------------------------------------------
 DEBUG = env.bool('DJANGO_DEBUG', default=False)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
-print('Debug set to: %s' % env.bool('DJANGO_DEBUG', False))
+print('Debug set to: %s' % env.bool('DJANGO_DEBUG', True))
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -75,7 +75,7 @@ CELERY_ALWAYS_EAGER = env.bool('CELERY_ALWAYS_EAGER', True)
 ########## END CELERY
 
 # When not running in debug mode
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
 
 # Your local stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
@@ -90,4 +90,4 @@ pil_logger = logging.getLogger('PIL.Image')
 pil_logger.setLevel(logging.INFO)
 
 # allow restful registration API endpoints
-ENABLE_REGISTRATION=True
+ENABLE_REGISTRATION=False

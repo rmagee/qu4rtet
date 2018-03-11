@@ -7,7 +7,6 @@ An open-source level-4 system for the masses.
     :target: https://github.com/pydanny/cookiecutter-django/
      :alt: Built with Cookiecutter Django
 
-
 :License: GPLv3
 
 
