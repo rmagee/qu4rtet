@@ -28,7 +28,6 @@ urlpatterns = [
                   url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
                   url(r'^serialbox/', include('serialbox.api.urls')),
                   url(r'^accounts/', include('allauth.urls'))
->>>>>>> master
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 registration = getattr(settings, 'ENABLE_REGISTRATION', None)
