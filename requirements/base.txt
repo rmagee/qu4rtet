@@ -38,6 +38,7 @@ djangorestframework
 django-rest-auth
 django-rest-swagger
 lxml
+django-cors-headers
 
 -e git+git@gitlab.com:serial-lab/EParseCIS.git#egg=eparsecis
 -e git+git@gitlab.com:serial-lab/EPCPyYes.git#egg=epcpyyes
