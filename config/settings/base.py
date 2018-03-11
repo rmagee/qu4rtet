@@ -294,7 +294,6 @@ ADMIN_URL = r'^admin/'
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
-    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.BasicAuthentication',]
 }
 
 AUTOCOMMIT = False
