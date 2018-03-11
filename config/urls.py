@@ -25,7 +25,6 @@ urlpatterns = [
                   url(r'^epcis/', include('quartet_epcis.urls')),
                   url(r'^api-auth/', include('rest_framework.urls')),
                   url(r'^rest-auth/', include('rest_auth.urls')),
-                  url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
                   url(r'^serialbox/', include('serialbox.api.urls')),
                   url(r'^accounts/', include('allauth.urls'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
