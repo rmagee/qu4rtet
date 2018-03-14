@@ -1,11 +1,17 @@
 QU4RTET
 =======
 
-An open-source level-4 system for the masses.
+       ____  _    _ _  _   _____ _______ ______ _______
+      / __ \| |  | | || | |  __ |__   __|  ____|__   __|
+     | |  | | |  | | || |_| |__) | | |  | |__     | |
+     | |  | | |  | |__   _|  _  /  | |  |  __|    | |
+     | |__| | |__| |  | | | | \ \  | |  | |____   | |
+      \___\_\\____/   |_| |_|  \_\ |_|  |______|  |_|
 
-.. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
-    :target: https://github.com/pydanny/cookiecutter-django/
-     :alt: Built with Cookiecutter Django
+
+
+The open-source level-4 system.
+
 
 :License: GPLv3
 
