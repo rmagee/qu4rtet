@@ -30,11 +30,11 @@ urlpatterns = [
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# registration = getattr(settings, 'ENABLE_REGISTRATION', False)
-#
-# if registration:
-#     urlpatterns.append(url(r'^rest-auth/registration/',
-#                            include('rest_auth.registration.urls')))
+registration = getattr(settings, 'ENABLE_REGISTRATION', False)
+
+if registration:
+    urlpatterns.append(url(r'^rest-auth/registration/',
+                           include('rest_auth.registration.urls')))
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
