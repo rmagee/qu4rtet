@@ -10,7 +10,7 @@ if [ -z "${POSTGRES_USER}" ]; then
     # the official postgres image uses 'postgres' as default user if not set explictly.
     export POSTGRES_USER=postgres
 fi
-export DATABASE_URL="postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}"
+export DATABASE_URL="postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DOCKER_DATABASE_HOST}:5432/${POSTGRES_DB}"
 
 postgres_ready() {
 python << END

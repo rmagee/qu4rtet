@@ -2,6 +2,8 @@ FROM python:3.6
 
 ENV PYTHONUNBUFFERED 1
 
+RUN export DOCKER=true
+
 RUN mkdir -p /root/.ssh
 ADD ./compose/local/django/gitlab_deploy_key_rsa /root/.ssh/id_rsa
 RUN chmod 700 /root/.ssh/id_rsa

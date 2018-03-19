@@ -20,8 +20,10 @@ env = environ.Env()
 READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=True)
 
 if READ_DOT_ENV_FILE:
-    # Operating System Environment variables have precedence over variables defined in the .env file,
-    # that is to say variables from the .env files will only be used if not defined
+    # Operating System Environment variables have precedence over
+    # #variables defined in the .env file,
+    # that is to say variables from the .env
+    # files will only be used if not defined
     # as environment variables.
     env_file = str(ROOT_DIR.path('.env'))
     print('Loading : {}'.format(env_file))
@@ -115,13 +117,22 @@ ADMINS = [
 MANAGERS = ADMINS
 
 # DATABASE CONFIGURATION
-# ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-# Uses django-environ to accept uri format
-# See: https://django-environ.readthedocs.io/en/latest/#supported-types
+docker = env.bool('DOCKER', False)
+if not docker:
+    database_host = env.str('DATABASE_HOST')
+else:
+    database_host = env.str('DOCKER_DATABASE_HOST')
+
+default_db_url = "postgres://{0}:{1}@{2}:5432/{3}".format(
+    env.str('POSTGRES_USER'),
+    env.str('POSTGRES_PASSWORD'),
+    database_host,
+    env.str('POSTGRES_DB')
+)
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///qu4rtet'),
+    'default': env.db('DATABASE_URL', default_db_url),
 }
+print(DATABASES)
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # GENERAL CONFIGURATION

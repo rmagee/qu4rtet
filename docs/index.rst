@@ -13,6 +13,7 @@ Contents:
 
    install
    deploy
+   docker
    docker_ec2
    tests
    api
