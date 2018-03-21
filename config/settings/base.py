@@ -43,9 +43,6 @@ DJANGO_APPS = [
 
     # Useful template tags:
     # 'django.contrib.humanize',
-
-    # Admin
-    'django.contrib.admin',
 ]
 THIRD_PARTY_APPS = [
     'allauth',  # registration
@@ -132,7 +129,6 @@ default_db_url = "postgres://{0}:{1}@{2}:5432/{3}".format(
 DATABASES = {
     'default': env.db('DATABASE_URL', default_db_url),
 }
-print(DATABASES)
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # GENERAL CONFIGURATION
@@ -294,7 +290,7 @@ else:
 CORS_ORIGIN_ALLOW_ALL = env('CORS_ORIGIN_ALLOW_ALL', default=True)
 
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
-ADMIN_URL = r'^admin/'
+ADMIN_URL = r'^qu4rtetadmin/'
 
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------

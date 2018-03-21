@@ -65,6 +65,10 @@ DEBUG_TOOLBAR_CONFIG = {
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ['django_extensions', ]
 
+# django admin
+# -----------------------------------------------------------------------------
+INSTALLED_APPS += ['django.contrib.admin', ]
+
 # TESTING
 # ------------------------------------------------------------------------------
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
@@ -90,4 +94,4 @@ pil_logger = logging.getLogger('PIL.Image')
 pil_logger.setLevel(logging.INFO)
 
 # allow restful registration API endpoints
-ENABLE_REGISTRATION=False
+ENABLE_REGISTRATION = False
