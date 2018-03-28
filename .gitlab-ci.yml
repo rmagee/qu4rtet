@@ -2,6 +2,7 @@ stages:
   - deploy
 
 before_script:
+  - bash
   - eval `ssh-agent -s`
   - mkdir -p ~/.ssh
   - ssh-add <(echo "$SERIALBOX_SSH_KEY") 2>/dev/null
@@ -13,7 +14,7 @@ before_script:
 
 deploy:
     stage: deploy
-    image: docker:latest
+    image: seriallab/python3.5dev
     services:
     - docker:dind
     script:
