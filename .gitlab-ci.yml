@@ -19,6 +19,6 @@ deploy:
     - docker:dind
     script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-    - docker build -t registry.gitlab.com/serial-lab/qu4rtet:latest .
+    - docker build -t registry.gitlab.com/serial-lab/qu4rtet:latest -f local.yml
     - docker push registry.gitlab.com/serial-lab/qu4rtet:latest
     environment: production
