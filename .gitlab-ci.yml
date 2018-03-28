@@ -2,7 +2,6 @@ stages:
   - deploy
 
 before_script:
-  - bash
   - eval `ssh-agent -s`
   - mkdir -p ~/.ssh
   - ssh-add <(echo "$SERIALBOX_SSH_KEY") 2>/dev/null
