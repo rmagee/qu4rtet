@@ -21,6 +21,5 @@ pytest-sugar==0.9.1
 bumpversion
 
 djangorestframework
-
 recommonmark
 sphinx_rtd_theme

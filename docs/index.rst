@@ -17,6 +17,7 @@ Contents:
    docker_ec2
    tests
    api
+   ../readme
 
 
 

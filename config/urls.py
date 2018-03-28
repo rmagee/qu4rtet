@@ -2,22 +2,24 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.urls import path
 from django.views import defaults as default_views
 from rest_framework.schemas import get_schema_view
 from qu4rtet.api.renderers import SwaggerRenderer, JSONOpenAPIRenderer
 from qu4rtet.api.views import APIRoot
+from qu4rtet.admin import admin_site
 from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_schema_view(title='QU4RTET API',
-                               renderer_classes=[SwaggerRenderer, JSONOpenAPIRenderer])
+                              renderer_classes=[SwaggerRenderer,
+                                                JSONOpenAPIRenderer])
 
 swagger_view = get_swagger_view(title='QU4RTET API')
 urlpatterns = [
-                  # Django Admin, use {% url 'admin:index' %}
                   url(r'^$', APIRoot.as_view()),
                   url(r'^schema/', schema_view, name='schema'),
                   url(r'^swagger', swagger_view, name='swagger'),
-                  url(settings.ADMIN_URL, admin.site.urls),
+                  path(settings.ADMIN_URL, admin_site.urls),
                   url(r'^manifest/', include('quartet_manifest.urls',
                                              namespace='manifest')),
                   url(r'^capture/', include('quartet_capture.urls',

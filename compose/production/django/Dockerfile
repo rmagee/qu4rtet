@@ -1,20 +1,17 @@
-FROM python:3.6-alpine
+FROM python:3.6
 
 ENV PYTHONUNBUFFERED 1
 
 RUN export DOCKER=true
 
-RUN apk update \
-  # psycopg2 dependencies
-  && apk add --virtual build-deps gcc python3-dev musl-dev \
-  && apk add postgresql-dev openssh \
-  # Pillow dependencies
-  && apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev \
-  # CFFI dependencies
-  && apk add libffi-dev openssl-dev py-cffi
+RUN mkdir -p /root/.ssh
+ADD ./compose/local/django/gitlab_deploy_key_rsa /root/.ssh/id_rsa
+RUN chmod 700 /root/.ssh/id_rsa
+RUN echo "Host gitlab.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
-RUN addgroup -S django \
-    && adduser -S -G django django
+RUN addgroup --system django \
+    && adduser --system django \
+    && usermod -aG django django
 
 # Requirements have to be pulled and installed here, otherwise caching won't work
 COPY ./requirements /requirements
@@ -46,5 +43,8 @@ RUN chown -R django /app
 USER django
 
 WORKDIR /app
+VOLUME ["/app/staticfiles", "/app/media/"]
+#VOLUME /static
+#VOLUME /media
 
 ENTRYPOINT ["/entrypoint.sh"]

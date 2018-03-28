@@ -9,19 +9,11 @@ QU4RTET
       \___\_\\____/   |_| |_|  \_\ |_|  |______|  |_|
 
 
-
 The open-source level-4 system.
 
 
 :License: GPLv3
 
-
-Settings
---------
-
-Moved to settings_.
-
-.. _settings: http://cookiecutter-django.readthedocs.io/en/latest/settings.html
 
 Basic Commands
 --------------
@@ -65,9 +57,7 @@ Moved to `Live reloading and SASS compilation`_.
 Celery
 ^^^^^^
 
-This app comes with Celery.
-
-To run a celery worker:
+To run the celery worker:
 
 .. code-block:: bash
 
@@ -78,12 +68,8 @@ Please note: For Celery's import magic to work, it is important *where* the
 celery commands are run. If you are in the same folder with *manage.py*,
 you should be right.
 
-
-
-
 Email Server
 ^^^^^^^^^^^^
-
 In development, it is often nice to be able to see emails that are being
 sent from your application. For that reason local SMTP server `MailHog`_ with
 a web interface is available as docker container.
@@ -96,8 +82,6 @@ With MailHog running, to view messages that are sent by your application,
 open your browser and go to ``http://127.0.0.1:8025``
 
 .. _mailhog: https://github.com/mailhog/MailHog
-
-
 
 Sentry
 ^^^^^^

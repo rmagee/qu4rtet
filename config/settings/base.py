@@ -278,6 +278,8 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 
 ########## CELERY
 INSTALLED_APPS += ['qu4rtet.taskapp.celery.CeleryConfig']
+
+
 CELERY_BROKER_URL = env('CELERY_BROKER_URL',
                         default='amqp://guest@localhost//')
 if CELERY_BROKER_URL == 'django://':
@@ -290,7 +292,7 @@ else:
 CORS_ORIGIN_ALLOW_ALL = env('CORS_ORIGIN_ALLOW_ALL', default=True)
 
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
-ADMIN_URL = r'^qu4rtetadmin/'
+ADMIN_URL = 'qu4rtetadmin/'
 
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
