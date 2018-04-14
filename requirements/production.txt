@@ -27,3 +27,7 @@ raven==6.5.0
 # -----------------------------------------
 opbeat==3.6.1
 
+# rest framwework XML support
+djangorestframework-xml
+
+

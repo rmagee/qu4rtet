@@ -298,6 +298,11 @@ ADMIN_URL = 'qu4rtetadmin/'
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'quartet_epcis.renderers.EPCPyYesXMLRenderer',
+    )
 }
 
-AUTOCOMMIT = False
+
