@@ -40,12 +40,12 @@ django-rest-swagger
 lxml
 django-cors-headers
 
--e git+git@gitlab.com:serial-lab/EParseCIS.git#egg=eparsecis
--e git+git@gitlab.com:serial-lab/EPCPyYes.git#egg=epcpyyes
--e git+git@gitlab.com:serial-lab/quartet_capture.git#egg=quartet_capture
--e git+git@gitlab.com:serial-lab/quartet_epcis.git#egg=quartet_epcis
--e git+git@gitlab.com:serial-lab/serialbox.git#egg=serialbox
--e git+git@gitlab.com:serial-lab/random-flavorpack.git#egg=random_flavorpack
--e git+git@gitlab.com:serial-lab/quartet_manifest.git#egg=quartet_manifest
+eparsecis
+epcpyyes
+quartet_capture
+quartet_epcis
+serialbox
+random_flavorpack
+quartet_manifest
 
 
