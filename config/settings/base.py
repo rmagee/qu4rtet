@@ -63,6 +63,7 @@ LOCAL_APPS = [
     'rest_auth.registration',
     'rest_framework_swagger',
     'corsheaders',
+    'django_filters',
 ]
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -302,7 +303,8 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
         'quartet_epcis.renderers.EPCPyYesXMLRenderer',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.SearchFilter', 'rest_framework.filters.OrderingFilter', 'django_filters.rest_framework.DjangoFilterBackend')
 }
-
-
