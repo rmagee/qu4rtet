@@ -39,6 +39,7 @@ django-rest-auth
 django-rest-swagger
 lxml
 django-cors-headers
+django-filter
 
 eparsecis
 epcpyyes
@@ -47,5 +48,3 @@ quartet_epcis
 serialbox
 random_flavorpack
 quartet_manifest
-
-
