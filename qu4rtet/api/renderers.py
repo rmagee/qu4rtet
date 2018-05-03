@@ -16,6 +16,7 @@ from rest_framework import renderers
 from openapi_codec import OpenAPICodec
 from rest_framework_swagger.renderers import OpenAPIRenderer
 
+
 class SwaggerRenderer(renderers.BaseRenderer):
     '''
     Used to render out the API as a swagger schema.
