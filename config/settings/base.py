@@ -55,6 +55,7 @@ LOCAL_APPS = [
     'quartet_manifest.apps.QuartetManifestConfig',
     'quartet_epcis.apps.QuartetEPCISConfig',
     'quartet_capture.apps.QuartetCaptureConfig',
+    'quartet_masterdata.apps.QuartetMasterdataConfig',
     'serialbox.apps.PoolsConfig',
     'random_flavorpack.apps.RandomFlavorpackConfig',
     'rest_framework',
@@ -79,12 +80,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-# MIGRATIONS CONFIGURATION
-# ------------------------------------------------------------------------------
-MIGRATION_MODULES = {
-    'sites': 'qu4rtet.contrib.sites.migrations'
-}
 
 # DEBUG
 # ------------------------------------------------------------------------------
@@ -120,6 +115,7 @@ if not docker:
 else:
     database_host = env.str('DOCKER_DATABASE_HOST')
 
+# TODO: make the port configurable as well
 default_db_url = "postgres://{0}:{1}@{2}:5432/{3}".format(
     env.str('POSTGRES_USER'),
     env.str('POSTGRES_PASSWORD'),
@@ -302,7 +298,9 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
         'quartet_epcis.renderers.EPCPyYesXMLRenderer',
-    )
+    ),
+    #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20
 }
 
 
