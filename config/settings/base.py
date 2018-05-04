@@ -8,7 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
-print("####################################################")
+
 ROOT_DIR = environ.Path(
     __file__) - 3  # (qu4rtet/config/settings/base.py - 3 = qu4rtet/)
 APPS_DIR = ROOT_DIR.path('qu4rtet')
@@ -26,7 +26,9 @@ if READ_DOT_ENV_FILE:
     # files will only be used if not defined
     # as environment variables.
     env_file = str(ROOT_DIR.path('.env'))
+    print('Loading : {}'.format(env_file))
     env.read_env(env_file)
+    print('The .env file has been loaded. See base.py for more information')
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -53,7 +55,6 @@ LOCAL_APPS = [
     'quartet_manifest.apps.QuartetManifestConfig',
     'quartet_epcis.apps.QuartetEPCISConfig',
     'quartet_capture.apps.QuartetCaptureConfig',
-    'quartet_masterdata.apps.QuartetMasterdataConfig',
     'serialbox.apps.PoolsConfig',
     'random_flavorpack.apps.RandomFlavorpackConfig',
     'rest_framework',
@@ -62,6 +63,7 @@ LOCAL_APPS = [
     'rest_auth.registration',
     'rest_framework_swagger',
     'corsheaders',
+    'django_filters',
 ]
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -297,8 +299,23 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
         'quartet_epcis.renderers.EPCPyYesXMLRenderer',
     ),
-    #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    )
 }
 
-
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic',
+        }
+    }
+}

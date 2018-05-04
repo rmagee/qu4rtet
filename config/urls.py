@@ -11,8 +11,7 @@ from qu4rtet.admin import admin_site
 from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_schema_view(title='QU4RTET API',
-                              renderer_classes=[SwaggerRenderer,
-                                                JSONOpenAPIRenderer])
+                              renderer_classes=[JSONOpenAPIRenderer])
 
 swagger_view = get_swagger_view(title='QU4RTET API')
 urlpatterns = [
