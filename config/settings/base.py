@@ -8,7 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
-
+print("####################################################")
 ROOT_DIR = environ.Path(
     __file__) - 3  # (qu4rtet/config/settings/base.py - 3 = qu4rtet/)
 APPS_DIR = ROOT_DIR.path('qu4rtet')
@@ -26,9 +26,7 @@ if READ_DOT_ENV_FILE:
     # files will only be used if not defined
     # as environment variables.
     env_file = str(ROOT_DIR.path('.env'))
-    print('Loading : {}'.format(env_file))
     env.read_env(env_file)
-    print('The .env file has been loaded. See base.py for more information')
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -119,7 +117,7 @@ default_db_url = "postgres://{0}:{1}@{2}:{3}/{4}".format(
     env.str('POSTGRES_USER'),
     env.str('POSTGRES_PASSWORD'),
     database_host,
-    env.str('POSTGRES_PORT', '5432'),
+    env.str('POSTGRES_PORT','5432'),
     env.str('POSTGRES_DB')
 )
 DATABASES = {

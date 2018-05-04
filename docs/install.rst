@@ -4,11 +4,11 @@ With the *Docker Compose* builds you can be up and running in minutes.
 If you wish to do a full manual install on a server or laptop, etc.  Follow
 the local installation instructions below.
 
-Docker Compose
-==============
+Local Docker Compose
+====================
 The docker compose config for local installs runs the following:
 
-1. A postgresql lates version container.
+1. A postgresql latest version container.
 2. A Django/Ubuntu latest version container exposing port 8000.
 3. A mailhog 1.0 container exposing port 8025
 4. A RabbitMQ container.
@@ -64,6 +64,8 @@ Or install it using the install instructions here:
 https://www.rabbitmq.com/download.html
 
 Make sure to start the RabbitMQ service.  :->
+
+
 
 Install Celery
 --------------

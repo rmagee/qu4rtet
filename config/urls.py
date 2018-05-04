@@ -25,6 +25,7 @@ urlpatterns = [
                   url(r'^capture/', include('quartet_capture.urls',
                                             namespace='quartet-capture')),
                   url(r'^epcis/', include('quartet_epcis.urls')),
+                  url(r'^masterdata/', include('quartet_masterdata.urls')),
                   url(r'^api-auth/', include('rest_framework.urls')),
                   url(r'^rest-auth/', include('rest_auth.urls')),
                   url(r'^serialbox/', include('serialbox.api.urls')),

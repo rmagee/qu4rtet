@@ -1,7 +1,10 @@
 Developing with Docker
 ======================
 
-You can develop your application in a `Docker`_ container for simpler deployment onto bare Linux machines later. This instruction assumes an `Amazon Web Services`_ EC2 instance, but it should work on any machine with Docker > 1.3 and `Docker compose`_ installed.
+You can develop your application in a `Docker`_ container for simpler
+deployment onto bare Linux machines later. This instruction assumes
+an `Amazon Web Services`_ EC2 instance, but it should work on any
+machine with Docker > 1.3 and `Docker compose`_ installed.
 
 .. _Docker: https://www.docker.com/
 .. _Amazon Web Services: http://aws.amazon.com/
@@ -10,17 +13,19 @@ You can develop your application in a `Docker`_ container for simpler deployment
 Setting up
 ^^^^^^^^^^
 
-Docker encourages running one container for each process. This might mean one container for your web server, one for Django application and a third for your database. Once you're happy composing containers in this way you can easily add more, such as a `Redis`_ cache.
+Docker encourages running one container for each process.
+This might mean one container for your web server, one for Django application
+and a third for your database. Once you're happy composing containers in
+this way you can easily add more, such as a `Redis`_ cache.
 
 .. _Redis: http://redis.io/
 
-The Docker compose tool (previously known as `fig`_) makes linking these containers easy. An example set up for your Cookiecutter Django project might look like this:
-
-.. _fig: http://www.fig.sh/
+The Docker compose tool makes linking these
+containers easy. An example set up for your project might look like this:
 
 ::
 
-    webapp/ # Your cookiecutter project would be in here
+    webapp/ # QU4RTET code would be in here
         Dockerfile
         ...
     database/
@@ -31,7 +36,10 @@ The Docker compose tool (previously known as `fig`_) makes linking these contain
         ...
     production.yml
 
-Each component of your application would get its own `Dockerfile`_. The rest of this example assumes you are using the `base postgres image`_ for your database. Your database settings in `config/base.py` might then look something like:
+Each component of your application would get its own `Dockerfile`_.
+The rest of this example assumes you are using the `base postgres image`_
+for your database. Your database settings in `config/base.py`
+might then look something like:
 
 .. _Dockerfile: https://docs.docker.com/reference/builder/
 .. _base postgres image: https://registry.hub.docker.com/_/postgres/
@@ -48,7 +56,8 @@ Each component of your application would get its own `Dockerfile`_. The rest of 
             }
         }
 
-The `Docker compose documentation`_ explains in detail what you can accomplish in the `production.yml` file, but an example configuration might look like this:
+The `Docker compose documentation`_ explains in detail what you can accomplish
+in the `production.yml` file, but an example configuration might look like this:
 
 .. _Docker compose documentation: https://docs.docker.com/compose/#compose-documentation
 
@@ -72,7 +81,9 @@ The `Docker compose documentation`_ explains in detail what you can accomplish i
         links:
             - webapp
 
-We'll ignore the webserver for now (you'll want to comment that part out while we do). A working Dockerfile to run your cookiecutter application might look like this:
+We'll ignore the webserver for now (you'll want to comment that part out
+while we do). A working Dockerfile to run your the application might
+look like this:
 
 ::
 
@@ -107,14 +118,23 @@ We'll ignore the webserver for now (you'll want to comment that part out while w
     # uncomment the line below to use container as a non-root user
     USER python:python
 
-Running `sudo docker-compose -f production.yml build` will follow the instructions in your `production.yml` file and build the database container, then your webapp, before mounting your cookiecutter project files as a volume in the webapp container and linking to the database. Our example yaml file runs in development mode but changing it to production mode is as simple as commenting out the line using `runserver` and uncommenting the line using `gunicorn`.
+Running `sudo docker-compose -f production.yml build` will follow the
+instructions in your `production.yml` file and build the database container,
+then your webapp, before mounting your project files as a
+volume in the webapp container and linking to the database. Our example
+yaml file runs in development mode but changing it to production mode is as
+simple as commenting out the line using `runserver` and uncommenting the
+line using `gunicorn`.
 
-Both are set to run on port `0.0.0.0:8000`, which is where the Docker daemon will discover it. You can now run `sudo docker-compose -f production.yml up` and browse to `localhost:8000` to see your application running.
+Both are set to run on port `0.0.0.0:8000`, which is where the Docker
+daemon will discover it. You can now run `sudo docker-compose -f production.yml up`
+and browse to `localhost:8000` to see your application running.
 
 Deployment
 ^^^^^^^^^^
 
-You'll need a webserver container for deployment. An example setup for `Nginx`_ might look like this:
+You'll need a webserver container for deployment. An example setup
+for `Nginx`_ might look like this:
 
 .. _Nginx: http://wiki.nginx.org/Main
 
@@ -134,14 +154,16 @@ You'll need a webserver container for deployment. An example setup for `Nginx`_ 
     EXPOSE 80 443
 
     # load nginx conf
-    ADD ./site.conf /etc/nginx/sites-available/your_cookiecutter_project
-    RUN ["ln", "-s", "/etc/nginx/sites-available/your_cookiecutter_project", "/etc/nginx/sites-enabled/your_cookiecutter_project"]
+    ADD ./site.conf /etc/nginx/sites-available/qu4rtet
+    RUN ["ln", "-s", "/etc/nginx/sites-available/qu4rtet", "/etc/nginx/sites-enabled/qu4rtet"]
     RUN ["rm", "-rf", "/etc/nginx/sites-available/default"]
 
     #start the server
     CMD ["nginx", "-g", "daemon off;"]
 
-That Dockerfile assumes you have an Nginx conf file named `site.conf` in the same directory as the webserver Dockerfile. A very basic example, which forwards traffic onto the development server or gunicorn for processing, would look like this:
+That Dockerfile assumes you have an Nginx conf file named `site.conf` in the
+same directory as the webserver Dockerfile. A very basic example, which forwards
+traffic onto the development server or gunicorn for processing, would look like this:
 
 ::
 
@@ -155,7 +177,10 @@ That Dockerfile assumes you have an Nginx conf file named `site.conf` in the sam
         }
     }
 
-Running `sudo docker-compose -f production.yml build webserver` will build your server container. Running `sudo docker-compose -f production.yml up` will now expose your application directly on `localhost` (no need to specify the port number).
+Running `sudo docker-compose -f production.yml build webserver` will build
+your server container. Running `sudo docker-compose -f production.yml up` will
+ now expose your application directly on `localhost`
+ (no need to specify the port number).
 
 Building and running your app on EC2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -176,11 +201,16 @@ All you now need to do to run your app in production is:
 
 * Point your domain name to the elastic IP.
 
-**Be careful with Elastic IPs** because, on the AWS free tier, if you assign one and then stop the machine you will incur charges while the machine is down (presumably because you're preventing them allocating the IP to someone else).
+**Be careful with Elastic IPs** because, on the AWS free tier, if you assign
+one and then stop the machine you will incur charges while the machine is down
+(presumably because you're preventing them allocating the IP to someone else).
 
 Security advisory
 ^^^^^^^^^^^^^^^^^
 
-The setup described in this instruction will get you up-and-running but it hasn't been audited for security. If you are running your own setup like this it is always advisable to, at a minimum, examine your application with a tool like `OWASP ZAP`_ to see what security holes you might be leaving open.
+The setup described in this instruction will get you up-and-running but it
+hasn't been audited for security. If you are running your own setup like this
+it is always advisable to, at a minimum, examine your application with a tool
+like `OWASP ZAP`_ to see what security holes you might be leaving open.
 
 .. _OWASP ZAP: https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project

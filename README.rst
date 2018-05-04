@@ -1,113 +1,84 @@
 QU4RTET
 =======
 
-       ____  _    _ _  _   _____ _______ ______ _______
-      / __ \| |  | | || | |  __ |__   __|  ____|__   __|
-     | |  | | |  | | || |_| |__) | | |  | |__     | |
-     | |  | | |  | |__   _|  _  /  | |  |  __|    | |
-     | |__| | |__| |  | | | | \ \  | |  | |____   | |
-      \___\_\\____/   |_| |_|  \_\ |_|  |______|  |_|
+.. code-block::text
+
+    MWNNNWWWNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNWNWWMMMMMMMMMMMMMMMMMMMWWNNNNNNWWM
+    WXOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO0KWMMMMMMMMMMMMMMMMMMMN0OOOOOO0NM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxk0NMMMMMMMMMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxkKWMMMMMMMMMMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxkKWMMMMMMMMMMMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxOXWMMMMMMMMMMMMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxkOKXWMMMMMMMMMMMMMMMMMMMMMMMMXOxxxxxxOXW
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxk0NWMMMMMMMMMMMMMMMMMMMMMMMMMMXOxxxxxxOXW
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxk0NMMMMMMMMMMMMMWWMMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxkKNMMMMMMMMMMMMMNKXWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxxkKWMMMMMMMMMMMMWN0kKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxOXWMMMMMMMMMMMMWXOxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxkOXWMMMMMMMMMMMMWKkxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxOXWMMMMMMMMMMMMN0kxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxk0NMMMMMMMMMMMMWN0kxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxk0NMMMMMMMMMMMMWXOxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxkKWMMMMMMMMMMMMWKkxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxxkKWMMMMMMMMMMMMN0kxxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxxOXWMMMMMMMMMMWNKOkxxxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxxxOXWMMMMMMMMMMWXOkxxxxxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxxk0NMMMMMMMMMMMWKkxxxxxxxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxxk0NMMMMMMMMMMMN0kxxxxxxxxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxxxxxxxxxxxxkKNMMMMMMMMMMMWK000OO00O000000000XMMMMMMMMMMMMMN00O00000NM
+    WKkxxxxxxxxxxxxxkKWMMMMMMMMMMMMMWWWWWWWWWWWWWWWWWWMMMMMMMMMMMMMMMWWWWWWWWMM
+    WKkxxxxxxxxxxxxOXWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+    WKkxxxxxxxxxxxOXWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+    WKkxxxxxxxxxkOXWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+    WKkxxxxxxxxk0NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+    WKkxxxxxxxk0NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+    WKkxxxxxxk0XNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNWMMMMMMMMMMMMMWNNNNNNNNWM
+    WKkxxxxxxxkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkOXWMMMMMMMMMMMMXOkkkkkkOXM
+    WKkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxxxO0KKK0KKKKKK00OkxxxxxxxxxxxxxxxxxxxxxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkxk0NWMMMMMMMMMMWN0kxxxxxxxxxxxxxxxxxxxxxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKkk0NMMMMMMMMMMMWN0kxxxxxxxxxxxxxxxxxxxxxxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WKOKNMMMMMMMMMMMWXOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxkKWMMMMMMMMMMMMXOxxxxxxOXM
+    WXXWMMMMMMMMMMMWX0kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkOXWMMMMMMMMMMMMXOkkkkkkOXM
+    MWWMMMMMMMMMMMMWNXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXNMMMMMMMMMMMMMWNXXXXXXNWM
 
 
 The open-source level-4 system.
 
-
 :License: GPLv3
 
+Getting Started
+---------------
 
-Basic Commands
---------------
+There are a few ways to get started quickly with QU4RTET, the fastest of
+which is via the docker-compose files in the root directory.  For more
+information on this, you can check out the help files for QU4RTET here:
 
-Setting Up Your Users
-^^^^^^^^^^^^^^^^^^^^^
+http://serial-lab.gitlab.io/
 
-* To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
+Features
+--------
 
-* To create an **superuser account**, use this command::
+OpenAPI/Swagger Support
++++++++++++++++++++++++
 
-    $ python manage.py createsuperuser
+EPCIS Support
++++++++++++++
+...
 
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
+Built In Extensibility
+++++++++++++++++++++++
+In bound / outbound rule...
 
-Test coverage
-^^^^^^^^^^^^^
+Opbeat Integration
+++++++++++++++++++
+bla
 
-To run the tests, check your test coverage, and generate an HTML coverage report::
-
-    $ coverage run manage.py test
-    $ coverage html
-    $ open htmlcov/index.html
-
-Running tests with py.test
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-  $ py.test
-
-Live reloading and Sass CSS compilation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Moved to `Live reloading and SASS compilation`_.
-
-.. _`Live reloading and SASS compilation`: http://cookiecutter-django.readthedocs.io/en/latest/live-reloading-and-sass-compilation.html
+Sentry Integration
+++++++++++++++++++
+bla
 
 
-
-Celery
-^^^^^^
-
-To run the celery worker:
-
-.. code-block:: bash
-
-    cd qu4rtet
-    celery -A qu4rtet.taskapp worker -l info
-
-Please note: For Celery's import magic to work, it is important *where* the
-celery commands are run. If you are in the same folder with *manage.py*,
-you should be right.
-
-Email Server
-^^^^^^^^^^^^
-In development, it is often nice to be able to see emails that are being
-sent from your application. For that reason local SMTP server `MailHog`_ with
-a web interface is available as docker container.
-
-Container mailhog will start automatically when you will run all docker containers.
-Please check `cookiecutter-django Docker documentation`_ for more details how
-to start all containers.
-
-With MailHog running, to view messages that are sent by your application,
-open your browser and go to ``http://127.0.0.1:8025``
-
-.. _mailhog: https://github.com/mailhog/MailHog
-
-Sentry
-^^^^^^
-
-Sentry is an error logging aggregator service. You can sign up for a free
-account at  https://sentry.io/signup/?code=cookiecutter
-or download and host it yourself.
-The system is setup with reasonable defaults, including 404 logging and
-integration with the WSGI application.
-
-You must set the DSN url in production.
-
-
-Deployment
-----------
-
-The following details how to deploy this application.
-
-
-
-Docker
-^^^^^^
-
-See detailed `cookiecutter-django Docker documentation`_.
-
-.. _`cookiecutter-django Docker documentation`: http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html
 
 
 
