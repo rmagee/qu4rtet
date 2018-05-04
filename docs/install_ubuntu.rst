@@ -300,9 +300,56 @@ Check to make sure gunicorn is running qu4rtet:
 Configure Nginx
 ---------------
 In the utils directory of the qu4rtet directory there is a pre-configured
-nginx file.  Copy that file to the nginx directory.
+nginx file.  Copy that file to the nginx directory and then edit it by changing
+the `server_name` field from SERVER_DOMAIN_OR_IP to whatever your host name
+or server ip address is.  ** Remember to make sure that whatever your
+host name is, it is also configured in the .env file under `DJANGO_ALLOWED_HOSTS`
+or your static files will not be served by nginx.**
 
-.. code-block::
+.. code-block::text
+
+    # copy the config file from the qu4rtet folder
+    sudo cp utility/nginx.conf /etc/nginx/sites-available/qu4rtet
+    # edit
+    sudo nano /etc/ng
 
 
+For example:
 
+.. code-block::text
+
+    server {
+        listen 80;
+        server_name serial-lab.local;
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location /static/ {
+            root /srv/qu4rtet;
+        }
+        location / {
+            include proxy_params;
+            proxy_pass http://unix:/srv/qu4rtet/qu4rtet.sock;
+        }
+    }
+
+Now create a symlink in the sites-enabled directory of nginx.
+
+.. code-block::text
+
+    sudo ln -s /etc/nginx/sites-available/qu4rtet /etc/nginx/sites-enabled
+    # test the config
+    sudo nginx -t
+    # restart the server
+    sudo systemctl restart nginx
+
+Check the Site
+--------------
+Your server should be up and running now.  Navigate to it in your browser.
+If you have any questions, reach out to us.  Our contact info, slack-channel
+and such is available at http://serial-lab.com
+
+Comments / Issues
+-----------------
+If you find any errors with this documentation.  Please feel free to create
+an issue on our gitlab page at:
+
+https://gitlab.com/serial-lab/qu4rtet/issues
