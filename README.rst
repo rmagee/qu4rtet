@@ -1,5 +1,5 @@
-QU4RTET
-=======
+QU4RTET BETA-1 Developer's Release
+==================================
 
 .. code-block::text
 
