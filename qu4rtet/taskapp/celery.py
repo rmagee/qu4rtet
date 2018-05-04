@@ -8,7 +8,7 @@ from django.conf import settings
 if not settings.configured:
     # set the default Django settings module for the 'celery' program.
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.local')  # pragma: no cover
-
+    print('Using local settings.')
 
 app = Celery('qu4rtet')
 
@@ -21,7 +21,7 @@ class CeleryConfig(AppConfig):
         app.autodiscover_tasks(force=True)
         # Using a string here means the worker will not have to
         # pickle the object when using Windows.
-        if hasattr(settings, 'RAVEN_CONFIG'):
+        if getattr(settings, 'USE_RAVEN', False) == True:
             # should be defined in production only
             from raven import Client as RavenClient
             from raven.contrib.celery import register_signal as raven_register_signal
@@ -31,7 +31,7 @@ class CeleryConfig(AppConfig):
             raven_register_logger_signal(raven_client)
             raven_register_signal(raven_client)
 
-        if hasattr(settings, 'OPBEAT'):
+        if getattr(settings, 'USE_OPBEAT', False) == True:
             # should be defined in production only
             from opbeat.contrib.django.models import client as opbeat_client
             from opbeat.contrib.django.models import logger as opbeat_logger

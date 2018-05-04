@@ -57,8 +57,8 @@ make sure to change the `host` parameters below!**
     createdb -e -E UTF8 -O qu4rtet --host=localhost --port=5432  qu4rtet 'The QU4RTET database backend.'
 
 
-Create an .env File and Add Your User Info
-------------------------------------------
+Create an .env File
+-------------------
 In the root directory of QU4RTET execute the following:
 
 .. code-block::text
@@ -83,6 +83,40 @@ Paste the following configuration into the .env file and modify accordingly:
     POSTGERS_PORT=5432 # change this if necessary
     #### make sure to put your qu4rtet user's password below !!!! ####
     POSTGRES_PASSWORD=
+
+    CONN_MAX_AGE=60
+
+    # General settings
+    DJANGO_SETTINGS_MODULE=config.settings.production
+    DJANGO_SECRET_KEY=lLPaGAoJIvUkWltSootWeXDjizxHys2HxUiH24gUoHp1Zw4YwB
+    DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1,192.168.1.4'
+    DJANGO_DEBUG=False
+
+    # AWS Settings
+    DJANGO_AWS_ACCESS_KEY_ID=
+    DJANGO_AWS_SECRET_ACCESS_KEY=
+    DJANGO_AWS_STORAGE_BUCKET_NAME=
+
+    # Used with email
+    DJANGO_MAILGUN_API_KEY=
+    DJANGO_SERVER_EMAIL=
+    MAILGUN_SENDER_DOMAIN=
+
+    # Security! Better to use DNS for this task, but you can use redirect
+    DJANGO_SECURE_SSL_REDIRECT=False
+
+    # django-allauth
+    DJANGO_ACCOUNT_ALLOW_REGISTRATION=False
+    # Sentry
+    DJANGO_SENTRY_DSN=https://fc9e6636aa204f27ad1ef02598d649b3@sentry.io/290104
+
+    DJANGO_OPBEAT_ORGANIZATION_ID='50813ddae7cc4965b2b0cf36e04509ea'
+    DJANGO_OPBEAT_APP_ID='727f44d4c1'
+    DJANGO_OPBEAT_SECRET_TOKEN='c4ed6c589e9b1b8f72b265cb5a9a1a1fa5ecc4c0'
+
+    CELERY_BROKER_URL="amqp://guest@localhost//"
+
+    USE_AWS=False
 
 
 Run The QU4RTET Database Migrations
@@ -199,7 +233,7 @@ Next, see if you can start celery.
 
 At this point you should be ready to configure the web server.
 
-Set Secure Environment Variables
+Set Environment Variables
 --------------------------------
 Here we will add system wide environment variables that handle the
 Django secret key for qu4rtet encryption.
@@ -207,14 +241,14 @@ Django secret key for qu4rtet encryption.
 Step 1.  Go here and create a secret key:
 https://www.miniwebtool.com/django-secret-key-generator/
 
-Step 2.  Add the secret key to the /etc/environment file.  ** Do not use the
+Step 2.  Add the secret key to the .env file.  ** Do not use the
 example key below!!!** Use the secret key you created in step 1.
 
 .. code-block::text
 
-    sudo nano /etc/environment
+    sudo nano .env
 
-    # paste your key into the file...for example:
+    # paste your key into the file under the DJANGO_SECRET_KEY setting:
     DJANGO_SECRET_KEY=tzrbhxx=6akus)ttq3e!375lzw43n006gbt^n+w2#si5p0-k5#
 
 **Log out of the system and then log back in for the environment variables
@@ -227,12 +261,7 @@ to take effect.**  To make sure the variables are there execute the following:
 You should see your variables in the output list.
 
 
-Configure (or disable) Sentry
------------------------------
-QU4RTET is pre-configured to work with Sentry.
-
-
-Configure Gunicorn
+Install Gunicorn
 ------------------
 
 Next we will install Gunicorn which will serve up the qu4rtet application
@@ -242,5 +271,12 @@ code via WSGI.
 
     sudo apt-get install -y gunicorn
 
+Make sure it works.  In the root of the qu4rtet download, execute the following:
+
+.. code-block::text
+
+    sudo gunicorn --bind 0.0.0.0:8000 config.wsgi:application
+
+It should start without error.  Hit CTRL+C to stop the gunicorn server.
 
 
