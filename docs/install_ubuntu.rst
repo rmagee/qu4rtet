@@ -7,7 +7,7 @@ Install Requirements
 .. code-block::text
 
     sudo apt-get -y install update
-    sudo apt-get -y install rabbitmq-server python3-pip postgresql postgresql-contrib gunicorn nginx
+    sudo apt-get -y install rabbitmq-server python3-pip postgresql postgresql-contrib gunicorn nginx supervisor
     cd /srv
     sudo git clone https://gitlab.com/serial-lab/qu4rtet.git
     sudo chown -R qu4rtet:root qu4rtet/
@@ -73,31 +73,44 @@ above under the POSTGRES_PASSWORD configuration value!!!...in addition,
 if you are using a different database host make sure to change the host
 and port values below as well!!!**
 
-Paste the following configuration into the .env file and modify accordingly:
+Paste the following configuration into the .env file and modify accordingly
+where it says ## CHANGE THIS ... ##.
+
+You will most likely only change the `POSTGRES_PASSWORD` and
+`DJANGO_SECRET_KEY` values.  You can generate a new secret key value here:
+https://www.miniwebtool.com/django-secret-key-generator/
 
 .. code-block::text
 
+    # postgres config
     POSTGRES_DB=qu4rtet
     POSTGRES_USER=qu4rtet
-    DATABASE_HOST=localhost # change this if necessary
-    POSTGERS_PORT=5432 # change this if necessary
-    #### make sure to put your qu4rtet user's password below !!!! ####
-    POSTGRES_PASSWORD=
+    POSTGRES_PORT=5432
+    # the password should be the password you configured in the database
+    # step in the instructions above.
+    # for example POSTGRES_PASSWORD=mysecurepassword
+    POSTGRES_PASSWORD=## CHANGE THIS ##
+
+    DATABASE_HOST=localhost
+    DOCKER_DATABASE_HOST=postgres # for use with docker compose- do not change
 
     CONN_MAX_AGE=60
 
     # General settings
     DJANGO_SETTINGS_MODULE=config.settings.production
-    DJANGO_SECRET_KEY=lLPaGAoJIvUkWltSootWeXDjizxHys2HxUiH24gUoHp1Zw4YwB
-    DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1,192.168.1.4'
+    # Generate a new secret key here: https://www.miniwebtool.com/django-secret-key-generator/
+    DJANGO_SECRET_KEY=## CHANGE THIS - generate a new secret key ##
+    DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1'
     DJANGO_DEBUG=False
 
-    # AWS Settings
+    # AWS Settings if you want to use S3 file storage as the default
+    # file storage backend configure this.
+    USE_AWS=False
     DJANGO_AWS_ACCESS_KEY_ID=
     DJANGO_AWS_SECRET_ACCESS_KEY=
     DJANGO_AWS_STORAGE_BUCKET_NAME=
 
-    # Used with email
+    # Used with https://www.mailgun.com/ email server
     DJANGO_MAILGUN_API_KEY=
     DJANGO_SERVER_EMAIL=
     MAILGUN_SENDER_DOMAIN=
@@ -108,16 +121,19 @@ Paste the following configuration into the .env file and modify accordingly:
     # django-allauth
     DJANGO_ACCOUNT_ALLOW_REGISTRATION=False
     # Sentry
-    DJANGO_SENTRY_DSN=https://fc9e6636aa204f27ad1ef02598d649b3@sentry.io/290104
+    USE_SENTRY=False
+    DJANGO_SENTRY_DSN=
 
-    DJANGO_OPBEAT_ORGANIZATION_ID='50813ddae7cc4965b2b0cf36e04509ea'
-    DJANGO_OPBEAT_APP_ID='727f44d4c1'
-    DJANGO_OPBEAT_SECRET_TOKEN='c4ed6c589e9b1b8f72b265cb5a9a1a1fa5ecc4c0'
+    USE_OPBEAT=False
+    DJANGO_OPBEAT_ORGANIZATION_ID=
+    DJANGO_OPBEAT_APP_ID=
+    DJANGO_OPBEAT_SECRET_TOKEN=
 
+    # change me if the celery broker is redis or is on a different server
+    # this is configured for a local RabbitMQ
     CELERY_BROKER_URL="amqp://guest@localhost//"
 
-    USE_AWS=False
-
+Save the file and exit.
 
 Run The QU4RTET Database Migrations
 -----------------------------------
@@ -233,50 +249,60 @@ Next, see if you can start celery.
 
 At this point you should be ready to configure the web server.
 
-Set Environment Variables
---------------------------------
-Here we will add system wide environment variables that handle the
-Django secret key for qu4rtet encryption.
 
-Step 1.  Go here and create a secret key:
-https://www.miniwebtool.com/django-secret-key-generator/
-
-Step 2.  Add the secret key to the .env file.  ** Do not use the
-example key below!!!** Use the secret key you created in step 1.
+Quickly Test Gunicorn
+---------------------
+Hop into the qu4rtet directory and see if you can run gunicorn without issue.
 
 .. code-block::text
 
-    sudo nano .env
-
-    # paste your key into the file under the DJANGO_SECRET_KEY setting:
-    DJANGO_SECRET_KEY=tzrbhxx=6akus)ttq3e!375lzw43n006gbt^n+w2#si5p0-k5#
-
-**Log out of the system and then log back in for the environment variables
-to take effect.**  To make sure the variables are there execute the following:
-
-.. code-block::text
-
-    printenv
-
-You should see your variables in the output list.
-
-
-Install Gunicorn
-------------------
-
-Next we will install Gunicorn which will serve up the qu4rtet application
-code via WSGI.
-
-.. code-block::text
-
-    sudo apt-get install -y gunicorn
-
-Make sure it works.  In the root of the qu4rtet download, execute the following:
-
-.. code-block::text
-
+    cd /srv/qu4rtet
     sudo gunicorn --bind 0.0.0.0:8000 config.wsgi:application
 
 It should start without error.  Hit CTRL+C to stop the gunicorn server.
+
+
+Create a Gunicorn Supervisor File
+---------------------------------
+Here we will daemonize Gunicorn with supervisor (which will also
+monitor the process).
+
+.. code-block::text
+
+    sudo nano /etc/supervisor/conf.d/gunicorn.conf
+
+Then paste the following into nano:
+
+.. code-block::text
+
+    [program:gunicorn]
+    directory=/srv/qu4rtet
+    command=gunicorn --workers 3 --bind unix:/srv/qu4rtet/qu4rtet.sock config.wsgi:application
+    autostart=true
+    autorestart=true
+    stderr_logfile=/var/log/gunicorn/gunicorn.out.log
+    stdout_logfile=/var/log/gunicorn/gunicorn.err.log
+    user=root
+    group=www-data
+    environment=LANG=en_US.UTF-8,LC_ALL=en_US.UTF-8
+
+    [group:guni]
+    programs:gunicorn
+
+Check to make sure gunicorn is running qu4rtet:
+
+.. code-block::text
+
+    sudo supervisorctl reread
+    sudo supervisorctl update
+    sudo supervisorctl status
+
+Configure Nginx
+---------------
+In the utils directory of the qu4rtet directory there is a pre-configured
+nginx file.  Copy that file to the nginx directory.
+
+.. code-block::
+
 
 
