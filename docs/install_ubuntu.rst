@@ -7,13 +7,14 @@ Install Requirements
 .. code-block::text
 
     sudo apt-get -y install update
-    sudo apt-get -y install rabbitmq-server python3-pip postgresql postgresql-contrib gunicorn nginx supervisor
+    sudo apt-get -y install rabbitmq-server python3-pip postgresql postgresql-contrib gunicorn nginx supervisor apache2-utils
     cd /srv
     sudo git clone https://gitlab.com/serial-lab/qu4rtet.git
     sudo chown -R qu4rtet:root qu4rtet/
     cd qu4rtet
     # for production
     sudo pip3 install -r requirements/production.txt
+    sudo pip3 install celery-flower
     # for running the dev server local, uncomment out below and/or execute
     # on the command line:
     # sudo pip3 install -r requirements/local.txt
@@ -150,10 +151,10 @@ First switch out of the postgres user account by typing exit:
 .. code-block::text
 
     sudo python3 manage.py makemigrations
-    python3 manage.py migrate --run-syncdb
-    python3 manage.py migrate
-    python3 manage.py collectstatic --no-input
-    python3 manage.py createsuperuser
+    sudo python3 manage.py migrate --run-syncdb
+    sudo python3 manage.py migrate
+    sudo python3 manage.py collectstatic --no-input
+    sudo python3 manage.py createsuperuser
 
 Run The Dev Server
 ------------------
@@ -162,7 +163,7 @@ A quick test of the configuration is to run the dev server as below.
 
 .. code-block::
 
-    python3 manage.py runserver
+    sudo python3 manage.py runserver
 
 If it runs without error we are good for now.  Kill the test server with a
 `CTRL+C` and we will move on.
@@ -262,34 +263,20 @@ Hop into the qu4rtet directory and see if you can run gunicorn without issue.
 It should start without error.  Hit CTRL+C to stop the gunicorn server.
 
 
-Create a Gunicorn Supervisor File
----------------------------------
-Here we will daemonize Gunicorn with supervisor (which will also
-monitor the process).
+Configure Supervisor
+--------------------
+Here we will daemonize Gunicorn and celery-flower with supervisor (which will also
+monitor the process).  The two configuration files in the utility directory
+are pre-configured to work with the installation instructions if you followed
+them.  Execute the following from the `/srv/qu4rtet` directory:
 
 .. code-block::text
 
-    sudo nano /etc/supervisor/conf.d/gunicorn.conf
+    sudo cp ./utility/flower.conf /etc/supervisor/conf.d/flower.conf
+    sudo cp ./utility/gunicorn.conf /etc/supervisor/conf.d/gunicorn.conf
 
-Then paste the following into nano:
 
-.. code-block::text
-
-    [program:gunicorn]
-    directory=/srv/qu4rtet
-    command=gunicorn --workers 3 --bind unix:/srv/qu4rtet/qu4rtet.sock config.wsgi:application
-    autostart=true
-    autorestart=true
-    stderr_logfile=/var/log/gunicorn/gunicorn.out.log
-    stdout_logfile=/var/log/gunicorn/gunicorn.err.log
-    user=root
-    group=www-data
-    environment=LANG=en_US.UTF-8,LC_ALL=en_US.UTF-8
-
-    [group:guni]
-    programs:gunicorn
-
-Check to make sure gunicorn is running qu4rtet:
+Now make sure everything is running:
 
 .. code-block::text
 
