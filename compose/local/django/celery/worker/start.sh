@@ -5,4 +5,6 @@ set -o nounset
 set -o xtrace
 
 
+export DJANGO_SETTINGS_MODULE=config.settings.local
 celery -A qu4rtet.taskapp worker -l INFO
+
