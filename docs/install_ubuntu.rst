@@ -1,7 +1,16 @@
 Ubuntu/Debian Installation
 ==========================
 
-Install Requirements
+Before You Begin
+----------------
+It is important to follow all of the recommended paths and commands in this
+document.  Not doing so will result in much heartache and wasting of time.
+Make sure to:
+
+# Always copy and paste the commands as expressed in the doc.
+# When an example says "change this setting", etc. make sure to change the setting.
+
+Install The Requirements
 --------------------
 
 .. code-block::text
@@ -101,8 +110,11 @@ https://www.miniwebtool.com/django-secret-key-generator/
     DJANGO_SETTINGS_MODULE=config.settings.production
     # Generate a new secret key here: https://www.miniwebtool.com/django-secret-key-generator/
     DJANGO_SECRET_KEY=## CHANGE THIS - generate a new secret key ##
-    DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1'
+    ### Change Below ###
+    DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1' ## add your server ip / host name here ###
     DJANGO_DEBUG=False
+    DJANGO_MEDIA_ROOT='/var/qu4rtet/media/'
+    DJANGO_MEDIA_URL='/media/
 
     # AWS Settings if you want to use S3 file storage as the default
     # file storage backend configure this.
@@ -178,7 +190,10 @@ daemon is up and running.  For more sophisticated Celery deployments
 see the Celery documentation.
 
 Here we are going to download the recommended daemon script from the
-celery github repostory and then configure it for local use.
+celery github repostory and then configure it for local use.  Then we will
+paste the `celeryd` file from the `utilities` folder into the
+`/etc/default/` directory, add the celery user to the system and
+start the Celery workers.
 
 .. code-block::
 
@@ -188,68 +203,17 @@ celery github repostory and then configure it for local use.
     sudo wget https://raw.githubusercontent.com/celery/celery/master/extra/generic-init.d/celeryd celeryd
     # grant execution rights
     sudo chmod ugo+x celeryd
-    # switch directories
-    cd /etc/default
-    # create a celery config file
-    sudo touch celeryd
-    # open with editor
-    sudo nano celeryd
+    # now copy the config file for the daemon from the qu4rtet utilities dir
+    sudo cp /srv/qu4rtet/utility/celeryd /etc/default/celeryd
+    # add the celery user referenced in the config
+    sudo adduser celery
+    # start celery and check the status
+    sudo /etc/init.d/celeryd start
+    sudo /etc/init.d/celeryd status
 
 Next you will paste in the following configuration which is meant to work
 with all of the steps you've followed thus far.  If you've deviated from
 all of the steps above you may experience errors in your system.
-
-.. code-block::
-
-    # here we start five celery nodes
-    CELERYD_NODES="qu4ret_worker_1 qu4rtet_worker2 qu4rtet_worker3 qu4rtet_worker4 qu4rtet_worker5"
-
-    # Absolute or relative path to the 'celery' command:
-    CELERY_BIN="/usr/local/bin/celery"
-
-    # App instance to use
-    CELERY_APP="qu4rtet.taskapp.celery:app"
-
-    # Where to chdir at start.
-    CELERYD_CHDIR="/srv/qu4rtet"
-
-    # Extra command-line arguments to the worker
-    CELERYD_OPTS="--time-limit=300 --concurrency=8"
-
-    # Only set logging level to DEBUG if you're having problems
-    #CELERYD_LOG_LEVEL="DEBUG"
-
-    # %n will be replaced with the first part of the nodename.
-    CELERYD_LOG_FILE="/var/log/celery/%n%I.log"
-    CELERYD_PID_FILE="/var/run/celery/%n.pid"
-
-    # Workers should run as an unprivileged user.
-    #   You need to create this user manually (or you can choose
-    #   a user/group combination that already exists (e.g., nobody).
-    CELERYD_USER="celery"
-    CELERYD_GROUP="celery"
-
-    # If enabled pid and log directories will be created if missing,
-    # and owned by the userid/group configured.
-    CELERY_CREATE_DIRS=1
-
-
-Save the file and exit.  Next, create the celery user and give it a secure
-password that you will remember.
-
-.. code-block::text
-
-    sudo adduser celery
-
-Next, see if you can start celery.
-
-.. code-block::text
-
-    sudo /etc/init.d/celeryd start
-    sudo /etc/init.d/celeryd status
-
-At this point you should be ready to configure the web server.
-
 
 Quickly Test Gunicorn
 ---------------------
@@ -263,8 +227,8 @@ Hop into the qu4rtet directory and see if you can run gunicorn without issue.
 It should start without error.  Hit CTRL+C to stop the gunicorn server.
 
 
-Configure Supervisor
---------------------
+Configure Supervisor to Run Gunicorn and Celery Flower
+------------------------------------------------------
 Here we will daemonize Gunicorn and celery-flower with supervisor (which will also
 monitor the process).  The two configuration files in the utility directory
 are pre-configured to work with the installation instructions if you followed
@@ -286,6 +250,7 @@ Now make sure everything is running:
 
 Configure Nginx
 ---------------
+
 In the utils directory of the qu4rtet directory there is a pre-configured
 nginx file.  Copy that file to the nginx directory and then edit it by changing
 the `server_name` field from SERVER_DOMAIN_OR_IP to whatever your host name
@@ -297,9 +262,8 @@ or your static files will not be served by nginx.**
 
     # copy the config file from the qu4rtet folder
     sudo cp utility/nginx.conf /etc/nginx/sites-available/qu4rtet
-    # edit
-    sudo nano /etc/ng
-
+    # edit the file by changing the server name to an appropriate server name
+    sudo nano /etc/nginx/sites-available/qu4rtet
 
 For example:
 
@@ -307,32 +271,149 @@ For example:
 
     server {
         listen 80;
+        # **********************
+        # CHANGE THE SERVER NAME
+        # **********************
         server_name serial-lab.local;
         location = /favicon.ico { access_log off; log_not_found off; }
         location /static/ {
             root /srv/qu4rtet;
+        }
+        location /media/ {
+            root /var/qu4rtet;
         }
         location / {
             include proxy_params;
             proxy_pass http://unix:/srv/qu4rtet/qu4rtet.sock;
         }
     }
+    server{
+        listen 5555;
+        # **********************
+        # CHANGE THE SERVER NAME
+        # **********************
+        server_name serial-lab.local;
 
-Now create a symlink in the sites-enabled directory of nginx.
+        location / {
+            proxy_pass http://127.0.0.1:5544;
+            proxy_set_header Host $host;
+            proxy_redirect off;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            auth_basic "Restricted";
+            auth_basic_user_file /etc/nginx/.htpasswd;
+        }
+    }
+
+Now create a symlink in the sites-enabled directory of nginx and create
+the media folder for qu4rtet to store uploaded files with:
 
 .. code-block::text
 
+    # get rid of the default site if it is there
+    sudo rm /etc/nginx/sites-enabled/default
+    # add a link to the qu4rtet site
     sudo ln -s /etc/nginx/sites-available/qu4rtet /etc/nginx/sites-enabled
+    # make the media folder
+    sudo mkdir -p /var/qu4rtet/media
+    # give the webserver rights to the media folder
+    sudo chown -R www-data:www-data /var/qu4rtet/media/
     # test the config
     sudo nginx -t
     # restart the server
     sudo systemctl restart nginx
 
+The last thing to do is create a user for the celery flower administration
+page:
+
+.. code-block::text
+
+    sudo htpasswd -c /etc/nginx/.htpasswd qu4rtet
+
 Check the Site
 --------------
-Your server should be up and running now.  Navigate to it in your browser.
+Your server should be up and running now.  Navigate to it in your browser using
+the server name you configured for the web server in the *Nginx* section
+of this document.
 If you have any questions, reach out to us.  Our contact info, slack-channel
 and such is available at http://serial-lab.com
+
+Check the Flower Page
+---------------------
+The flower page will be exposed on port 5555 of your qu4rtet server.
+For example:
+
+`http://myserver.myhost.com:5555`
+
+
+Optional Sentry and Opbeat Configurations
+-----------------------------------------
+
+Sentry Settings
++++++++++++++++
+
+**NOTE: remember to restart gunicorn if you make any settings changes
+recommended in this section.**
+
+If you'd like to use Sentry to monitor your application logs, go to https://sentry.io/
+and sign up for a free account, create a `Django` project and follow the
+instructions here:
+
+https://sentry.io/serial-lab/my-quartet/getting-started/python-django/
+
+** Change Sentry Settings in .env **
+
+Add your *Sentry DSN* to the following settings in your .env file:
+
+.. code-block::text
+
+    # set this value to True
+    USE_SENTRY=True
+    # for example
+    DJANGO_SENTRY_DSN=https://fc9e6636bb204f27ad1ef02598d649b3@sentry.example/292104
+
+When you are complete.  Restart the gunicorn server.  This will reload
+the settings of your QU4RTET application.
+
+.. code-block::text
+
+    sudo supervisorctl restart guni:gunicorn
+
+
+Opbeat Settings
++++++++++++++++
+If you'd like to monitor your system performance using Opbeat, sign up
+for an opbeat account here:
+
+https://opbeat.com/
+
+Create a new `Django` app with a `Custom` deployment method.  **DO NOT
+FOLLOW THE INSTRUCTIONS ON THE FOLLOWING PAGE AFTER CREATING THE NEW APP.**
+Much of the work on the opbeat instructions page is already complete.  All you
+need to do is go into your .env file and set the following values to
+those in the instruction page:
+
+.. code-block::text
+
+    # set this to True
+    USE_OPBEAT=True
+    # put the ORGANIZATION_ID from the opbeat page here (no quotes)
+    DJANGO_OPBEAT_ORGANIZATION_ID=
+    # put the APP_ID from the opbeat page here (no quotes)
+    DJANGO_OPBEAT_APP_ID=
+    # put the SECRET_TOKEN value from the opbeat page here (no quotes
+    DJANGO_OPBEAT_SECRET_TOKEN=
+
+For example:
+
+.. code-block::text
+
+    # in your .env file (only an EXAMPLE)
+    USE_OPBEAT=True
+    DJANGO_OPBEAT_ORGANIZATION_ID=50813ddbe7cc4965b2b0cf36e04509ea
+    DJANGO_OPBEAT_APP_ID=9ed1fc5445
+    DJANGO_OPBEAT_SECRET_TOKEN=c4ed6c589e9b1b8f72b265cb5a9a1a1fa5ecc4c0
 
 Comments / Issues
 -----------------
@@ -340,3 +421,5 @@ If you find any errors with this documentation.  Please feel free to create
 an issue on our gitlab page at:
 
 https://gitlab.com/serial-lab/qu4rtet/issues
+
+

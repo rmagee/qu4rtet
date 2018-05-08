@@ -208,10 +208,13 @@ STATICFILES_FINDERS = [
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = str(APPS_DIR('media'))
+MEDIA_ROOT = env.str('DJANGO_MEDIA_ROOT', str(APPS_DIR('media')))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = '/media/'
+MEDIA_URL = env.str('DJANGO_MEDIA_URL', '/media/')
+
+# FILE STORAGE
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 # URL Configuration
 # ------------------------------------------------------------------------------
