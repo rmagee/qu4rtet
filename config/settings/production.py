@@ -232,6 +232,46 @@ if USE_SENTRY:
         'CELERY_LOGLEVEL': env.int('DJANGO_SENTRY_LOG_LEVEL', logging.INFO),
         'DSN': SENTRY_DSN
     }
+else:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': True,
+        'formatters': {
+            'standard': {
+                'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+            },
+        },
+        'handlers': {
+            'default': {
+                'level': 'DEBUG',
+                'class': 'logging.handlers.RotatingFileHandler',
+                'filename': '/var/qu4rtet/logs/qu4rtet.log',
+                'maxBytes': 1024 * 1024 * 5,
+                'backupCount': 5,
+                'formatter': 'standard',
+            },
+            'request_handler': {
+                'level': 'DEBUG',
+                'class': 'logging.handlers.RotatingFileHandler',
+                'filename': '/var/qu4rtet/logs/django_request.log',
+                'maxBytes': 1024 * 1024 * 5,
+                'backupCount': 5,
+                'formatter': 'standard',
+            },
+        },
+        'loggers': {
+            '': {
+                'handlers': ['default'],
+                'level': 'ERROR',
+                'propagate': True
+            },
+            'django.request': {  # Stop SQL debug from logging to main logger
+                'handlers': ['request_handler'],
+                'level': 'DEBUG',
+                'propagate': False
+            },
+        }
+    }
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------

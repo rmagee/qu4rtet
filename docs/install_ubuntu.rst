@@ -319,6 +319,10 @@ the media folder for qu4rtet to store uploaded files with:
     sudo mkdir -p /var/qu4rtet/media
     # give the webserver rights to the media folder
     sudo chown -R www-data:www-data /var/qu4rtet/media/
+    # create the error logging folder for qu4rtet
+    sudo mkdir -p /var/qu4rtet/logs
+    # give nginx rights to the logging folder
+    sudo chown -R www-data:www-data /var/qu4rtet/logs
     # test the config
     sudo nginx -t
     # restart the server
