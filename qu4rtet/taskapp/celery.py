@@ -9,6 +9,7 @@ if not settings.configured:
     # set the default Django settings module for the 'celery' program.
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.production')  # pragma: no cover
     print('Using production settings.')
+    print(settings.__dict__)
 
 app = Celery('qu4rtet')
 
@@ -21,7 +22,7 @@ class CeleryConfig(AppConfig):
         app.autodiscover_tasks(force=True)
         # Using a string here means the worker will not have to
         # pickle the object when using Windows.
-        if getattr(settings, 'USE_RAVEN', False) == True:
+        if getattr(settings, 'USE_SENTRY', False) == True:
             # should be defined in production only
             from raven import Client as RavenClient
             from raven.contrib.celery import register_signal as raven_register_signal
