@@ -45,7 +45,8 @@ services:
       - mailhog
     env_file:
       - ./.envs/.local/.celery
-    ports: []
+    ports:
+      - "5555:5555"
     command: /start-celeryworker.sh
 
   celerybeat:
@@ -56,5 +57,6 @@ services:
       - mailhog
     env_file:
       - ./.envs/.local/.celery
-    ports: []
+    ports:
+      - "5556:5556"
     command: /start-celerybeat.sh

@@ -4,20 +4,17 @@
    contain the root `toctree` directive.
 
 QU4RTET The Open Source Level-4 System
-====================================================================
-
+======================================
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+   readme
+   development
+   install_ubuntu
    install
-   deploy
-   docker
-   docker_ec2
-   tests
-   api
-   ../readme
+
 
 
 

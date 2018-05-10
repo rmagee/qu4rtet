@@ -1,0 +1,55 @@
+################################################################
+
+PLEASE READ
+
+This is only an example for local development
+DO NOT USE THESE NAMES AND PASSWORDS IN A PRODUCTION ENVIRONMENT
+
+
+################################################################
+POSTGRES_DB=qu4rtet
+POSTGRES_USER=qu4rtet
+POSTGRES_PORT=5432
+POSTGRES_PASSWORD=onetwothreefour4321
+
+DATABASE_HOST=localhost
+DOCKER_DATABASE_HOST=postgres
+
+CONN_MAX_AGE=60
+
+# General settings
+DJANGO_SETTINGS_MODULE=config.settings.local
+DJANGO_SECRET_KEY=gLvAMdTEIWtTHVHTcAfivd0loFluxWtBez3Hy72TRqJ2qeit59
+DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1'
+DJANGO_DEBUG=True
+#DJANGO_MEDIA_ROOT=/tmp/qu4rtet/
+DJANGO_MEDIA_URL=/media/
+
+# AWS Settings
+DJANGO_AWS_ACCESS_KEY_ID=
+DJANGO_AWS_SECRET_ACCESS_KEY=
+DJANGO_AWS_STORAGE_BUCKET_NAME=
+
+# Used with email
+DJANGO_MAILGUN_API_KEY=
+DJANGO_SERVER_EMAIL=
+MAILGUN_SENDER_DOMAIN=
+
+# Security! Better to use DNS for this task, but you can use redirect
+DJANGO_SECURE_SSL_REDIRECT=False
+
+# django-allauth
+DJANGO_ACCOUNT_ALLOW_REGISTRATION=False
+# Sentry
+USE_SENTRY=False
+DJANGO_SENTRY_DSN=
+
+USE_OPBEAT=False
+DJANGO_OPBEAT_ORGANIZATION_ID=
+DJANGO_OPBEAT_APP_ID=
+DJANGO_OPBEAT_SECRET_TOKEN=
+
+CELERY_BROKER_URL="amqp://guest@localhost//"
+
+USE_AWS=False
+

@@ -7,3 +7,4 @@ set -o xtrace
 export DJANGO_SETTINGS_MODULE=config.settings.local
 rm -f './celerybeat.pid'
 celery -A qu4rtet.taskapp beat -l INFO
+flower -A qu4rtet.taskapp --port=5556

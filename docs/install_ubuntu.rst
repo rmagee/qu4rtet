@@ -13,7 +13,7 @@ Make sure to:
 Install The Requirements
 ------------------------
 
-.. code-block::text
+.. code-block:: text
 
     sudo apt-get -y install update
     sudo apt-get -y install rabbitmq-server python3-pip postgresql postgresql-contrib gunicorn nginx supervisor apache2-utils
@@ -35,11 +35,11 @@ Configure Database
 This example is for PostgreSQL.  If you are using another database as a back-end
 (which is fine) you'll need to configure it accordingly.
 
-.. code-block::text
+.. code-block:: text
 
 Switch over to the postgres user.
 
-.. code-block::text
+.. code-block:: text
 
     sudo -i -u postgres
 
@@ -47,7 +47,7 @@ Now launch psql and create a password for the postgres user.  The default
 postgres account has a secret password.  Change it to something secure
 that you can remember.
 
-.. code-block::text
+.. code-block:: text
     psql
     # now IN psql execute the following to change the passwords
     \password postgres
@@ -60,7 +60,7 @@ user account that QU4RTET will use to access the database.
 **NOTE: If you are configuring a remote database backend on another host,
 make sure to change the `host` parameters below!**
 
-.. code-block::text
+.. code-block:: text
 
     # create quartet user and database
     createuser -P -d -l -r -S -i --replication --host=localhost --port=5432 qu4rtet
@@ -71,7 +71,7 @@ Create an .env File
 -------------------
 In the root directory of QU4RTET execute the following:
 
-.. code-block::text
+.. code-block:: text
 
     sudo touch .env
     sudo nano .env
@@ -90,7 +90,7 @@ You will most likely only change the `POSTGRES_PASSWORD` and
 `DJANGO_SECRET_KEY` values.  You can generate a new secret key value here:
 https://www.miniwebtool.com/django-secret-key-generator/
 
-.. code-block::text
+.. code-block:: text
 
     # postgres config
     POSTGRES_DB=qu4rtet
@@ -156,11 +156,11 @@ all of the tables and other logic necessary to support the application.
 
 First switch out of the postgres user account by typing exit:
 
-.. code-block::text
+.. code-block:: text
 
     exit
 
-.. code-block::text
+.. code-block:: text
 
     sudo python3 manage.py makemigrations
     sudo python3 manage.py migrate --run-syncdb
@@ -173,7 +173,7 @@ Run The Dev Server
 
 A quick test of the configuration is to run the dev server as below.
 
-.. code-block::text
+.. code-block:: text
 
     sudo python3 manage.py runserver
 
@@ -195,7 +195,7 @@ paste the `celeryd` file from the `utilities` folder into the
 `/etc/default/` directory, add the celery user to the system and
 start the Celery workers.
 
-.. code-block::text
+.. code-block:: text
 
     # switch directories
     cd /etc/init.d
@@ -219,7 +219,7 @@ Quickly Test Gunicorn
 ---------------------
 Hop into the qu4rtet directory and see if you can run gunicorn without issue.
 
-.. code-block::text
+.. code-block:: text
 
     cd /srv/qu4rtet
     sudo gunicorn --bind 0.0.0.0:8000 config.wsgi:application
@@ -234,7 +234,7 @@ monitor the process).  The two configuration files in the utility directory
 are pre-configured to work with the installation instructions if you followed
 them.  Execute the following from the `/srv/qu4rtet` directory:
 
-.. code-block::text
+.. code-block:: text
 
     sudo cp ./utility/flower.conf /etc/supervisor/conf.d/flower.conf
     sudo cp ./utility/gunicorn.conf /etc/supervisor/conf.d/gunicorn.conf
@@ -242,7 +242,7 @@ them.  Execute the following from the `/srv/qu4rtet` directory:
 
 Now make sure everything is running:
 
-.. code-block::text
+.. code-block:: text
 
     sudo supervisorctl reread
     sudo supervisorctl update
@@ -258,7 +258,7 @@ or server ip address is.  ** Remember to make sure that whatever your
 host name is, it is also configured in the .env file under `DJANGO_ALLOWED_HOSTS`
 or your static files will not be served by nginx.**
 
-.. code-block::text
+.. code-block:: text
 
     # copy the config file from the qu4rtet folder
     sudo cp utility/nginx.conf /etc/nginx/sites-available/qu4rtet
@@ -267,7 +267,7 @@ or your static files will not be served by nginx.**
 
 For example:
 
-.. code-block::text
+.. code-block:: text
 
     server {
         listen 80;
@@ -309,7 +309,7 @@ For example:
 Now create a symlink in the sites-enabled directory of nginx and create
 the media folder for qu4rtet to store uploaded files with:
 
-.. code-block::text
+.. code-block:: text
 
     # get rid of the default site if it is there
     sudo rm /etc/nginx/sites-enabled/default
@@ -331,7 +331,7 @@ the media folder for qu4rtet to store uploaded files with:
 The last thing to do is create a user for the celery flower administration
 page:
 
-.. code-block::text
+.. code-block:: text
 
     sudo htpasswd -c /etc/nginx/.htpasswd qu4rtet
 
@@ -370,7 +370,7 @@ https://sentry.io/serial-lab/my-quartet/getting-started/python-django/
 
 Add your *Sentry DSN* to the following settings in your .env file:
 
-.. code-block::text
+.. code-block:: text
 
     # set this value to True
     USE_SENTRY=True
@@ -380,7 +380,7 @@ Add your *Sentry DSN* to the following settings in your .env file:
 When you are complete.  Restart the gunicorn server.  This will reload
 the settings of your QU4RTET application.
 
-.. code-block::text
+.. code-block:: text
 
     sudo supervisorctl restart guni:gunicorn
 
@@ -398,7 +398,7 @@ Much of the work on the opbeat instructions page is already complete.  All you
 need to do is go into your .env file and set the following values to
 those in the instruction page:
 
-.. code-block::text
+.. code-block:: text
 
     # set this to True
     USE_OPBEAT=True
@@ -411,7 +411,7 @@ those in the instruction page:
 
 For example:
 
-.. code-block::text
+.. code-block:: text
 
     # in your .env file (only an EXAMPLE)
     USE_OPBEAT=True
