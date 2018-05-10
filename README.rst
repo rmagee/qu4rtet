@@ -1,6 +1,10 @@
 QU4RTET BETA-1 Developer's Release
 ==================================
 
+.. image:: https://gitlab.com/serial-lab/qu4rtet/badges/master/pipeline.svg
+        :target: https://gitlab.com/serial-lab/qu4rtet/commits/master
+
+
 .. code-block:: text
 
     MWNNNWWWNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNWNWWMMMMMMMMMMMMMMMMMMMWWNNNNNNWWM
@@ -46,9 +50,6 @@ QU4RTET BETA-1 Developer's Release
 The open-source level-4 system.
 
 :License: GPLv3
-
-BETA-1 Developer's Release
-==========================
 
 Getting Started
 ---------------
