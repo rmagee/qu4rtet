@@ -64,8 +64,19 @@ https://serial-lab.gitlab.io/qu4rtet/
 Features
 --------
 
+QU4RTET-UI
+++++++++++
+The QU4RTET-UI is a graphical interface to manage multiple QU4RTET systems.
+Manage all of your systems, test, qa, development, production, etc. inside of
+one interface.  You can find the quartet-ui here:
+
+https://gitlab.com/serial-lab/quartet-ui/
+
+
 Docker Compose Builds
 +++++++++++++++++++++
+The root directory contains a docker-compose build that works right out
+of the box and is the easiest way to get going.  For more see the documentation.
 
 OpenAPI Specification Support (Swagger)
 +++++++++++++++++++++++++++++++++++++++
