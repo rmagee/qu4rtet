@@ -28,6 +28,7 @@ awesome-slugify==1.6.5
 pytz==2018.3
 
 celery
+flower
 markdown
 
 # Your custom requirements go here
