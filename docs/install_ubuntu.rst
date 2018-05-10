@@ -11,7 +11,7 @@ Make sure to:
 # When an example says "change this setting", etc. make sure to change the setting.
 
 Install The Requirements
---------------------
+------------------------
 
 .. code-block::text
 
@@ -173,7 +173,7 @@ Run The Dev Server
 
 A quick test of the configuration is to run the dev server as below.
 
-.. code-block::
+.. code-block::text
 
     sudo python3 manage.py runserver
 
@@ -195,7 +195,7 @@ paste the `celeryd` file from the `utilities` folder into the
 `/etc/default/` directory, add the celery user to the system and
 start the Celery workers.
 
-.. code-block::
+.. code-block::text
 
     # switch directories
     cd /etc/init.d
