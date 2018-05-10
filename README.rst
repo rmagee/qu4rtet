@@ -56,7 +56,9 @@ Getting Started
 There are a few ways to get started quickly with QU4RTET, the fastest of
 which is via the docker-compose file `local.yml` in the root directory.  For
 more info on getting the docker-compose and other environments set up, check
-out the documentation.
+out the documentation here:
+
+https://serial-lab.gitlab.io/qu4rtet/
 
 Features
 --------
