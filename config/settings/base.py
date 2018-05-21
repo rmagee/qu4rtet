@@ -55,6 +55,7 @@ LOCAL_APPS = [
     'quartet_manifest.apps.QuartetManifestConfig',
     'quartet_epcis.apps.QuartetEPCISConfig',
     'quartet_capture.apps.QuartetCaptureConfig',
+    'quartet_masterdata.apps.QuartetMasterdataConfig',
     'serialbox.apps.PoolsConfig',
     'random_flavorpack.apps.RandomFlavorpackConfig',
     'rest_framework',

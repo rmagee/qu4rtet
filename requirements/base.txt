@@ -46,3 +46,4 @@ quartet_epcis
 serialbox
 random_flavorpack
 quartet_manifest
+quartet_masterdata
