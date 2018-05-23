@@ -38,13 +38,39 @@ Run these two commands:
     docker-compose -f local.yml build
     docker-compose -f local.yml up
 
+To bring down the images, use the following command:
+
+.. code-block:: text
+
+    docker-compose -f local.yml down
+
 Then navigate your browser to the following:
 
 ** QU4RTET **
 http://localhost:8000
 
+Create a Super User
+-------------------
+If you want to connect to this instance using the QU4RTET-UI application,
+connect to the `qu4rtet_django_1` docker container and create a superuser
+to authenticate with using the following commands:
 
+.. code-block:: text
 
+    # connect to the quartet django container
+    docker exec -i -t qu4rtet_django_1 /bin/bash
+    # now create a superuser
+    python manage.py createsuperuser
+
+Get QU4RTET-UI and Connect
+--------------------------
+You can find instructions on dowloading and installing QU4RTET-UI here:
+
+    https://gitlab.com/serial-lab/quartet-ui
+
+Then you can follow the instructions for connecting with QUARTET-UI here:
+
+    https://serial-lab.gitlab.io/quartet-ui/
 
 
 
