@@ -116,17 +116,20 @@ if not docker:
 else:
     database_host = env.str('DOCKER_DATABASE_HOST')
 
-default_db_url = "postgres://{0}:{1}@{2}:{3}/{4}".format(
-    env.str('POSTGRES_USER'),
-    env.str('POSTGRES_PASSWORD'),
-    database_host,
-    env.str('POSTGRES_PORT','5432'),
-    env.str('POSTGRES_DB')
-)
-DATABASES = {
-    'default': env.db('DATABASE_URL', default_db_url),
-}
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+testing = env.str('TESTING', None)
+
+if not testing:
+    default_db_url = "postgres://{0}:{1}@{2}:{3}/{4}".format(
+        env.str('POSTGRES_USER'),
+        env.str('POSTGRES_PASSWORD'),
+        database_host,
+        env.str('POSTGRES_PORT','5432'),
+        env.str('POSTGRES_DB')
+    )
+    DATABASES = {
+        'default': env.db('DATABASE_URL', default_db_url),
+    }
+    DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------
