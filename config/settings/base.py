@@ -112,7 +112,7 @@ MANAGERS = ADMINS
 # DATABASE CONFIGURATION
 docker = env.bool('DOCKER', False)
 if not docker:
-    database_host = env.str('DATABASE_HOST')
+    database_host = env.str('DATABASE_HOST', 'localhost')
 else:
     database_host = env.str('DOCKER_DATABASE_HOST')
 
