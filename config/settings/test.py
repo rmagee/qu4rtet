@@ -3,7 +3,6 @@ Test settings for QU4RTET project.
 
 - Used to run tests fast on the continuous integration server and locally
 """
-
 from .base import *  # noqa
 
 
@@ -42,6 +41,12 @@ CACHES = {
 # ------------------------------------------------------------------------------
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ":memory:",
+    }
+}
 
 # PASSWORD HASHING
 # ------------------------------------------------------------------------------
