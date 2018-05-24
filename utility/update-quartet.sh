@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 cd /srv/qu4rtet
+git stash
 git checkout master
 git pull https://gitlab.com/serial-lab/qu4rtet.git master
 git fetch --tags
