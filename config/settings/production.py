@@ -235,3 +235,5 @@ if USE_SENTRY:
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+if env.bool('DJANGO_ENABLE_ADMIN', False):
+    INSTALLED_APPS += ['django_admin_bootstrapped', 'django.contrib.admin']
