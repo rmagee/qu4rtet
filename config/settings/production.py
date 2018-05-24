@@ -237,3 +237,5 @@ if USE_SENTRY:
 # ------------------------------------------------------------------------------
 if env.bool('DJANGO_ENABLE_ADMIN', False):
     INSTALLED_APPS += ['django_admin_bootstrapped', 'django.contrib.admin']
+
+ENABLE_REGISTRATION = env.bool('DJANGO_ENABLE_REGISTRATION', True)
