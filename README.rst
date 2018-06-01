@@ -79,6 +79,20 @@ Docker Compose Builds
 The root directory contains a docker-compose build that works right out
 of the box and is the easiest way to get going.  For more see the documentation.
 
+
+VirtualBox Image
+++++++++++++++++
+** Note: the virtualbox image is not part of our automated build.  It is
+usually somewhat up to date but you will want to follow the update instructions
+in the documentation here under the virtualbox page:
+
+https://serial-lab.gitlab.io/qu4rtet/
+
+There is a virtualbox image that is available at bintray.com- see the link
+here:
+
+
+
 OpenAPI Specification Support (Swagger)
 +++++++++++++++++++++++++++++++++++++++
 All of the APIs exposed by QU4RTET are available via an *OpenAPI* schema.

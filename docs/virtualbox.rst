@@ -30,6 +30,18 @@ To connect with QU4RTET-UI:
 # In QU4RTET-UI use the ipaddress as the host name and use the same
 username and password to configure.
 
+Using Your Own QU4RTET Code
+---------------------------
+If you've forked QU4RTET (or any of it's components)
+and would like to use that, the code
+for QU4RTET is in the `/srv/qu4rtet` directory.  You can modify the
+`.git/config` file there to point to your repo.  Calling `quartet-update`
+will now pull from your repo but will still install all of the serial-lab
+quartet components from PyPi.  If you want to install your own forked
+components as well, modify the `/usr/local/bin/quartet-update` file and
+set the pip install commands to point to your repos or PyPI packages
+accordingly.
+
 Upgrading and Restarting QU4RTET
 --------------------------------
 If you want to update or restart all of the QU4RTET services on the
