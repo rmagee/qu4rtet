@@ -4,7 +4,7 @@ QU4RTET BETA-1 Developer's Release
 .. image:: https://gitlab.com/serial-lab/qu4rtet/badges/master/pipeline.svg
         :target: https://gitlab.com/serial-lab/qu4rtet/commits/master
 .. image:: https://gitlab.com/serial-lab/qu4rtet/badges/master/coverage.svg
-        :target: https://gitlab.com/serial-lab/qu4rtet/commits/master
+        :target: https://gitlab.com/serial-lab/qu4rtet/pipelines
 
 .. code-block:: text
 
