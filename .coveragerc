@@ -1,5 +1,7 @@
 [run]
 include = qu4rtet/*
-omit = *migrations*, *tests*, quartet/taskapp/*
-plugins =
-    django_coverage_plugin
+omit =
+    *migrations*
+    *tests*
+    quartet/taskapp/celery.py
+
