@@ -1,5 +1,5 @@
 [run]
 include = qu4rtet/*
-omit = *migrations*, *tests*
+omit = *migrations*, *tests*, quartet/taskapp/*
 plugins =
     django_coverage_plugin
