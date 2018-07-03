@@ -1,7 +1,7 @@
 [run]
-source = qu4rtet/api/*
+include = qu4rtet/api/*
 omit =
     *migrations*
     *tests*
-
+    quartet/taskapp/celery.py
 
