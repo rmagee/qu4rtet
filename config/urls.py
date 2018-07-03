@@ -1,11 +1,10 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.urls import path
 from django.views import defaults as default_views
 from rest_framework.schemas import get_schema_view
-from qu4rtet.api.renderers import SwaggerRenderer, JSONOpenAPIRenderer
+from qu4rtet.api.renderers import JSONOpenAPIRenderer
 from qu4rtet.api.views import APIRoot
 from qu4rtet.admin import admin_site
 from rest_framework_swagger.views import get_swagger_view
@@ -23,7 +22,8 @@ urlpatterns = [
                                              namespace='manifest')),
                   url(r'^capture/', include('quartet_capture.urls',
                                             namespace='quartet-capture')),
-
+                  url(r'^output/', include('quartet_output.urls',
+                                            namespace='quartet-output')),
                   url(r'^epcis/', include('quartet_epcis.urls')),
                   url(r'^api-auth/', include('rest_framework.urls')),
                   url(r'^rest-auth/', include('rest_auth.urls')),
