@@ -46,3 +46,5 @@ serialbox
 random_flavorpack
 quartet_manifest
 quartet_masterdata
+quartet_output
+
