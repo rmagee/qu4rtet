@@ -70,7 +70,7 @@ quartet-capture==1.0.20
 quartet-epcis==1.1.8
 quartet-manifest==1.0.2
 quartet-masterdata==1.0.0
-quartet-output==1.0.0
+quartet-output==1.0.3
 random-flavorpack==1.0.2
 regex==2018.6.21          # via awesome-slugify
 requests==2.19.1          # via coreapi
