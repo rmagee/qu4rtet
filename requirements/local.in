@@ -1,0 +1,19 @@
+-r base.in
+
+coverage
+django-coverage-plugin
+Sphinx==1.4.8
+django-extensions
+Werkzeug
+django-test-plus
+factory-boy
+django-debug-toolbar
+ipdb
+pytest-django
+pytest-sugar
+bumpversion
+djangorestframework
+recommonmark
+sphinx_rtd_theme
+pip-tools
+bumpversion
