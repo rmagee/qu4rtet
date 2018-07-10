@@ -13,7 +13,6 @@
 #
 # Copyright 2018 SerialLab LLC.  All rights reserved.
 from rest_framework import renderers
-from openapi_codec import OpenAPICodec
 from rest_framework_swagger.renderers import OpenAPIRenderer
 
 
@@ -23,10 +22,6 @@ class SwaggerRenderer(renderers.BaseRenderer):
     '''
     media_type = 'application/openapi+json'
     format = 'swagger'
-
-    def render(self, data, media_type=None, renderer_context=None):
-        codec = OpenAPICodec()
-        return codec.dump(data)
 
 
 class JSONOpenAPIRenderer(OpenAPIRenderer):

@@ -17,6 +17,7 @@ import django
 from rest_framework.test import APITestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
+from qu4rtet.api.views import APIRoot
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'config.settings.test'
 django.setup()
@@ -42,3 +43,6 @@ class ViewTest(APITestCase):
         response = self.client.get(url)
         self.assertIs(response.status_code, 200)
 
+    def test_name(self):
+        name = APIRoot().get_view_name()
+        self.assertEqual('Schema API', name)
