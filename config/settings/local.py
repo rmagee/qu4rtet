@@ -65,9 +65,9 @@ DEBUG_TOOLBAR_CONFIG = {
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ['django_extensions', ]
 
-# django admin
+# uncomment for django admin
 # -----------------------------------------------------------------------------
-INSTALLED_APPS += ['django_admin_bootstrapped', 'django.contrib.admin']
+# INSTALLED_APPS += ['django.contrib.admin']
 
 # TESTING
 # ------------------------------------------------------------------------------
