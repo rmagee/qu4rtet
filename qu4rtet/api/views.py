@@ -15,6 +15,7 @@
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
+from rest_framework_swagger.views import get_swagger_view
 
 class APIRoot(APIView):
     '''
