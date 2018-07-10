@@ -35,8 +35,6 @@ Configure Database
 This example is for PostgreSQL.  If you are using another database as a back-end
 (which is fine) you'll need to configure it accordingly.
 
-.. code-block:: text
-
 Switch over to the postgres user.
 
 .. code-block:: text
