@@ -45,8 +45,7 @@ DJANGO_APPS = [
     # 'django.contrib.humanize',
 ]
 THIRD_PARTY_APPS = [
-    'allauth',  # registration
-    'allauth.account',  # registration
+    #put any third party apps here
 ]
 
 # Apps specific for this project go here.
