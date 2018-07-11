@@ -1,5 +1,5 @@
-QU4RTET BETA-1 Developer's Release
-==================================
+QU4RTET: The Open-Source Level-4
+================================
 
 .. image:: https://gitlab.com/serial-lab/qu4rtet/badges/master/pipeline.svg
         :target: https://gitlab.com/serial-lab/qu4rtet/commits/master
@@ -131,7 +131,7 @@ inheriting from a simple class and imlementing a simple function call.
 For example, the code below is how the `qu4rtet_epcis` package exposes EPCIS
 parsing to the rule engine:
 
-.. code-block:: text
+.. code-block:: python
 
     import io
     from quartet_capture.rules import Step
