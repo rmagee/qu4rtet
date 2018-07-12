@@ -65,6 +65,7 @@ LOCAL_APPS = [
     'random_flavorpack.apps.RandomFlavorpackConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'allauth',
     'rest_auth',
     'rest_auth.registration',
     'rest_framework_swagger',
