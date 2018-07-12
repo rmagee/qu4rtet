@@ -8,6 +8,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
+import platform
+
+if platform.python_implementation() == 'PyPy':
+    from psycopg2cffi import compat
+    compat.register()
 
 ROOT_DIR = environ.Path(
     __file__) - 3  # (qu4rtet/config/settings/base.py - 3 = qu4rtet/)
@@ -60,6 +65,7 @@ LOCAL_APPS = [
     'random_flavorpack.apps.RandomFlavorpackConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'allauth',
     'rest_auth',
     'rest_auth.registration',
     'rest_framework_swagger',
@@ -334,3 +340,4 @@ SWAGGER_SETTINGS = {
         }
     }
 }
+
