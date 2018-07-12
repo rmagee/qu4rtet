@@ -9,8 +9,8 @@ argon2-cffi==18.1.0
 awesome-slugify==1.6.5
 babel==2.6.0              # via flower
 billiard==3.5.0.4         # via celery
-boto3==1.7.54
-botocore==1.10.54         # via boto3, s3transfer
+boto3==1.7.56
+botocore==1.10.56         # via boto3, s3transfer
 celery==4.2.0
 certifi==2018.4.16        # via opbeat, requests
 cffi==1.11.5              # via argon2-cffi
@@ -64,13 +64,13 @@ quartet-masterdata==1.0.0
 quartet-output==1.0.3
 random-flavorpack==1.0.2
 raven==6.9.0
-regex==2018.6.21          # via awesome-slugify
+regex==2018.7.11          # via awesome-slugify
 requests==2.19.1          # via coreapi, django-anymail
 s3transfer==0.1.13        # via boto3
 serialbox==1.0.13
 simplejson==3.16.0        # via django-rest-swagger
 six==1.11.0               # via argon2-cffi, django-anymail, django-extensions, django-rest-auth, djangorestframework-csv, python-dateutil, serialbox
-tornado==5.0.2            # via flower
+tornado==5.1              # via flower
 unicodecsv==0.14.1        # via djangorestframework-csv
 unidecode==0.4.21         # via awesome-slugify
 uritemplate==3.0.0        # via coreapi

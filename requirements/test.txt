@@ -72,7 +72,7 @@ quartet-manifest==1.0.2
 quartet-masterdata==1.0.0
 quartet-output==1.0.3
 random-flavorpack==1.0.2
-regex==2018.6.21          # via awesome-slugify
+regex==2018.7.11          # via awesome-slugify
 requests==2.19.1          # via coreapi
 serialbox==1.0.13
 simplejson==3.16.0        # via django-rest-swagger
@@ -80,7 +80,7 @@ six==1.11.0               # via argon2-cffi, django-coverage-plugin, django-exte
 sqlparse==0.2.4           # via django-debug-toolbar
 termcolor==1.1.0          # via pytest-sugar
 text-unidecode==1.2       # via faker
-tornado==5.0.2            # via flower
+tornado==5.1              # via flower
 unicodecsv==0.14.1        # via djangorestframework-csv
 unidecode==0.4.21         # via awesome-slugify
 uritemplate==3.0.0        # via coreapi
