@@ -135,7 +135,8 @@ if not testing:
     DATABASES = {
         'default': env.db('DATABASE_URL', default_db_url),
     }
-    DATABASES['default']['ATOMIC_REQUESTS'] = True
+    DATABASES['default']['ATOMIC_REQUESTS'] = False
+    DATABASES['default']['AUTOCOMMIT'] = True
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -283,7 +284,6 @@ ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION',
 # Select the correct user model
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
-
 ########## CELERY
 INSTALLED_APPS += ['qu4rtet.taskapp.celery.CeleryConfig']
 

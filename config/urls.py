@@ -24,6 +24,7 @@ urlpatterns = [
                                             namespace='quartet-capture')),
                   url(r'^output/', include('quartet_output.urls',
                                             namespace='quartet-output')),
+                  url(r'^accounts/', include('allauth.urls')),
                   url(r'^epcis/', include('quartet_epcis.urls')),
                   url(r'^api-auth/', include('rest_framework.urls')),
                   url(r'^rest-auth/', include('rest_auth.urls')),
