@@ -10,6 +10,8 @@ Local settings for QU4RTET project.
 """
 
 from .base import *  # noqa
+import logging
+from os import path
 
 # DEBUG
 # ------------------------------------------------------------------------------
@@ -81,14 +83,59 @@ CELERY_ALWAYS_EAGER = env.bool('CELERY_ALWAYS_EAGER', True)
 # When not running in debug mode
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
 
-# Your local stuff: Below this line define 3rd party library settings
-# ------------------------------------------------------------------------------
-import logging
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    handlers=[logging.StreamHandler()]
-)
+# get the logging path from the .env file
+CELERYD_HIJACK_ROOT_LOGGER = False
+# get the logging path from the .env file
+LOGGING_PATH = env.str('LOGGING_PATH', '/var/quartet')
+file_path = os.path.join(LOGGING_PATH, 'quartet.txt')
+print('Logging to path %s' % file_path)
+# check to make sure that there are write rights to the log location
+if not os.access(file_path, os.W_OK):
+    raise IOError('Logging is configured for a path (%s) which QU4RTET '
+                  'does not currently have rights to write too.  The '
+                  'account which needs these rights is typically that '
+                  'of the web server or process running the celery '
+                  'daemon.')
+print('Logging rights are confirmed.')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['file', ],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.StreamHandler',
+            'filename': file_path,
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'celery': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        'celery.task': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': False
+        }
+    },
+}
 
 pil_logger = logging.getLogger('PIL.Image')
 pil_logger.setLevel(logging.INFO)

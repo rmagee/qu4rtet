@@ -22,7 +22,7 @@ coverage==4.5.1
 decorator==4.3.0          # via serialbox
 defusedxml==0.5.0         # via djangorestframework-xml, python3-openid
 django-allauth==0.36.0
-django-cors-headers==2.3.0
+django-cors-headers==2.4.0
 django-coverage-plugin==1.5.0
 django-debug-toolbar==1.9.1
 django-environ==0.4.5
@@ -74,11 +74,11 @@ quartet-epcis==1.1.13
 quartet-manifest==1.0.2
 quartet-masterdata==1.0.1
 quartet-output==1.0.6
-random-flavorpack==1.0.2
+random-flavorpack==1.0.3
 regex==2018.7.11          # via awesome-slugify
 requests-oauthlib==1.0.0  # via django-allauth
 requests==2.19.1          # via coreapi, django-allauth, requests-oauthlib
-serialbox==1.0.13
+serialbox==1.0.14
 simplejson==3.16.0        # via django-rest-swagger
 six==1.11.0               # via argon2-cffi, django-coverage-plugin, django-extensions, django-rest-auth, djangorestframework-csv, faker, more-itertools, pytest, python-dateutil, serialbox
 sqlparse==0.2.4           # via django-debug-toolbar

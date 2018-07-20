@@ -13,7 +13,7 @@ Production settings for QU4RTET project.
 """
 
 import logging
-
+import os
 from .base import *  # noqa
 
 # SECRET CONFIGURATION
@@ -99,7 +99,7 @@ if env.bool('USE_AWS', default=False):
     # Revert the following and use str after the above-mentioned bug is fixed in
     # either django-storage-redux or boto
     control = 'max-age=%d, s-maxage=%d, must-revalidate' % (
-    AWS_EXPIRY, AWS_EXPIRY)
+        AWS_EXPIRY, AWS_EXPIRY)
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': bytes(control, encoding='latin-1'),
     }
@@ -128,7 +128,6 @@ if env.bool('USE_AWS', default=False):
     AWS_PRELOAD_METADATA = True
     INSTALLED_APPS += ['collectfast', ]
 
-
 # EMAIL
 # ------------------------------------------------------------------------------
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
@@ -136,13 +135,13 @@ DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
 EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[QU4RTET]')
 SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
-# Anymail with Mailgun
-INSTALLED_APPS += ['anymail', ]
-ANYMAIL = {
-    'MAILGUN_API_KEY': env('DJANGO_MAILGUN_API_KEY'),
-    'MAILGUN_SENDER_DOMAIN': env('MAILGUN_SENDER_DOMAIN')
-}
-EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
+# Uncomment for Anymail with Mailgun
+# INSTALLED_APPS += ['anymail', ]
+# ANYMAIL = {
+#     'MAILGUN_API_KEY': env('DJANGO_MAILGUN_API_KEY'),
+#     'MAILGUN_SENDER_DOMAIN': env('MAILGUN_SENDER_DOMAIN')
+# }
+# EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -232,10 +231,61 @@ if USE_SENTRY:
         'CELERY_LOGLEVEL': env.int('DJANGO_SENTRY_LOG_LEVEL', logging.INFO),
         'DSN': SENTRY_DSN
     }
+else:
+    CELERYD_HIJACK_ROOT_LOGGER = False
+    # get the logging path from the .env file
+    LOGGING_PATH = env.str('LOGGING_PATH', '/var/quartet')
+    file_path = os.path.join(LOGGING_PATH, 'quartet.txt')
+    print('Logging to path %s' % file_path)
+    # check to make sure that there are write rights to the log location
+    if not os.access(file_path, os.W_OK):
+        raise IOError('Logging is configured for a path (%s) which QU4RTET '
+                      'does not currently have rights to write too.  The '
+                      'account which needs these rights is typically that '
+                      'of the web server or process running the celery '
+                      'daemon.')
+    print('Logging rights are confirmed.')
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': True,
+        'root': {
+            'level': 'WARNING',
+            'handlers': ['file', ],
+        },
+        'formatters': {
+            'verbose': {
+                'format': '%(levelname)s %(asctime)s %(module)s '
+                          '%(process)d %(thread)d %(message)s'
+            },
+        },
+        'handlers': {
+            'file': {
+                'level': 'WARNING',
+                'class': 'logging.handlers.WatchedFileHandler',
+                'filename': file_path,
+                'formatter': 'verbose',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['file'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+            'celery': {
+                'handlers': ['file'],
+                'level': 'WARNING',
+                'propagate': False
+            },
+            'celery.task': {
+                'handlers': ['file'],
+                'level': 'WARNING',
+                'propagate': False
+            }
+        },
+    }
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
 if env.bool('DJANGO_ENABLE_ADMIN', False):
-    INSTALLED_APPS += ['django_admin_bootstrapped', 'django.contrib.admin']
-
-ENABLE_REGISTRATION = env.bool('DJANGO_ENABLE_REGISTRATION', True)
+    INSTALLED_APPS += ['django.contrib.admin']

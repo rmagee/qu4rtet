@@ -15,8 +15,9 @@ Install The Requirements
 
 .. code-block:: text
 
-    sudo apt-get -y install update
+    sudo apt-get -y update
     sudo apt-get -y install rabbitmq-server python3-pip postgresql postgresql-contrib gunicorn nginx supervisor apache2-utils
+    sudo ln -s /usr/bin/pip3 /usr/bin/pip
     cd /srv
     sudo git clone https://gitlab.com/serial-lab/qu4rtet.git
     sudo chown -R qu4rtet:root qu4rtet/
@@ -112,7 +113,7 @@ https://www.miniwebtool.com/django-secret-key-generator/
     DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1' ## add your server ip / host name here ###
     DJANGO_DEBUG=False
     DJANGO_MEDIA_ROOT='/var/qu4rtet/media/'
-    DJANGO_MEDIA_URL='/media/
+    DJANGO_MEDIA_URL='/media/'
 
     # AWS Settings if you want to use S3 file storage as the default
     # file storage backend configure this.
@@ -143,6 +144,9 @@ https://www.miniwebtool.com/django-secret-key-generator/
     # change me if the celery broker is redis or is on a different server
     # this is configured for a local RabbitMQ
     CELERY_BROKER_URL="amqp://guest@localhost//"
+
+    # set the log file to your preferred location
+    LOGGING_PATH=/var/quartet/
 
 Save the file and exit.
 
@@ -175,7 +179,8 @@ A quick test of the configuration is to run the dev server as below.
 
     sudo python3 manage.py runserver
 
-If it runs without error we are good for now.  Kill the test server with a
+If it runs without error we are good for now- even if it returns a 400 HTTP
+status that's Ok.  Kill the test server with a
 `CTRL+C` and we will move on.
 
 
@@ -232,11 +237,19 @@ monitor the process).  The two configuration files in the utility directory
 are pre-configured to work with the installation instructions if you followed
 them.  Execute the following from the `/srv/qu4rtet` directory:
 
+(If you've decided to use a virtualenv, map /usr/local/bin/celery to your
+virtualenv celery.  For example:
+*sudo ln -s /home/ubuntu/.virtualenvs/qu4rtet/bin/celery /usr/local/bin/celery*)
+
 .. code-block:: text
 
     sudo cp ./utility/flower.conf /etc/supervisor/conf.d/flower.conf
     sudo cp ./utility/gunicorn.conf /etc/supervisor/conf.d/gunicorn.conf
 
+**If you are using a virtual env, you will need to modify your flower.conf
+and your gunicorn.con on lines 3.  The command should point to the virtualenv
+bins of your gunicorn and flower installs. There are examples in the conf
+files to illustrate this.**
 
 Now make sure everything is running:
 
