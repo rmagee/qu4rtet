@@ -112,8 +112,8 @@ https://www.miniwebtool.com/django-secret-key-generator/
     ### Change Below ###
     DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1' ## add your server ip / host name here ###
     DJANGO_DEBUG=False
-    DJANGO_MEDIA_ROOT='/var/qu4rtet/media/'
-    DJANGO_MEDIA_URL='/media/'
+    DJANGO_MEDIA_ROOT=/var/quartet/media/
+    DJANGO_MEDIA_URL=/media/
 
     # AWS Settings if you want to use S3 file storage as the default
     # file storage backend configure this.
@@ -146,7 +146,8 @@ https://www.miniwebtool.com/django-secret-key-generator/
     CELERY_BROKER_URL="amqp://guest@localhost//"
 
     # set the log file to your preferred location
-    LOGGING_PATH=/var/quartet/
+    LOGGING_PATH=/var/log/quartet
+    HTTPS_ONLY=False
 
 Save the file and exit.
 
@@ -155,6 +156,8 @@ Run The QU4RTET Database Migrations
 
 The steps below will populate the `qu4rtet` database created above with
 all of the tables and other logic necessary to support the application.
+In addition, it will move any static files required for the QU4RTET API
+pages into a single directory to be served up by the webserver.
 
 First switch out of the postgres user account by typing exit:
 
@@ -262,6 +265,25 @@ Now make sure everything is running:
 Configure Nginx
 ---------------
 
+Create The Log and Media Directories
+====================================
+If you're not using AWS or another cloud storage system to keep inbound
+EPCIS files, etc. then you'll need to tell the system where you want to store
+your EPCIS files on the local file system.
+
+First create the log directory:
+
+.. code-block:: text
+
+    sudo mkdir /var/log/quartet
+    sudo chown -R www-data:celery /var/log/quartet
+
+Now create the media directory where inbound files will be stored:
+
+    sudo mkdir /var/quartet/media
+    sudo chown -R www-data:celery /var/quartet/media
+
+
 In the utils directory of the qu4rtet directory there is a pre-configured
 nginx file.  Copy that file to the nginx directory and then edit it by changing
 the `server_name` field from SERVER_DOMAIN_OR_IP to whatever your host name
@@ -291,7 +313,7 @@ For example:
             root /srv/qu4rtet;
         }
         location /media/ {
-            root /var/qu4rtet;
+            root /var/qu4rtet/media;
         }
         location / {
             include proxy_params;
@@ -345,6 +367,11 @@ page:
 .. code-block:: text
 
     sudo htpasswd -c /etc/nginx/.htpasswd qu4rtet
+
+Modify The HTTPS_ONLY Setting (Optional)
+----------------------------------------
+If you decide to implement HTTPS on your nginx server, you'll need to change
+the HTTPS_ONLY to True in your .env file.
 
 Check the Site
 --------------

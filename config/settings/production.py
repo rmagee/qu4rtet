@@ -25,10 +25,6 @@ SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 USE_SENTRY = env.bool('DJANGO_USE_SENTRY', False)
 USE_OPBEAT = env.bool('DJANGO_USE_OPBEAT', False)
 
-# This ensures that Django will be able to detect a secure connection
-# properly on Heroku.
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 if USE_SENTRY:
     # raven sentry client
     # See https://docs.sentry.io/clients/python/integrations/django/
@@ -49,22 +45,9 @@ if USE_OPBEAT:
     MIDDLEWARE = [
                      'opbeat.contrib.django.middleware.OpbeatAPMMiddleware', ] + MIDDLEWARE
 
-# SECURITY CONFIGURATION
-# ------------------------------------------------------------------------------
-# See https://docs.djangoproject.com/en/dev/ref/middleware/#module-django.middleware.security
-# and https://docs.djangoproject.com/en/dev/howto/deployment/checklist/#run-manage-py-check-deploy
+if env.bool('HTTPS_ONLY', True):
+    from .secure import *
 
-# set this to 60 seconds and then to 518400 when you can prove it works
-SECURE_HSTS_SECONDS = 60
-SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
-    'DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS', default=True)
-SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
-    'DJANGO_SECURE_CONTENT_TYPE_NOSNIFF', default=True)
-SECURE_BROWSER_XSS_FILTER = True
-SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
-SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
-CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
 
@@ -238,7 +221,7 @@ else:
     file_path = os.path.join(LOGGING_PATH, 'quartet.txt')
     print('Logging to path %s' % file_path)
     # check to make sure that there are write rights to the log location
-    if not os.access(file_path, os.W_OK):
+    if not os.access(LOGGING_PATH, os.W_OK):
         raise IOError('Logging is configured for a path (%s) which QU4RTET '
                       'does not currently have rights to write too.  The '
                       'account which needs these rights is typically that '

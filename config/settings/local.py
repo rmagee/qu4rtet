@@ -90,7 +90,7 @@ LOGGING_PATH = env.str('LOGGING_PATH', '/var/quartet')
 file_path = os.path.join(LOGGING_PATH, 'quartet.txt')
 print('Logging to path %s' % file_path)
 # check to make sure that there are write rights to the log location
-if not os.access(file_path, os.W_OK):
+if not os.access(LOGGING_PATH, os.W_OK):
     raise IOError('Logging is configured for a path (%s) which QU4RTET '
                   'does not currently have rights to write too.  The '
                   'account which needs these rights is typically that '
@@ -113,8 +113,7 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'INFO',
-            'class': 'logging.handlers.StreamHandler',
-            'filename': file_path,
+            'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
     },
