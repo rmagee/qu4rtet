@@ -12,4 +12,30 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Copyright 2018 SerialLab LLC.  All rights reserved.
+from rest_framework import routers
+from qu4rtet.api import viewsets
 
+router = routers.DefaultRouter()
+
+router.register(
+    r'user',
+    viewsets.UserViewSet,
+    base_name='users'
+)
+router.register(
+    r'group',
+    viewsets.GroupViewSet,
+    base_name='group'
+)
+router.register(
+    r'permission',
+    viewsets.PermissionViewSet,
+    base_name='permission'
+)
+router.register(
+    r'read-only-users',
+    viewsets.ReadOnlyUserViewSet,
+    base_name='read-only-users'
+)
+
+urlpatterns = router.urls

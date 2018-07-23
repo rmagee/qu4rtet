@@ -5,6 +5,7 @@ from django.urls import path
 from django.views import defaults as default_views
 from rest_framework.schemas import get_schema_view
 from qu4rtet.api.renderers import JSONOpenAPIRenderer
+from qu4rtet.api import routers
 from qu4rtet.api.views import APIRoot
 from qu4rtet.admin import admin_site
 from rest_framework_swagger.views import get_swagger_view
@@ -30,6 +31,8 @@ urlpatterns = [
                   url(r'^serialbox/', include('serialbox.api.urls')),
                   url(r'^masterdata/', include('quartet_masterdata.urls'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += routers.urlpatterns
 
 registration = getattr(settings, 'ENABLE_REGISTRATION', False)
 
