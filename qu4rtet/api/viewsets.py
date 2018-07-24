@@ -24,7 +24,7 @@ class UserViewSet(ModelViewSet):
     """
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
-
+    search_fields = ['email', 'first_name', 'last_name', 'username']
 
 class GroupViewSet(ModelViewSet):
     """
