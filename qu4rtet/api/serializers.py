@@ -40,13 +40,22 @@ class UserSerializer(ModelSerializer):
     """
     Default serializer for the User model.
     """
-    password = CharField(
-        style={'input_type': 'password'}
-    )
 
     class Meta:
         model = models.User
-        fields = '__all__'
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'last_login',
+            'date_joined',
+            'is_staff',
+            'is_active',
+            'is_superuser',
+            'groups',
+            'user_permissions',
+        ]
         extra_kwargs = {'password': {'write_only': True}}
 
 
@@ -79,5 +88,17 @@ class ReadOnlyUserSerializer(ModelSerializer):
 
     class Meta:
         model = models.User
-        fields = '__all__'
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'last_login',
+            'date_joined',
+            'is_staff',
+            'is_active',
+            'is_superuser',
+            'groups',
+            'user_permissions',
+        ]
         extra_kwargs = {'password': {'write_only': True}}

@@ -9,3 +9,4 @@ factory-boy
 django-coverage-plugin
 pytest-django
 pytest-sugar
+
