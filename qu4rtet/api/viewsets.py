@@ -32,6 +32,7 @@ class GroupViewSet(ModelViewSet):
     """
     queryset = models.Group.objects.all()
     serializer_class = serializers.GroupSerializer
+    search_fields = ['name',]
 
 
 class PermissionViewSet(ModelViewSet):
@@ -40,7 +41,7 @@ class PermissionViewSet(ModelViewSet):
     """
     queryset = models.Permission.objects.all()
     serializer_class = serializers.PermissionSerializer
-
+    search_fields = ['name',]
 
 class ReadOnlyUserViewSet(ReadOnlyModelViewSet):
     """
@@ -48,3 +49,4 @@ class ReadOnlyUserViewSet(ReadOnlyModelViewSet):
     """
     queryset = models.User.objects.all()
     serializer_class = serializers.ReadOnlyUserSerializer
+    search_fields = ['email', 'first_name', 'last_name', 'username']
