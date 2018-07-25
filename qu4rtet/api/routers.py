@@ -37,5 +37,10 @@ router.register(
     viewsets.ReadOnlyUserViewSet,
     base_name='read-only-users'
 )
+router.register(
+    r'read-only-groups',
+    viewsets.ReadOnlyGroupViewSet,
+    base_name='read-only-groups'
+)
 
 urlpatterns = router.urls

@@ -27,7 +27,17 @@ class UserFactory(factory.Factory):
     admin = False
 
 class TestPermissions(TestCase):
-    pass
+
+    def test_good_user(self):
+        """
+        Confirms that a user with rights has access to a pool.
+        """
+        pool_perm = models.Permission.objects.get(
+            name=''
+        )
+        user = UserFactory.create()
+
+
 
 
 
