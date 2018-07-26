@@ -114,6 +114,7 @@ class UserSerializer(ModelSerializer):
         Check against the configured password validators.
         """
         validate_password(password)
+        return password
 
     def update(self, instance: models.User, validated_data):
         password = validated_data.get('password')
