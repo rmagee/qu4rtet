@@ -12,6 +12,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Copyright 2018 SerialLab Corp.  All rights reserved.
+from django.contrib.auth.password_validation import validate_password, \
+    password_changed
 from django.contrib.auth import models
 from django.utils.translation import gettext as _
 from rest_framework.exceptions import ValidationError
@@ -92,6 +94,7 @@ class UserSerializer(ModelSerializer):
         return attrs
 
     def create(self, validated_data):
+        validate_password(validated_data.get('password'))
         user = models.User.objects.create_user(
             username=validated_data.get('username'),
             email=validated_data.get('email'),
@@ -105,6 +108,21 @@ class UserSerializer(ModelSerializer):
         user.groups.set(validated_data.get('groups'))
         user.user_permissions.set(validated_data.get('user_permissions'))
         return user
+
+    def validate_password(self, password):
+        """
+        Check against the configured password validators.
+        """
+        validate_password(password)
+
+    def update(self, instance: models.User, validated_data):
+        password = validated_data.get('password')
+        if password:
+            instance.set_password(password)
+            instance.full_clean()
+            instance.save()
+            password_changed(password)
+        return super().update(instance, validated_data)
 
 
 class ReadOnlyPermissionSerializer(ModelSerializer):
