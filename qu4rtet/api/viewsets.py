@@ -14,7 +14,9 @@
 # Copyright 2018 SerialLab Corp.  All rights reserved.
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 from django.contrib.auth import models
+from django.utils.translation import gettext as _
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from rest_framework import exceptions
 from qu4rtet.api import serializers
 
 
@@ -34,6 +36,14 @@ class UserViewSet(BaseModelViewSet):
     serializer_class = serializers.UserSerializer
     search_fields = ['email', 'first_name', 'last_name', 'username']
 
+    def check_permissions(self, request):
+        super().check_permissions(request)
+        if not request.user.has_perm('qu4rtet.read_users') and not \
+            request.user.is_superuser and not request.user.is_staff and not \
+            request.user.has_perm('auth.change_user'):
+            raise exceptions.PermissionDenied(_('You do not have rights'
+                                                ' to read user data.'))
+
 
 class GroupViewSet(BaseModelViewSet):
     """
@@ -42,6 +52,14 @@ class GroupViewSet(BaseModelViewSet):
     queryset = models.Group.objects.all()
     serializer_class = serializers.GroupSerializer
     search_fields = ['name', ]
+
+    def check_permissions(self, request):
+        super().check_permissions(request)
+        if not request.user.has_perm('qu4rtet.read_groups') and not \
+            request.user.is_superuser and not request.user.is_staff and not \
+            request.user.has_perm('auth.change_group'):
+            raise exceptions.PermissionDenied(_('You do not have rights'
+                                                ' to read group data.'))
 
 
 class PermissionViewSet(BaseModelViewSet):
@@ -62,6 +80,14 @@ class ReadOnlyUserViewSet(ReadOnlyModelViewSet):
     serializer_class = serializers.ReadOnlyUserSerializer
     search_fields = ['email', 'first_name', 'last_name', 'username']
 
+    def check_permissions(self, request):
+        super().check_permissions(request)
+        if not request.user.has_perm('qu4rtet.read_users') and not \
+            request.user.is_superuser and not request.user.is_staff and not \
+            request.user.has_perm('auth.change_user'):
+            raise exceptions.PermissionDenied(_('You do not have rights'
+                                                ' to read user data.'))
+
 
 class ReadOnlyGroupViewSet(ReadOnlyModelViewSet):
     """
@@ -71,3 +97,11 @@ class ReadOnlyGroupViewSet(ReadOnlyModelViewSet):
     queryset = models.Group.objects.all()
     serializer_class = serializers.ReadOnlyGroupSerializer
     search_fields = ['name', ]
+
+    def check_permissions(self, request):
+        super().check_permissions(request)
+        if not request.user.has_perm('qu4rtet.read_groups') and not \
+            request.user.is_superuser and not request.user.is_staff and not \
+            request.user.has_perm('auth.change_group'):
+            raise exceptions.PermissionDenied(_('You do not have rights'
+                                                ' to read group data.'))
