@@ -57,7 +57,9 @@ class UserSerializer(ModelSerializer):
             'groups',
             'user_permissions',
         ]
-        extra_kwargs = {'password': {'write_only': True}}
+        extra_kwargs = {'password': {'write_only': True},
+                        'date_joined': {'read_only': True},
+                        'last_login': {'read_only':True}}
 
 
 class ReadOnlyPermissionSerializer(ModelSerializer):
