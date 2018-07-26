@@ -54,13 +54,6 @@ class UserSerializer(ModelSerializer):
         style={'input_type': 'password'}
     )
 
-    # password = fields.CharField(
-    #     label=_('Password'),
-    #     help_text=_('Enter new password to change.'),
-    #     required=False,
-    #     write_only=True,
-    #     style={'input_type': 'password'}
-    # )
     class Meta:
         model = models.User
         fields = [
