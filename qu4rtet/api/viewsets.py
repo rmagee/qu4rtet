@@ -84,9 +84,14 @@ class ReadOnlyUserViewSet(ReadOnlyModelViewSet):
         super().check_permissions(request)
         if not request.user.has_perm('qu4rtet.read_users') and not \
             request.user.is_superuser and not request.user.is_staff and not \
-            request.user.has_perm('auth.change_user'):
+            request.user.has_perm(
+                'auth.change_user') and not request.user.has_perm(
+            'auth.add_user'):
             raise exceptions.PermissionDenied(_('You do not have rights'
                                                 ' to read user data.'))
+
+    def options(self, request, *args, **kwargs):
+        return super().options(request, *args, **kwargs)
 
 
 class ReadOnlyGroupViewSet(ReadOnlyModelViewSet):
