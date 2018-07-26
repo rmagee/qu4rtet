@@ -46,7 +46,8 @@ class UserSerializer(ModelSerializer):
     Default serializer for the User model.
     """
     is_staff = fields.BooleanField(
-        help_text=_('Whether or not this user can view other user info.')
+        help_text=_('Whether or not this user can view other user info.'),
+        required=False,
     )
     password2 = fields.CharField(
         label=_('Confirm Password'),
@@ -94,17 +95,22 @@ class UserSerializer(ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        validate_password(validated_data.get('password'))
+        """
+        Handle the creation of a new User- checks the password using the
+        :param validated_data:
+        :return:
+        """
         user = models.User.objects.create_user(
             username=validated_data.get('username'),
             email=validated_data.get('email'),
-            password=validated_data.get('password'),
             first_name=validated_data.get('first_name'),
             last_name=validated_data.get('last_name'),
             is_staff=validated_data.get('is_staff'),
             is_active=validated_data.get('is_active'),
             is_superuser=validated_data.get('is_superuser'),
         )
+        password = validated_data.get('password')
+        user.set_password(password)
         user.groups.set(validated_data.get('groups'))
         user.user_permissions.set(validated_data.get('user_permissions'))
         return user
@@ -117,13 +123,12 @@ class UserSerializer(ModelSerializer):
         return password
 
     def update(self, instance: models.User, validated_data):
+        instance = super().update(instance, validated_data)
         password = validated_data.get('password')
         if password:
             instance.set_password(password)
-            instance.full_clean()
             instance.save()
-            password_changed(password)
-        return super().update(instance, validated_data)
+        return instance
 
 
 class ReadOnlyPermissionSerializer(ModelSerializer):

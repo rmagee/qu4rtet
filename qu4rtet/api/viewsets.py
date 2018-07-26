@@ -23,7 +23,7 @@ class BaseModelViewSet(ModelViewSet):
     Base class for all of the viewsets in this module.  Sets default permission
     classes, etc.
     """
-    permission_classes = (IsAuthenticated, DjangoModelPermissions)
+    permission_classes = (DjangoModelPermissions, IsAuthenticated)
 
 
 class UserViewSet(BaseModelViewSet):
