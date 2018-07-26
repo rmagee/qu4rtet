@@ -13,7 +13,10 @@
 #
 # Copyright 2018 SerialLab Corp.  All rights reserved.
 from django.contrib.auth import models
+from django.utils.translation import gettext as _
+from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer, CharField
+from rest_framework import fields
 
 
 class GroupSerializer(ModelSerializer):
@@ -40,11 +43,30 @@ class UserSerializer(ModelSerializer):
     """
     Default serializer for the User model.
     """
+    is_staff = fields.BooleanField(
+        help_text=_('Whether or not this user can view other user info.')
+    )
+    password2 = fields.CharField(
+        label=_('Confirm Password'),
+        help_text=_('Please confirm your password.'),
+        required=False,
+        write_only=True,
+        style={'input_type': 'password'}
+    )
 
+    # password = fields.CharField(
+    #     label=_('Password'),
+    #     help_text=_('Enter new password to change.'),
+    #     required=False,
+    #     write_only=True,
+    #     style={'input_type': 'password'}
+    # )
     class Meta:
         model = models.User
         fields = [
             'id',
+            'password',
+            'password2',
             'username',
             'first_name',
             'last_name',
@@ -57,9 +79,39 @@ class UserSerializer(ModelSerializer):
             'groups',
             'user_permissions',
         ]
-        extra_kwargs = {'password': {'write_only': True},
-                        'date_joined': {'read_only': True},
-                        'last_login': {'read_only':True}}
+        extra_kwargs = {
+            'password': {
+                'write_only': True,
+                'style': {'input_type': 'password'},
+                'required': False
+            },
+            'date_joined': {'read_only': True},
+            'last_login': {'read_only': True}
+        }
+
+    def validate(self, attrs):
+        """
+        Make sure the passwords are good if they were provided.
+        """
+        if attrs.get('password'):
+            if attrs.get('password') != attrs.get('password2'):
+                raise ValidationError(_('The passwords do not match.'))
+        return attrs
+
+    def create(self, validated_data):
+        user = models.User.objects.create_user(
+            username=validated_data.get('username'),
+            email=validated_data.get('email'),
+            password=validated_data.get('password'),
+            first_name=validated_data.get('first_name'),
+            last_name=validated_data.get('last_name'),
+            is_staff=validated_data.get('is_staff'),
+            is_active=validated_data.get('is_active'),
+            is_superuser=validated_data.get('is_superuser'),
+        )
+        user.groups.set(validated_data.get('groups'))
+        user.user_permissions.set(validated_data.get('user_permissions'))
+        return user
 
 
 class ReadOnlyPermissionSerializer(ModelSerializer):
