@@ -38,7 +38,7 @@ class UserViewSet(BaseModelViewSet):
 
     def check_permissions(self, request):
         super().check_permissions(request)
-        if not request.user.has_perm('qu4rtet.read_users') and not \
+        if not request.user.has_perm('auth.read_users') and not \
             request.user.is_superuser and not request.user.is_staff and not \
             request.user.has_perm(
                 'auth.change_user') and not request.user.has_perm(
@@ -57,7 +57,7 @@ class GroupViewSet(BaseModelViewSet):
 
     def check_permissions(self, request):
         super().check_permissions(request)
-        if not request.user.has_perm('qu4rtet.read_groups') and not \
+        if not request.user.has_perm('auth.read_groups') and not \
             request.user.is_superuser and not request.user.is_staff and not \
             request.user.has_perm('auth.change_group'):
             raise exceptions.PermissionDenied(_('You do not have rights'
@@ -84,7 +84,7 @@ class ReadOnlyUserViewSet(ReadOnlyModelViewSet):
 
     def check_permissions(self, request):
         super().check_permissions(request)
-        if not request.user.has_perm('qu4rtet.read_users') and not \
+        if not request.user.has_perm('auth.read_users') and not \
             request.user.is_superuser and not request.user.is_staff and not \
             request.user.has_perm(
                 'auth.change_user') and not request.user.has_perm(
@@ -107,7 +107,7 @@ class ReadOnlyGroupViewSet(ReadOnlyModelViewSet):
 
     def check_permissions(self, request):
         super().check_permissions(request)
-        if not request.user.has_perm('qu4rtet.read_groups') and not \
+        if not request.user.has_perm('auth.read_groups') and not \
             request.user.is_superuser and not request.user.is_staff and not \
             request.user.has_perm(
                 'auth.change_group') and not request.user.has_perm(

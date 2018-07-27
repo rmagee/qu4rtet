@@ -111,8 +111,12 @@ class UserSerializer(ModelSerializer):
         )
         password = validated_data.get('password')
         user.set_password(password)
-        user.groups.set(validated_data.get('groups'))
-        user.user_permissions.set(validated_data.get('user_permissions'))
+        groups = validated_data.get('groups')
+        if groups:
+            user.groups.set(groups)
+        user_permissions = validated_data.get('user_permissions')
+        if user_permissions:
+            user.user_permissions.set(user_permissions)
         return user
 
     def validate_password(self, password):
