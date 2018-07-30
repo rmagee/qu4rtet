@@ -325,6 +325,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.DjangoModelPermissions'
     ),
     #'DEFAULT_METADATA_CLASS': 'rest_framework.metadata.SimpleMetadata'
     'DEFAULT_METADATA_CLASS': 'qu4rtet.api.metadata.QuartetUIMetadata'
