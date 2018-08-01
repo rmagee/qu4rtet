@@ -13,22 +13,26 @@
 #
 # Copyright 2018 SerialLab Corp.  All rights reserved.
 from django.contrib.auth.models import Permission, ContentType, User, Group
+from django.db.utils import ProgrammingError
 
+try:
+    ct = ContentType.objects.get_for_model(User)
+    can_read_users, created = Permission.objects.get_or_create(
+        codename='read_users',
+        content_type=ct
+    )
+    if created:
+        can_read_users.name = 'Can read user data.'
+        can_read_users.save()
 
-ct = ContentType.objects.get_for_model(User)
-can_read_users, created = Permission.objects.get_or_create(
-    codename='read_users',
-    content_type=ct
-)
-if created:
-    can_read_users.name = 'Can read user data.'
-    can_read_users.save()
-
-ct = ContentType.objects.get_for_model(Group)
-can_read_groups, created = Permission.objects.get_or_create(
-    codename='read_groups',
-    content_type=ct
-)
-if created:
-    can_read_groups.name = 'Can read group data.'
-    can_read_groups.save()
+    ct = ContentType.objects.get_for_model(Group)
+    can_read_groups, created = Permission.objects.get_or_create(
+        codename='read_groups',
+        content_type=ct
+    )
+    if created:
+        can_read_groups.name = 'Can read group data.'
+        can_read_groups.save()
+except ProgrammingError:
+    # for the first database migration, this will fail- but doesn't matter
+    pass
