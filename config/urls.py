@@ -8,7 +8,6 @@ from qu4rtet.api.renderers import JSONOpenAPIRenderer
 from qu4rtet.api import routers
 from qu4rtet.api.views import APIRoot
 from qu4rtet.api import permissions
-from qu4rtet.admin import admin_site
 from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_schema_view(title='QU4RTET API',
@@ -19,7 +18,6 @@ urlpatterns = [
                   url(r'^$', APIRoot.as_view()),
                   url(r'^schema/', schema_view, name='schema'),
                   url(r'^swagger', swagger_view, name='swagger'),
-                  path(settings.ADMIN_URL, admin_site.urls),
                   url(r'^manifest/', include('quartet_manifest.urls',
                                              namespace='manifest')),
                   url(r'^capture/', include('quartet_capture.urls',
