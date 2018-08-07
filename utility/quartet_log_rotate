@@ -1,0 +1,47 @@
+/var/log/quartet/quartet.log {
+  rotate 5
+  weekly
+  compress
+  missingok
+  notifempty
+}
+
+/var/log/celery/qu4rtet_worker5.log{
+  rotate 5
+  weekly
+  compress
+  missingok
+  notifempty
+}
+
+/var/log/celery/qu4rtet_worker4.log{
+  rotate 5
+  weekly
+  compress
+  missingok
+  notifempty
+}
+
+/var/log/celery/qu4rtet_worker3.log{
+  rotate 5
+  weekly
+  compress
+  missingok
+  notifempty
+}
+
+/var/log/celery/qu4rtet_worker2.log{
+  rotate 5
+  weekly
+  compress
+  missingok
+  notifempty
+}
+
+/var/log/celery/qu4rtet_worker1.log{
+  rotate 5
+  weekly
+  compress
+  missingok
+  notifempty
+}
