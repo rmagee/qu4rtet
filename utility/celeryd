@@ -1,5 +1,5 @@
 # here we start five celery nodes
-CELERYD_NODES="qu4ret_worker_1 qu4rtet_worker2 qu4rtet_worker3 qu4rtet_worker4 qu4rtet_worker5"
+CELERYD_NODES="qu4rtet_worker1 qu4rtet_worker2 qu4rtet_worker3 qu4rtet_worker4 qu4rtet_worker5"
 
 # Absolute or relative path to the 'celery' command:
 CELERY_BIN="/usr/local/bin/celery"
