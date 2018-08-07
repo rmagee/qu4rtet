@@ -6,8 +6,5 @@ django-storages
 Collectfast
 django-anymail
 # Raven is the Sentry client
-# --------------------------
 raven
-# Opbeat agent for performance monitoring
-# -----------------------------------------
-opbeat==3.6.1
+elastic-apm

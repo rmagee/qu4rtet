@@ -22,8 +22,8 @@ from .base import *  # noqa
 # Raises ImproperlyConfigured exception if DJANGO_SECRET_KEY not in os.environ
 SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
-USE_SENTRY = env.bool('DJANGO_USE_SENTRY', False)
-USE_OPBEAT = env.bool('DJANGO_USE_OPBEAT', False)
+USE_SENTRY = env.bool('USE_SENTRY', False)
+USE_ELASTIC_APM = env.bool('USE_ELASTIC_APM', False)
 
 if USE_SENTRY:
     # raven sentry client
@@ -33,17 +33,16 @@ if USE_SENTRY:
         'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware']
     MIDDLEWARE = RAVEN_MIDDLEWARE + MIDDLEWARE
 
-if USE_OPBEAT:
-    # opbeat integration
-    # See https://opbeat.com/languages/django/
-    INSTALLED_APPS += ['opbeat.contrib.django', ]
-    OPBEAT = {
-        'ORGANIZATION_ID': env('DJANGO_OPBEAT_ORGANIZATION_ID'),
-        'APP_ID': env('DJANGO_OPBEAT_APP_ID'),
-        'SECRET_TOKEN': env('DJANGO_OPBEAT_SECRET_TOKEN')
+if USE_ELASTIC_APM:
+    INSTALLED_APPS += ['elasticapm.contrib.django', ]
+    ELASTIC_APM = {
+        'SERVICE_NAME': env('ELASTIC_APM_SERVICE_NAME'),
+        'SECRET_TOKEN': env('ELASTIC_APM_SECRET_TOKEN'),
+        'SERVER_URL': env('ELASTIC_APM_SERVER_URL')
     }
     MIDDLEWARE = [
-                     'opbeat.contrib.django.middleware.OpbeatAPMMiddleware', ] + MIDDLEWARE
+                     'elasticapm.contrib.django.middleware.TracingMiddleware',
+                 ] + MIDDLEWARE
 
 if env.bool('HTTPS_ONLY', True):
     from .secure import *

@@ -20,7 +20,7 @@ CELERYD_OPTS="--time-limit=300 --concurrency=8"
 CELERYD_LOG_FILE="/var/log/celery/%n%I.log"
 CELERYD_PID_FILE="/var/run/celery/%n.pid"
 
-# Workers should run as an unprivileged user.
+#   Workers should run as an unprivileged user.
 #   You need to create this user manually (or you can choose
 #   a user/group combination that already exists (e.g., nobody).
 CELERYD_USER="celery"

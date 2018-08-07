@@ -35,6 +35,13 @@ if READ_DOT_ENV_FILE:
     env.read_env(env_file)
     print('The .env file has been loaded. See base.py for more information')
 
+# if the system is running in EC2, we can check parameter store for certain
+# environment variables
+EC2 = env.bool('EC2', False)
+if EC2:
+    # look for database url
+    pass
+
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
@@ -343,4 +350,5 @@ SWAGGER_SETTINGS = {
         }
     }
 }
+
 

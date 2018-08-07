@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # assumes you set up using the ubuntu/debian setup instructions
 sudo supervisorctl stop guni:gunicorn
 sudo supervisorctl start guni:gunicorn

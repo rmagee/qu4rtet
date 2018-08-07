@@ -1,4 +1,3 @@
-
 import os
 import logging
 from celery import Celery
@@ -12,15 +11,18 @@ def on_celery_setup_logging(**kwargs):
     print('on_celery_setup_logging signal hadled.')
     pass
 
+
 if not settings.configured:
     # set the default Django settings module for the 'celery' program.
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.production')  # pragma: no cover
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                          'config.settings.production')  # pragma: no cover
     print('Using production settings.')
     print(settings.__dict__)
 
 logger = logging.getLogger(__name__)
 
 app = Celery('qu4rtet')
+
 
 class CeleryConfig(AppConfig):
     name = 'qu4rtet.taskapp'
@@ -35,24 +37,11 @@ class CeleryConfig(AppConfig):
         if getattr(settings, 'USE_SENTRY', False) == True:
             # should be defined in production only
             from raven import Client as RavenClient
-            from raven.contrib.celery import register_signal as raven_register_signal
-            from raven.contrib.celery import register_logger_signal as raven_register_logger_signal
+            from raven.contrib.celery import \
+                register_signal as raven_register_signal
+            from raven.contrib.celery import \
+                register_logger_signal as raven_register_logger_signal
 
             raven_client = RavenClient(dsn=settings.RAVEN_CONFIG['DSN'])
             raven_register_logger_signal(raven_client)
             raven_register_signal(raven_client)
-
-        if getattr(settings, 'USE_OPBEAT', False) == True:
-            # should be defined in production only
-            from opbeat.contrib.django.models import client as opbeat_client
-            from opbeat.contrib.django.models import logger as opbeat_logger
-            from opbeat.contrib.django.models import register_handlers as opbeat_register_handlers
-            from opbeat.contrib.celery import register_signal as opbeat_register_signal
-
-            try:
-                opbeat_register_signal(opbeat_client)
-            except Exception as e:
-                opbeat_logger.exception('Failed installing celery hook: %s' % e)
-
-            if 'opbeat.contrib.django' in settings.INSTALLED_APPS:
-                opbeat_register_handlers()

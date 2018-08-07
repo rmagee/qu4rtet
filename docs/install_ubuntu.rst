@@ -136,10 +136,10 @@ https://www.miniwebtool.com/django-secret-key-generator/
     USE_SENTRY=False
     DJANGO_SENTRY_DSN=
 
-    USE_OPBEAT=False
-    DJANGO_OPBEAT_ORGANIZATION_ID=
-    DJANGO_OPBEAT_APP_ID=
-    DJANGO_OPBEAT_SECRET_TOKEN=
+    USE_ELASTIC_APM=False
+    ELASTIC_APM_SERVICE_NAME=
+    ELASTIC_APM_SECRET_TOKEN=
+    ELASTIC_APM_SERVER_URL=
 
     # change me if the celery broker is redis or is on a different server
     # this is configured for a local RabbitMQ
@@ -389,7 +389,7 @@ For example:
 `http://myserver.myhost.com:5555`
 
 
-Optional Sentry and Opbeat Configurations
+Optional Sentry and Elastic APM Configurations
 -----------------------------------------
 
 Sentry Settings
@@ -423,39 +423,29 @@ the settings of your QU4RTET application.
     sudo supervisorctl restart guni:gunicorn
 
 
-Opbeat Settings
-+++++++++++++++
-If you'd like to monitor your system performance using Opbeat, sign up
-for an opbeat account here:
+Elastic APM Settings
+++++++++++++++++++++
+If you'd like to monitor your system performance using Elastic APM, you
+can find the software here:
 
-https://opbeat.com/
+https://www.elastic.co/solutions/apm
 
-Create a new `Django` app with a `Custom` deployment method.  **DO NOT
-FOLLOW THE INSTRUCTIONS ON THE FOLLOWING PAGE AFTER CREATING THE NEW APP.**
-Much of the work on the opbeat instructions page is already complete.  All you
-need to do is go into your .env file and set the following values to
-those in the instruction page:
+After you install your APM server, fill in the following settings in your
+`.env` file:
 
 .. code-block:: text
 
     # set this to True
-    USE_OPBEAT=True
-    # put the ORGANIZATION_ID from the opbeat page here (no quotes)
-    DJANGO_OPBEAT_ORGANIZATION_ID=
-    # put the APP_ID from the opbeat page here (no quotes)
-    DJANGO_OPBEAT_APP_ID=
-    # put the SECRET_TOKEN value from the opbeat page here (no quotes
-    DJANGO_OPBEAT_SECRET_TOKEN=
+    USE_ELASTIC_APM=True
+    ELASTIC_APM_SERVICE_NAME= # put your service name here
+    ELASTIC_APM_SECRET_TOKEN= # put your secret token here
+    ELASTIC_APM_SERVER_URL= # if not local host, put the URL/host name here
 
-For example:
+Restart your QU4RTET services by executing the restart command:
 
-.. code-block:: text
+.. code-block::
 
-    # in your .env file (only an EXAMPLE)
-    USE_OPBEAT=True
-    DJANGO_OPBEAT_ORGANIZATION_ID=50813ddbe7cc4965b2b0cf36e04509ea
-    DJANGO_OPBEAT_APP_ID=9ed1fc5445
-    DJANGO_OPBEAT_SECRET_TOKEN=c4ed6c589e9b1b8f72b265cb5a9a1a1fa5ecc4c0
+    restart-quartet
 
 Comments / Issues
 -----------------
