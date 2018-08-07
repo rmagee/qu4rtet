@@ -216,7 +216,7 @@ if USE_SENTRY:
 else:
     CELERYD_HIJACK_ROOT_LOGGER = False
     # get the logging path from the .env file
-    LOGGING_PATH = env.str('LOGGING_PATH', '/var/quartet')
+    LOGGING_PATH = env.str('LOGGING_PATH', '/var/log/quartet')
     file_path = os.path.join(LOGGING_PATH, 'quartet.txt')
     print('Logging to path %s' % file_path)
     # check to make sure that there are write rights to the log location
