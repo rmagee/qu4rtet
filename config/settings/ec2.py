@@ -88,7 +88,8 @@ def get_values():
             'DJANGO_SUPERUSER',
             'DJANGO_SUPERUSER_PASSWORD',
             'DJANGO_SUPERUSER_EMAIL',
-            'ELASTIC_APM'
+            'ELASTIC_APM',
+            'INTERNAL_IPS',
         ]
         names = ['/%s/%s' % (parameter_group, name) for name in names]
         lists = list(chunks(names, 10))
