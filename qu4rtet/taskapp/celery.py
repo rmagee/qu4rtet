@@ -4,7 +4,7 @@ from celery import Celery
 from django.apps import apps, AppConfig
 from django.conf import settings
 import celery.signals
-
+logger = logging.getLogger(__name__)
 
 @celery.signals.setup_logging.connect
 def on_celery_setup_logging(**kwargs):
@@ -19,9 +19,10 @@ if not settings.configured:
     print('Using production settings.')
     print(settings.__dict__)
 
-logger = logging.getLogger(__name__)
+logger.info('Using settings module %s', os.environ['DJANGO_SETTINGS_MODULE'])
 
 app = Celery('qu4rtet')
+
 
 
 class CeleryConfig(AppConfig):
