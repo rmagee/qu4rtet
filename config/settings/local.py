@@ -87,7 +87,7 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
 CELERYD_HIJACK_ROOT_LOGGER = False
 # get the logging path from the .env file
 LOGGING_PATH = env.str('LOGGING_PATH', '/var/quartet')
-file_path = os.path.join(LOGGING_PATH, 'quartet.txt')
+file_path = os.path.join(LOGGING_PATH, 'quartet.log')
 print('Logging to path %s' % file_path)
 # check to make sure that there are write rights to the log location
 if not os.access(LOGGING_PATH, os.W_OK):
