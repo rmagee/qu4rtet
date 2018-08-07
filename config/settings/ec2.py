@@ -94,6 +94,7 @@ def get_values():
             'DJANGO_SUPERUSER_EMAIL',
             'ELASTIC_APM',
             'INTERNAL_IPS',
+            'LOGGING_LEVEL',
         ]
         names = ['/%s/%s' % (parameter_group, name) for name in names]
         lists = list(chunks(names, 10))

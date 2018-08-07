@@ -227,11 +227,12 @@ else:
                       'of the web server or process running the celery '
                       'daemon.')
     print('Logging rights are confirmed.')
+    LOGGING_LEVEL=env.str('LOGGING_LEVEL', 'WARNING')
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': True,
         'root': {
-            'level': 'WARNING',
+            'level': LOGGING_LEVEL,
             'handlers': ['file', ],
         },
         'formatters': {
@@ -242,7 +243,7 @@ else:
         },
         'handlers': {
             'file': {
-                'level': 'WARNING',
+                'level': LOGGING_LEVEL,
                 'class': 'logging.handlers.WatchedFileHandler',
                 'filename': file_path,
                 'formatter': 'verbose',
@@ -256,12 +257,12 @@ else:
             },
             'celery': {
                 'handlers': ['file'],
-                'level': 'WARNING',
+                'level': LOGGING_LEVEL,
                 'propagate': False
             },
             'celery.task': {
                 'handlers': ['file'],
-                'level': 'WARNING',
+                'level': LOGGING_LEVEL,
                 'propagate': False
             }
         },
