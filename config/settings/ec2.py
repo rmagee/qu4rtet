@@ -17,6 +17,10 @@ import io
 import boto3
 from ec2_metadata import ec2_metadata
 
+from logging import getLogger
+
+logger = getLogger(__name__)
+
 
 def chunks(l, n):
     """
@@ -103,5 +107,7 @@ def get_values():
             for parameter in parameters:
                 name = os.path.basename(parameter['Name'])
                 os.environ[name] = parameter['Value']
+                logger.info('Setting os.environ key %s to %s',
+                            name, parameter['Value'])
     else:
         print('No parameter group was defined in the user-data.')
