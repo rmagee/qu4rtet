@@ -151,7 +151,6 @@ default_db_url = "postgres://{0}:{1}@{2}:5432/{3}".format(
     database_host,
     env.str('POSTGRES_DB')
 )
-logging.info('Default database host: %s', database_host)
 DATABASES = {'default': env.db('DATABASE_URL', default_db_url)}
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 DATABASES['default']['CONN_MAX_AGE'] = env.int('CONN_MAX_AGE', default=60)
@@ -273,3 +272,5 @@ else:
 # ------------------------------------------------------------------------------
 if env.bool('DJANGO_ENABLE_ADMIN', False):
     INSTALLED_APPS += ['django.contrib.admin']
+
+logging.info('Default database host: %s', database_host)
