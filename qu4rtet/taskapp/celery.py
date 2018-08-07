@@ -20,6 +20,7 @@ if not settings.configured:
     print(settings.__dict__)
 
 logger.info('Using settings module %s', os.environ['DJANGO_SETTINGS_MODULE'])
+logger.info('Using database at %s', os.environ['DATABASE_HOST'])
 
 app = Celery('qu4rtet')
 
