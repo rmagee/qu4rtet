@@ -39,8 +39,11 @@ if READ_DOT_ENV_FILE:
 # environment variables
 EC2 = env.bool('EC2', False)
 if EC2:
-    # look for database url
-    pass
+    # look in the parameter store for values
+    from config.settings.ec2 import get_values
+    # this will load any ec2 parameter store values over any thing
+    # in the .env file
+    get_values()
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
