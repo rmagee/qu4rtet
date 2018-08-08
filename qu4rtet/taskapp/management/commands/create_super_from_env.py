@@ -16,8 +16,7 @@
 import environ
 from django.core.management.base import BaseCommand
 from django.utils.translation import gettext as _
-import psycopg2
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+from django.contrib.auth.models import User
 
 
 class Command(BaseCommand):
@@ -30,17 +29,16 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print('Checking for environment variables...')
         env = self._read_env()
-        print('Connecting to the database...')
-        con = psycopg2.connect(
-            dbname='postgres',
-            user=env.str('POSTGRES_USER'),
-            host=env.str('DATABASE_HOST'),
-            password=env.str('POSTGRES_PASSWORD')
+        username = env.str('DJANGO_SUPERUSER')
+        user_pwd = env.str('DJANGO_SUPERUSER_PASSWORD')
+        user_email = env.str('DJANGO_SUPERUSER_EMAIL')
+        User.objects.create_user(
+            username=username,
+            password=user_pwd,
+            email=user_email,
+            is_super=True
         )
-        con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-        cursor = con.cursor()
-        cursor.execute('CREATE DATABASE %s OWNER %s ENCODING \'UTF8\';' %
-                       (env.str('POSTGRES_DB'), env.str('POSTGRES_USER')))
+        print('User created.')
 
     def _read_env(self):
         ROOT_DIR = environ.Path(
