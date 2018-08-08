@@ -121,6 +121,6 @@ def get_values():
         try:
             with open('/tmp/q4_env', 'w+') as f:
                 for k, v in found_parameters.items():
-                    f.write('%s=%s\n' % (k, v))
+                    f.write('export %s=%s\n' % (k, v))
         except PermissionError:
             print("The /tmp/q4_env file could not be overwritten.")
