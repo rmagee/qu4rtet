@@ -57,6 +57,7 @@ def get_values():
         PARAMETER_GROUP=GROUP-1
 
     """
+    found_parameters = {}
     parameter_group = get_user_data()
     if parameter_group:
         client = boto3.client(
@@ -108,7 +109,16 @@ def get_values():
             for parameter in parameters:
                 name = os.path.basename(parameter['Name'])
                 os.environ[name] = parameter['Value']
+                found_parameters[name] = parameter['Value']
                 logger.info('Setting os.environ key %s to %s',
                             name, parameter['Value'])
     else:
         print('No parameter group was defined in the user-data.')
+
+    # here we write out the value pairs to an env file if a bash
+    # script needs to import into env variables in another process
+    if len(found_parameters) > 0:
+        with open('/tmp/q4_env', 'w+') as f:
+            for k,v in found_parameters.items():
+                f.write('%s=%s\n' % (k,v))
+
