@@ -115,12 +115,4 @@ def get_values():
     else:
         print('No parameter group was defined in the user-data.')
 
-    # here we write out the value pairs to an env file if a bash
-    # script needs to import into env variables in another process
-    if len(found_parameters) > 0:
-        try:
-            with open('/tmp/q4_env', 'w+') as f:
-                for k, v in found_parameters.items():
-                    f.write('export %s=%s\n' % (k, v))
-        except PermissionError:
-            print("The /tmp/q4_env file could not be overwritten.")
+    return found_parameters
