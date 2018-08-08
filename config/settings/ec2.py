@@ -118,7 +118,9 @@ def get_values():
     # here we write out the value pairs to an env file if a bash
     # script needs to import into env variables in another process
     if len(found_parameters) > 0:
-        with open('/tmp/q4_env', 'w+') as f:
-            for k,v in found_parameters.items():
-                f.write('%s=%s\n' % (k,v))
-
+        try:
+            with open('/tmp/q4_env', 'w+') as f:
+                for k, v in found_parameters.items():
+                    f.write('%s=%s\n' % (k, v))
+        except PermissionError:
+            print("The /tmp/q4_env file could not be overwritten.")
