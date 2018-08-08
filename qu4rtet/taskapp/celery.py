@@ -46,4 +46,4 @@ class CeleryConfig(AppConfig):
             raven_client = RavenClient(dsn=settings.RAVEN_CONFIG['DSN'])
             raven_register_logger_signal(raven_client)
             raven_register_signal(raven_client)
-        logger.info('Using database at %s', os.environ['DATABASE_HOST'])
+        logger.info('Using database at %s', os.environ.get('DATABASE_HOST',''))
