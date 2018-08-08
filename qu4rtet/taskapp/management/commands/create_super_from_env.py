@@ -32,11 +32,11 @@ class Command(BaseCommand):
         username = env.str('DJANGO_SUPERUSER')
         user_pwd = env.str('DJANGO_SUPERUSER_PASSWORD')
         user_email = env.str('DJANGO_SUPERUSER_EMAIL')
-        User.objects.create_user(
+        user = User.objects.create_user(
             username=username,
             password=user_pwd,
             email=user_email,
-            is_super=True
+            is_superuser=True
         )
         print('User created.')
 
