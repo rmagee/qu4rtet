@@ -58,7 +58,7 @@ itypes==1.1.0             # via coreapi
 jedi==0.12.1              # via ipython
 jinja2==2.10              # via coreschema, epcpyyes, sphinx
 kombu==4.2.1              # via celery
-lxml==4.2.3
+lxml==4.2.4
 markdown==2.6.11
 markupsafe==1.0           # via jinja2
 more-itertools==4.3.0     # via pytest
@@ -77,7 +77,7 @@ pycparser==2.18           # via cffi
 pygments==2.2.0           # via ipython, sphinx
 pytest-django==3.3.3
 pytest-sugar==0.9.1
-pytest==3.7.0             # via pytest-django, pytest-sugar
+pytest==3.7.1             # via pytest-django, pytest-sugar
 python-dateutil==2.7.3    # via faker, quartet-epcis
 python3-openid==3.1.0     # via django-allauth
 pytz==2018.5
