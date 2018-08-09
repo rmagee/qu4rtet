@@ -14,6 +14,7 @@
 # Copyright 2018 SerialLab Corp.  All rights reserved.
 from django.contrib.auth.models import Permission, ContentType, User, Group
 from django.db.utils import ProgrammingError
+from django.db.utils import OperationalError
 
 try:
     ct = ContentType.objects.get_for_model(User)
@@ -33,6 +34,6 @@ try:
     if created:
         can_read_groups.name = 'Can read group data.'
         can_read_groups.save()
-except ProgrammingError:
+except (ProgrammingError, OperationalError):
     # for the first database migration, this will fail- but doesn't matter
     pass
