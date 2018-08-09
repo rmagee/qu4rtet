@@ -44,7 +44,7 @@ class Command(BaseCommand):
 
     def _read_env(self):
         ROOT_DIR = environ.Path(
-            __file__) - 4
+            __file__) - 5
         env = environ.Env()
         READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=True)
         if READ_DOT_ENV_FILE:
