@@ -6,4 +6,4 @@ python manage.py create_masterdata_groups
 python manage.py create_output_groups
 python manage.py load_serialbox_auth
 python manage.py load_random_flavorpack_auth
-
+python manage.py create_permissions

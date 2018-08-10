@@ -4,7 +4,9 @@ from celery import Celery
 from django.apps import apps, AppConfig
 from django.conf import settings
 import celery.signals
+
 logger = logging.getLogger(__name__)
+
 
 @celery.signals.setup_logging.connect
 def on_celery_setup_logging(**kwargs):
@@ -22,7 +24,6 @@ if not settings.configured:
 logger.info('Using settings module %s', os.environ['DJANGO_SETTINGS_MODULE'])
 
 app = Celery('qu4rtet')
-
 
 
 class CeleryConfig(AppConfig):
@@ -46,4 +47,5 @@ class CeleryConfig(AppConfig):
             raven_client = RavenClient(dsn=settings.RAVEN_CONFIG['DSN'])
             raven_register_logger_signal(raven_client)
             raven_register_signal(raven_client)
-        logger.info('Using database at %s', os.environ.get('DATABASE_HOST',''))
+        logger.info('Using database at %s',
+                    os.environ.get('DATABASE_HOST', ''))

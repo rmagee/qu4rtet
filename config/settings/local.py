@@ -22,8 +22,7 @@ print('Debug set to: %s' % env.bool('DJANGO_DEBUG', True))
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key only used for development and testing.
-SECRET_KEY = env('DJANGO_SECRET_KEY',
-                 default='gLvAMdTEIWtTHVHTcAfivd0loFluxWtBez3Hy72TRqJ2qeit59')
+SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
 # Mail settings
 # ------------------------------------------------------------------------------
@@ -77,7 +76,7 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 ########## CELERY
 # In development, all tasks will be executed locally by blocking until the task returns
-CELERY_ALWAYS_EAGER = env.bool('CELERY_ALWAYS_EAGER', True)
+# CELERY_ALWAYS_EAGER = env.bool('CELERY_ALWAYS_EAGER', True)
 ########## END CELERY
 
 # When not running in debug mode
@@ -97,11 +96,12 @@ if not os.access(LOGGING_PATH, os.W_OK):
                   'of the web server or process running the celery '
                   'daemon.')
 print('Logging rights are confirmed.')
+LOGGING_LEVEL=env.str('LOGGING_LEVEL', 'WARNING')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'root': {
-        'level': 'WARNING',
+        'level': LOGGING_LEVEL,
         'handlers': ['file', ],
     },
     'formatters': {
@@ -112,7 +112,7 @@ LOGGING = {
     },
     'handlers': {
         'file': {
-            'level': 'INFO',
+            'level': LOGGING_LEVEL,
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
@@ -125,12 +125,12 @@ LOGGING = {
         },
         'celery': {
             'handlers': ['file'],
-            'level': 'INFO',
+            'level': LOGGING_LEVEL,
             'propagate': False
         },
         'celery.task': {
             'handlers': ['file'],
-            'level': 'INFO',
+            'level': LOGGING_LEVEL,
             'propagate': False
         }
     },

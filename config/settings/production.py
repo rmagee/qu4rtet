@@ -135,27 +135,6 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
         'django.template.loaders.app_directories.Loader', ]),
 ]
 
-# DATABASE CONFIGURATION
-# ------------------------------------------------------------------------------
-# Use the Heroku-style specification
-# DATABASE CONFIGURATION
-docker = env.bool('DOCKER', False)
-if not docker:
-    database_host = env.str('DATABASE_HOST')
-else:
-    database_host = env.str('DOCKER_DATABASE_HOST')
-
-default_db_url = "postgres://{0}:{1}@{2}:5432/{3}".format(
-    env.str('POSTGRES_USER'),
-    env.str('POSTGRES_PASSWORD'),
-    database_host,
-    env.str('POSTGRES_DB')
-)
-DATABASES = {'default': env.db('DATABASE_URL', default_db_url)}
-DATABASES['default']['ATOMIC_REQUESTS'] = True
-DATABASES['default']['CONN_MAX_AGE'] = env.int('CONN_MAX_AGE', default=60)
-DATABASES['default']['ATOMIC_REQUESTS'] = True
-
 # Sentry Configuration
 if USE_SENTRY:
     SENTRY_DSN = env('DJANGO_SENTRY_DSN')
@@ -216,7 +195,7 @@ if USE_SENTRY:
 else:
     CELERYD_HIJACK_ROOT_LOGGER = False
     # get the logging path from the .env file
-    LOGGING_PATH = env.str('LOGGING_PATH', '/var/log/quartet')
+    LOGGING_PATH = env.str('LOGGING_PATH', '/tmp')
     file_path = os.path.join(LOGGING_PATH, 'quartet.log')
     print('Logging to path %s' % file_path)
     # check to make sure that there are write rights to the log location

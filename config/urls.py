@@ -7,7 +7,6 @@ from rest_framework.schemas import get_schema_view
 from qu4rtet.api.renderers import JSONOpenAPIRenderer
 from qu4rtet.api import routers
 from qu4rtet.api.views import APIRoot
-from qu4rtet.api import permissions
 from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_schema_view(title='QU4RTET API',
