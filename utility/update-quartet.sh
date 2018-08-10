@@ -12,11 +12,12 @@ export LATESTQ4=`git describe --abbrev=0 --tags`
 echo "Latest Tag: $LATESTQ4"
 git checkout tags/$LATESTQ4
 echo "Installing latest requirements..."
-sudo pip3 install -r ./requirements/production.txt
-sudo python3 manage.py makemigrations
-sudo python3 manage.py migrate
-sudo python3 manage.py migrate --run-syncdb
-sudo python3 manage.py collectstatic
+workon qu4rtet
+pip install -r ./requirements/production.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py migrate --run-syncdb
+python manage.py collectstatic
 echo "Restarting the QU4RTET infrastructure."
 sudo restart-quartet
 echo "Complete."
