@@ -39,11 +39,20 @@ def get_user_data():
     :return:
     """
     ret = None
-    with io.StringIO(ec2_metadata.user_data.decode('utf-8')) as f:
-        for line in f:
-            vals = line.rstrip().split('=')
-            if len(vals) == 2 and vals[0] == 'PARAMETER_GROUP':
-                ret = vals[1].strip('\'"')
+    try:
+        with io.StringIO(ec2_metadata.user_data.decode('utf-8')) as f:
+            for line in f:
+                vals = line.rstrip().split('=')
+                if len(vals) == 2 and vals[0] == 'PARAMETER_GROUP':
+                    ret = vals[1].strip('\'"')
+    except AttributeError:
+        print('No user data is defined for this instance.')
+        logger.error('No EC2 data could be parsed. If you are trying '
+                     'to use the EC2 parameter store, you will need '
+                     'to set a PARAMETER_GROUP=[value] in the user '
+                     'data of your instance and then configure parameters '
+                     'as /[Parameter group name/[value] in the parameter '
+                     'store.')
     return ret
 
 
