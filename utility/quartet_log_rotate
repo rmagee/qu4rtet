@@ -4,6 +4,7 @@
   compress
   missingok
   notifempty
+  su celery www-data
   create 774 celery www-data
 }
 
@@ -13,6 +14,7 @@
   compress
   missingok
   notifempty
+  su celery www-data
   create 774 celery www-data
 }
 
@@ -22,6 +24,7 @@
   compress
   missingok
   notifempty
+  su celery www-data
   create 774 celery www-data
 }
 
@@ -31,6 +34,7 @@
   compress
   missingok
   notifempty
+  su celery www-data
   create 774 celery www-data
 }
 
@@ -40,6 +44,7 @@
   compress
   missingok
   notifempty
+  su celery www-data
   create 774 celery www-data
 }
 
@@ -49,5 +54,6 @@
   compress
   missingok
   notifempty
+  su celery www-data
   create 774 celery www-data
 }
