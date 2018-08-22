@@ -2,13 +2,16 @@
 CELERYD_NODES="qu4rtet_worker1 qu4rtet_worker2 qu4rtet_worker3 qu4rtet_worker4 qu4rtet_worker5"
 
 # Absolute or relative path to the 'celery' command:
-CELERY_BIN="/usr/local/bin/celery"
+CELERY_BIN="/home/ubuntu/.virtualenvs/qu4rtet/bin/celery"
 
 # App instance to use
 CELERY_APP="qu4rtet.taskapp.celery:app"
 
 # Where to chdir at start.
 CELERYD_CHDIR="/srv/qu4rtet"
+
+# use the virtual env
+ENV_PYTHON="/home/ubuntu/.virtualenvs/qu4rtet/bin/python"
 
 # Extra command-line arguments to the worker
 CELERYD_OPTS="--time-limit=300 --concurrency=8"

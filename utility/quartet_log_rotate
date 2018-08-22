@@ -4,6 +4,7 @@
   compress
   missingok
   notifempty
+  create 774 celery www-data
 }
 
 /var/log/celery/qu4rtet_worker5.log{
@@ -12,6 +13,7 @@
   compress
   missingok
   notifempty
+  create 774 celery www-data
 }
 
 /var/log/celery/qu4rtet_worker4.log{
@@ -20,6 +22,7 @@
   compress
   missingok
   notifempty
+  create 774 celery www-data
 }
 
 /var/log/celery/qu4rtet_worker3.log{
@@ -28,6 +31,7 @@
   compress
   missingok
   notifempty
+  create 774 celery www-data
 }
 
 /var/log/celery/qu4rtet_worker2.log{
@@ -36,6 +40,7 @@
   compress
   missingok
   notifempty
+  create 774 celery www-data
 }
 
 /var/log/celery/qu4rtet_worker1.log{
@@ -44,4 +49,5 @@
   compress
   missingok
   notifempty
+  create 774 celery www-data
 }
