@@ -213,6 +213,8 @@ start the Celery workers.
     sudo cp /srv/qu4rtet/utility/celeryd /etc/default/celeryd
     # add the celery user referenced in the config
     sudo adduser celery
+    # make sure the system auto-starts and stops
+    sudo update-rc.d celeryd defaults
     # start celery and check the status
     sudo /etc/init.d/celeryd start
     sudo /etc/init.d/celeryd status
