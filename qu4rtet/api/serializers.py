@@ -100,23 +100,24 @@ class UserSerializer(ModelSerializer):
         :param validated_data:
         :return:
         """
+        password = validated_data.get('password')
         user = models.User.objects.create_user(
             username=validated_data.get('username'),
             email=validated_data.get('email'),
+            password=password,
             first_name=validated_data.get('first_name'),
             last_name=validated_data.get('last_name'),
             is_staff=validated_data.get('is_staff'),
             is_active=validated_data.get('is_active'),
             is_superuser=validated_data.get('is_superuser'),
         )
-        password = validated_data.get('password')
-        user.set_password(password)
         groups = validated_data.get('groups')
         if groups:
             user.groups.set(groups)
         user_permissions = validated_data.get('user_permissions')
         if user_permissions:
             user.user_permissions.set(user_permissions)
+        user.save()
         return user
 
     def validate_password(self, password):
