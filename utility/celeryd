@@ -1,5 +1,5 @@
 # here we start five celery nodes
-CELERYD_NODES="qu4rtet_worker1 qu4rtet_worker2 qu4rtet_worker3 qu4rtet_worker4 qu4rtet_worker5"
+CELERYD_NODES="qu4rtet_worker1 qu4rtet_worker2"
 
 # Absolute or relative path to the 'celery' command:
 CELERY_BIN="/home/ubuntu/.virtualenvs/qu4rtet/bin/celery"
@@ -14,7 +14,7 @@ CELERYD_CHDIR="/srv/qu4rtet"
 ENV_PYTHON="/home/ubuntu/.virtualenvs/qu4rtet/bin/python"
 
 # Extra command-line arguments to the worker
-CELERYD_OPTS="--time-limit=300 --concurrency=8"
+CELERYD_OPTS="--time-limit=1600"
 
 # Only set logging level to DEBUG if you're having problems
 #CELERYD_LOG_LEVEL="DEBUG"
