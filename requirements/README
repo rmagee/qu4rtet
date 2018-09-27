@@ -1,0 +1,12 @@
+If you update a core quartet package that is part of the requirements for
+the main quartet project, you will need to update the requirements files in
+this directory.  Follow the steps below.
+
+1. update qu4rtet dependency package (make sure you have a pypi deploy step
+as part of your CI)
+2. tag and commit (pypi should build during tags)
+3. after pypi build succeeds, run update.sh in this requirements directory
+4. commit and push all changes to any requirements files in this directory
+5. tag QU4RTET with a patch revision with bumpversion from the root directory
+of this project.
+6. push changes and tags to repository (git push && git push --tags)
