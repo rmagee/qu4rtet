@@ -4,13 +4,13 @@
 #
 #    pip-compile --output-file ec2.txt ec2.in
 #
-boto3==1.9.4
-botocore==1.12.4          # via boto3, s3transfer
+boto3==1.9.12
+botocore==1.12.12         # via boto3, s3transfer
 cached-property==1.5.1    # via ec2-metadata
 certifi==2018.8.24        # via requests
 chardet==3.0.4            # via requests
 docutils==0.14            # via botocore
-ec2-metadata==1.6.0
+ec2-metadata==1.7.1
 idna==2.7                 # via requests
 jmespath==0.9.3           # via boto3, botocore
 python-dateutil==2.7.3    # via botocore
