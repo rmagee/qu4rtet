@@ -230,3 +230,4 @@ if env.bool('DJANGO_ENABLE_ADMIN', False):
     INSTALLED_APPS += ['django.contrib.admin']
 
 logging.info('Default database host: %s', database_host)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
