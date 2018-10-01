@@ -14,7 +14,6 @@ git checkout tags/$LATESTQ4
 echo "Installing latest requirements..."
 workon qu4rtet
 pip install -r ./requirements/production.txt
-python manage.py makemigrations
 python manage.py migrate
 python manage.py migrate --run-syncdb
 python manage.py collectstatic
