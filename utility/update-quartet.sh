@@ -4,7 +4,7 @@ cd /srv/qu4rtet
 echo "Stashing any local changes..."
 git stash
 echo "Checking out the master branch..."
-git checkout master
+git checkout origin/master
 echo "Pulling the lastest tag..."
 git pull https://gitlab.com/serial-lab/qu4rtet.git master
 git fetch --tags
