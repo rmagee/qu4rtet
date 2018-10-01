@@ -24,7 +24,10 @@ quartet_capture
 quartet_epcis
 serialbox
 random_flavorpack
+list_based_flavorpack
 quartet_manifest
 quartet_masterdata
 quartet_output
+quartet_templates
+
 

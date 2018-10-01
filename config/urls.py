@@ -28,7 +28,8 @@ urlpatterns = [
                   url(r'^api-auth/', include('rest_framework.urls')),
                   url(r'^rest-auth/', include('rest_auth.urls')),
                   url(r'^serialbox/', include('serialbox.api.urls')),
-                  url(r'^masterdata/', include('quartet_masterdata.urls'))
+                  url(r'^masterdata/', include('quartet_masterdata.urls')),
+                  url(r'^templates/', include('quartet_templates.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += routers.urlpatterns

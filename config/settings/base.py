@@ -73,6 +73,8 @@ LOCAL_APPS = [
     'quartet_output.apps.QuartetOutputConfig',
     'serialbox.apps.PoolsConfig',
     'random_flavorpack.apps.RandomFlavorpackConfig',
+    'list_based_flavorpack.apps.ListBasedFlavorpackConfig',
+    'quartet_templates.apps.QuartetTemplatesConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'allauth',
