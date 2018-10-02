@@ -54,10 +54,10 @@ ipdb==0.11
 ipython-genutils==0.2.0   # via traitlets
 ipython==7.0.1            # via ipdb
 itypes==1.1.0             # via coreapi
-jedi==0.12.1              # via ipython
+jedi==0.13.1              # via ipython
 jinja2==2.10              # via coreschema, epcpyyes, sphinx
 kombu==4.2.1              # via celery
-list-based-flavorpack==1.0.4
+list-based-flavorpack==1.0.5
 lxml==4.2.5
 markdown==3.0.1
 markupsafe==1.0           # via jinja2
@@ -77,7 +77,7 @@ pycparser==2.19           # via cffi
 pygments==2.2.0           # via ipython, sphinx
 pytest-django==3.4.3
 pytest-sugar==0.9.1
-pytest==3.8.1             # via pytest-django, pytest-sugar
+pytest==3.8.2             # via pytest-django, pytest-sugar
 python-dateutil==2.7.3    # via faker, quartet-epcis
 python3-openid==3.1.0     # via django-allauth
 pytz==2018.5
