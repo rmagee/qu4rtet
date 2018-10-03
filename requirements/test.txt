@@ -73,7 +73,7 @@ pyup==1.0.0
 quartet-capture==1.3.5
 quartet-epcis==1.3.0
 quartet-manifest==1.0.5
-quartet-masterdata==1.1.5
+quartet-masterdata==1.1.6
 quartet-output==1.1.4
 quartet-templates==1.0.0
 random-flavorpack==1.0.4

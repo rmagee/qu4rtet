@@ -20,6 +20,7 @@ django-cors-headers
 django-filter
 eparsecis
 epcpyyes
+factory_boy
 quartet_capture
 quartet_epcis
 serialbox
