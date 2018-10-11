@@ -1,5 +1,5 @@
-QU4RTET: The Open-Source Level-4
-================================
+QU4RTET: The Open-Source EPCIS / Level-4
+========================================
 
 .. image:: https://gitlab.com/serial-lab/qu4rtet/badges/master/pipeline.svg
         :target: https://gitlab.com/serial-lab/qu4rtet/commits/master
@@ -48,7 +48,7 @@ QU4RTET: The Open-Source Level-4
     MWWMMMMMMMMMMMMWNXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXNMMMMMMMMMMMMMWNXXXXXXNWM
 
 
-The open-source level-4 system.
+The open-source EPCIS / level-4 system.
 
 :License: GPLv3
 
