@@ -19,6 +19,27 @@ from rest_framework.permissions import IsAuthenticated
 
 class APIRoot(APIView):
     '''
+    Congratulations.  If you have arrived at this page, your QU4RTET
+    system has been installed and is up and running.  This page and the
+    browse-able API are for software developers looking to extend QU4RTET's
+    features or to use the API layer for integration purposes.
+
+    If you are an end user, get the QU4RTET UI per the instructions below.
+    If you are a software developer, check the swagger and OpenAPI notes
+    below.
+
+    ## Get QU4RTET UI
+
+    Get the QU4RTET UI client application to utilize the QU4RTET UI from
+    an easy-to-use client interface.  See documentation and download
+    instructions here:
+
+    [https://gitlab.com/serial-lab/quartet-ui/](https://gitlab.com/serial-lab/quartet-ui/)
+
+    Code is also available.
+
+    ## OpenAPI/Swagger Information
+
     To enumerate all of the API options available on this QU4RTET
     instance, use the swagger or schema options below.
 
@@ -29,10 +50,10 @@ class APIRoot(APIView):
 
     For more on Swagger and Open API see:
 
-    ## Swagger
+    ### Swagger
     [https://swagger.io/](https://swagger.io/)
 
-    ## Open API Initiative
+    ### Open API Initiative
     [https://www.openapis.org/](https://www.openapis.org/)
 
     '''
