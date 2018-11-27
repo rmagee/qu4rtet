@@ -93,7 +93,7 @@ pytz==2018.7
 quartet-capture==1.4.3
 quartet-epcis==1.3.8
 quartet-manifest==1.0.5
-quartet-masterdata==1.1.6
+quartet-masterdata==1.1.7
 quartet-output==1.1.11
 quartet-templates==1.0.4
 random-flavorpack==1.0.4
