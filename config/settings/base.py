@@ -82,8 +82,9 @@ LOCAL_APPS = [
     'rest_auth.registration',
     'rest_framework_swagger',
     'corsheaders',
-    'django_filters'
+    'django_filters',
     'simple_history',
+    'quartet_trail.apps.QuartetTrailConfig',
 ]
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
