@@ -8,6 +8,7 @@ from qu4rtet.api.renderers import JSONOpenAPIRenderer
 from qu4rtet.api import routers
 from qu4rtet.api.views import APIRoot
 from rest_framework_swagger.views import get_swagger_view
+from quartet_trail.urls import urlpatterns as trail_patterns
 
 schema_view = get_schema_view(title='QU4RTET API',
                               renderer_classes=[JSONOpenAPIRenderer])
@@ -33,7 +34,7 @@ urlpatterns = [
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += routers.urlpatterns
-
+urlpatterns += trail_patterns
 registration = getattr(settings, 'ENABLE_REGISTRATION', False)
 
 if registration:

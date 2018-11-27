@@ -82,7 +82,8 @@ LOCAL_APPS = [
     'rest_auth.registration',
     'rest_framework_swagger',
     'corsheaders',
-    'django_filters',
+    'django_filters'
+    'simple_history',
 ]
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -96,6 +97,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
