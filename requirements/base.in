@@ -18,6 +18,7 @@ django-allauth
 lxml
 django-cors-headers
 django-filter
+django-simple-history
 eparsecis
 epcpyyes
 paramiko
@@ -33,5 +34,3 @@ quartet_output
 quartet_templates
 quartet_trail
 gs123
-
-
