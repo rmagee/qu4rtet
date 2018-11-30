@@ -11,10 +11,10 @@ awesome-slugify==1.6.5
 babel==2.6.0              # via flower
 bcrypt==3.1.4             # via paramiko
 billiard==3.5.0.4         # via celery
-boto3==1.9.56
-botocore==1.12.56         # via boto3, s3transfer
+boto3==1.9.57
+botocore==1.12.57         # via boto3, s3transfer
 celery==4.2.1
-certifi==2018.11.29       # via elastic-apm, requests
+certifi==2018.11.29       # via elastic-apm, requests, sentry-sdk
 cffi==1.11.5              # via argon2-cffi, bcrypt, cryptography, pynacl
 chardet==3.0.4            # via requests
 click==7.0                # via gs123
@@ -85,6 +85,7 @@ regex==2018.11.22         # via awesome-slugify
 requests-oauthlib==1.0.0  # via django-allauth
 requests==2.20.1          # via coreapi, django-allauth, django-anymail, requests-oauthlib
 s3transfer==0.1.13        # via boto3
+sentry-sdk==0.5.5
 serialbox==1.2.7
 simplejson==3.16.0        # via django-rest-swagger
 six==1.11.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-extensions, django-rest-auth, djangorestframework-csv, faker, pynacl, python-dateutil, serialbox
@@ -93,6 +94,6 @@ tornado==5.1.1            # via flower
 unicodecsv==0.14.1        # via djangorestframework-csv
 unidecode==0.4.21         # via awesome-slugify
 uritemplate==3.0.0        # via coreapi
-urllib3==1.24.1           # via botocore, elastic-apm, requests
+urllib3==1.24.1           # via botocore, elastic-apm, requests, sentry-sdk
 vine==1.1.4               # via amqp
 wheel==0.32.3

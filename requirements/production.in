@@ -8,3 +8,4 @@ django-anymail
 # Raven is the Sentry client
 raven
 elastic-apm
+sentry-sdk
