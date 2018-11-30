@@ -36,16 +36,5 @@ class CeleryConfig(AppConfig):
         app.autodiscover_tasks(force=True)
         # Using a string here means the worker will not have to
         # pickle the object when using Windows.
-        if getattr(settings, 'USE_SENTRY', False) == True:
-            # should be defined in production only
-            from raven import Client as RavenClient
-            from raven.contrib.celery import \
-                register_signal as raven_register_signal
-            from raven.contrib.celery import \
-                register_logger_signal as raven_register_logger_signal
-
-            raven_client = RavenClient(dsn=settings.RAVEN_CONFIG['DSN'])
-            raven_register_logger_signal(raven_client)
-            raven_register_signal(raven_client)
         logger.info('Using database at %s',
                     os.environ.get('DATABASE_HOST', ''))
