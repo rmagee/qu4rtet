@@ -170,7 +170,7 @@ else:
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
-if env.bool('DJANGO_ENABLE_ADMIN', False):
+if env.bool('DJANGO_ENABLE_ADMIN', True):
     INSTALLED_APPS += ['django.contrib.admin']
 
 logging.info('Default database host: %s', database_host)

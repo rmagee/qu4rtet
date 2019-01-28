@@ -37,6 +37,7 @@ keys = [
     ('/{0}/POSTGRES_PASSWORD', 'SecureString', 'Provide Value'),
     ('/{0}/USE_AWS', 'String', 'False'),
     ('/{0}/USE_SENTRY', 'String', 'False'),
+    ('/{0}/DJANGO_ENABLE_ADMIN', 'String', 'True'),
 ]
 
 

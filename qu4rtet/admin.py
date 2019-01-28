@@ -12,16 +12,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Copyright 2018 SerialLab Corp.  All rights reserved.
-from django.contrib.admin import AdminSite
-from quartet_epcis.models import entries
-from quartet_epcis import admin
+from quartet_epcis import admin as epcis_admin
+from quartet_capture import admin as capture_admin
+from django.contrib import admin
 
-class Qu4rtetAdminSite(AdminSite):
-    site_header = 'QU4RTET Administration'
+class QuartetAdminSite(admin.AdminSite):
+    site_header = "QU4RTET Administration"
 
+admin_site = QuartetAdminSite(name='qu4rtetadmin')
 
-
-
-admin_site = Qu4rtetAdminSite(name='qu4rtetadmin')
-
-admin.register_to_site(admin_site)
+epcis_admin.register_to_site(admin_site)
+capture_admin.register_to_site(admin_site)

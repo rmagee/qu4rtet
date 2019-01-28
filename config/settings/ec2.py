@@ -92,6 +92,7 @@ def get_values():
             'DJANGO_AWS_STORAGE_BUCKET_NAME',
             'DJANGO_MAILGUN_API_KEY',
             'DJANGO_SERVER_EMAIL',
+            'DJANGO_ENABLE_ADMIN',
             'MAILGUN_SENDER_DOMAIN',
             'USE_SENTRY',
             'DJANGO_SENTRY_DSN',

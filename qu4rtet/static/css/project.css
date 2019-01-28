@@ -11,3 +11,79 @@
   background-color: #f2dede;
   border-color: #eed3d7;
 }
+
+/*override the button on the admin site*/
+.submit-row a.deletelink {
+  height: 35px;
+}
+
+td, th {
+  padding: 8px;
+}
+
+element.style {
+}
+
+.inline-group .tabular td.original p {
+  overflow: INHERIT;
+  font-size: 12px;
+}
+
+#header {
+  height: 65px;
+  background: black;
+}
+
+div.breadcrumbs {
+  background: #96cc47;
+}
+
+.module h2, .module caption, .inline-group h2 {
+  background: #96cc47;
+}
+
+a:link, a:visited {
+  color: white;
+}
+
+#content-related {
+    visibility: hidden;
+    background: #f8f8f8;
+}
+
+#result_list > tbody > tr > th > a{
+  color: black;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+  background: #96cc47;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+  background: #96cc47;
+
+}
+
+#container > ul > li > a {
+  color: black;
+}
+
+.button.default:active, input[type=submit].default:active, .button.default:focus, input[type=submit].default:focus, .button.default:hover, input[type=submit].default:hover {
+    background: grey;
+}
+
+.button:active, input[type=submit]:active, input[type=button]:active, .button:focus, input[type=submit]:focus, input[type=button]:focus, .button:hover, input[type=submit]:hover, input[type=button]:hover {
+    background: grey;
+}
+
+.object-tools a:link, .object-tools a a:visited {
+    background-color: #96cc47;
+}
+
+div.breadcrumbs {
+  color: #fff;
+}
+
+.object-tools a:focus, .object-tools a:hover {
+    background-color: grey;
+}

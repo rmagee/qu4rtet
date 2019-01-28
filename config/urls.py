@@ -40,6 +40,11 @@ registration = getattr(settings, 'ENABLE_REGISTRATION', False)
 if registration:
     urlpatterns.append(url(r'^rest-auth/registration/',
                            include('rest_auth.registration.urls')))
+if 'django.contrib.admin' in settings.INSTALLED_APPS:
+    from qu4rtet.admin import admin_site
+    urlpatterns = [
+        path('admin/', admin_site.urls),
+    ] + urlpatterns
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
@@ -59,3 +64,4 @@ if settings.DEBUG:
         urlpatterns = [
                           url(r'^__debug__/', include(debug_toolbar.urls)),
                       ] + urlpatterns
+
