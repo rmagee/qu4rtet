@@ -87,7 +87,7 @@ quartet-manifest==1.0.5
 quartet-masterdata==1.1.7
 quartet-output==1.1.12
 quartet-templates==1.0.4
-quartet-trail==0.2.3
+quartet-trail==0.2.4
 random-flavorpack==1.0.4
 regex==2019.1.24          # via awesome-slugify
 requests-oauthlib==1.2.0  # via django-allauth
