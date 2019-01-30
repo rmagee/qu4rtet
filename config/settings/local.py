@@ -43,7 +43,7 @@ CACHES = {
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
 MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
-INSTALLED_APPS += ['debug_toolbar',]
+INSTALLED_APPS += ['debug_toolbar', 'quartet_tracelink', 'quartet_4nt4r3s']
 
 INTERNAL_IPS = ['127.0.0.1', '10.0.2.2', ]
 
