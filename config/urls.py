@@ -43,7 +43,7 @@ if registration:
 if 'django.contrib.admin' in settings.INSTALLED_APPS:
     from qu4rtet.admin import admin_site
     urlpatterns = [
-        path('admin/', admin_site.urls),
+        path(getattr(settings, 'DJANGO_ADMIN_URL', 'qu4rtetadmin/'), admin_site.urls),
     ] + urlpatterns
 
 if settings.DEBUG:
