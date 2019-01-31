@@ -167,8 +167,6 @@ First switch out of the postgres user account by typing exit:
 
 .. code-block:: text
 
-    sudo python3 manage.py makemigrations
-    sudo python3 manage.py migrate --run-syncdb
     sudo python3 manage.py migrate
     sudo python3 manage.py collectstatic --no-input
     sudo python3 manage.py createsuperuser
