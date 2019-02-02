@@ -3,7 +3,6 @@
 django-debug-toolbar
 coverage
 flake8
-pyup
 django-test-plus
 factory-boy
 django-coverage-plugin
