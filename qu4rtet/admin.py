@@ -14,12 +14,25 @@
 # Copyright 2018 SerialLab Corp.  All rights reserved.
 from quartet_epcis import admin as epcis_admin
 from quartet_capture import admin as capture_admin
+from list_based_flavorpack import admin as lbf_admin
+from quartet_output import admin as output_admin
+from django.contrib.auth.models import User, Group
+from django.contrib.auth.admin import GroupAdmin, UserAdmin
 from django.contrib import admin
 
 class QuartetAdminSite(admin.AdminSite):
     site_header = "QU4RTET Administration"
 
+class QUserAdmin(UserAdmin):
+    list_filter = ()
+    filter_horizontal = ()
+
 admin_site = QuartetAdminSite(name='qu4rtetadmin')
+admin_site.register(Group, GroupAdmin)
+admin_site.register(User, QUserAdmin)
 
 epcis_admin.register_to_site(admin_site)
 capture_admin.register_to_site(admin_site)
+lbf_admin.register_to_site(admin_site)
+output_admin.register_to_site(admin_site)
+
