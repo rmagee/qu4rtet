@@ -56,7 +56,7 @@ idna==2.8                 # via requests
 itypes==1.1.0             # via coreapi
 jinja2==2.10              # via coreschema, epcpyyes
 kombu==4.3.0              # via celery
-list-based-flavorpack==2.0.3
+list-based-flavorpack==2.0.4
 lxml==4.3.1
 markdown==3.0.1
 markupsafe==1.1.0         # via jinja2
@@ -81,13 +81,13 @@ pytest==4.2.1             # via pytest-django, pytest-sugar
 python-dateutil==2.8.0    # via faker, quartet-epcis
 python3-openid==3.1.0     # via django-allauth
 pytz==2018.9
-quartet-capture==2.2.8
+quartet-capture==2.2.9
 quartet-epcis==1.4.3
 quartet-manifest==1.0.5
 quartet-masterdata==1.1.7
-quartet-output==1.1.16
+quartet-output==1.1.17
 quartet-templates==1.0.4
-quartet-trail==0.2.4
+quartet-trail==0.2.5
 random-flavorpack==1.0.4
 regex==2019.2.7           # via awesome-slugify
 requests-oauthlib==1.2.0  # via django-allauth
