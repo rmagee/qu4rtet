@@ -141,3 +141,8 @@ pil_logger.setLevel(logging.INFO)
 
 # allow restful registration API endpoints
 ENABLE_REGISTRATION = False
+
+try:
+    from config.settings.dev_settings import *
+except ImportError:
+    pass
