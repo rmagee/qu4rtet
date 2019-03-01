@@ -11,8 +11,8 @@ awesome-slugify==1.6.5
 babel==2.6.0              # via flower
 bcrypt==3.1.6             # via paramiko
 billiard==3.5.0.5         # via celery
-boto3==1.9.103
-botocore==1.12.103        # via boto3, s3transfer
+boto3==1.9.105
+botocore==1.12.105        # via boto3, s3transfer
 celery==4.2.1
 certifi==2018.11.29       # via elastic-apm, requests, sentry-sdk
 cffi==1.12.2              # via argon2-cffi, bcrypt, cryptography, pynacl
@@ -22,12 +22,12 @@ collectfast==0.6.2
 commonmark==0.8.1         # via epcpyyes
 coreapi==2.3.3            # via django-rest-swagger, openapi-codec
 coreschema==0.0.4         # via coreapi
-cryptography==2.5         # via paramiko
+cryptography==2.6.1       # via paramiko
 decorator==4.3.2          # via serialbox
 defusedxml==0.5.0         # via djangorestframework-xml, python3-openid
-django-allauth==0.39.0
+django-allauth==0.39.1
 django-anymail==6.0
-django-cors-headers==2.4.0
+django-cors-headers==2.4.1
 django-environ==0.4.5
 django-extensions==2.1.6
 django-filter==2.1.0
@@ -59,7 +59,7 @@ jinja2==2.10              # via coreschema, epcpyyes
 jmespath==0.9.4           # via boto3, botocore
 kombu==4.3.0              # via celery
 list-based-flavorpack==2.0.4
-lxml==4.3.1
+lxml==4.3.2
 markdown==3.0.1
 markupsafe==1.1.1         # via jinja2
 oauthlib==3.0.1           # via requests-oauthlib
@@ -73,7 +73,7 @@ python-dateutil==2.8.0    # via botocore, faker, quartet-epcis
 python3-openid==3.1.0     # via django-allauth
 pytz==2018.9
 quartet-capture==2.2.10
-quartet-epcis==1.4.3
+quartet-epcis==1.4.4
 quartet-manifest==1.0.5
 quartet-masterdata==1.1.7
 quartet-output==2.0.2
@@ -90,7 +90,7 @@ serialbox==1.2.10
 simplejson==3.16.0        # via django-rest-swagger
 six==1.12.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-extensions, django-rest-auth, djangorestframework-csv, faker, pynacl, python-dateutil, serialbox
 text-unidecode==1.2       # via faker
-tornado==5.1.1            # via flower
+tornado==6.0              # via flower
 unicodecsv==0.14.1        # via djangorestframework-csv
 unidecode==0.4.21         # via awesome-slugify
 uritemplate==3.0.0        # via coreapi

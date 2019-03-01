@@ -26,11 +26,11 @@ commonmark==0.8.1         # via epcpyyes, recommonmark
 coreapi==2.3.3            # via django-rest-swagger, openapi-codec
 coreschema==0.0.4         # via coreapi
 coverage==4.5.2
-cryptography==2.5         # via paramiko
+cryptography==2.6.1       # via paramiko
 decorator==4.3.2          # via ipython, serialbox, traitlets
 defusedxml==0.5.0         # via djangorestframework-xml, python3-openid
-django-allauth==0.39.0
-django-cors-headers==2.4.0
+django-allauth==0.39.1
+django-cors-headers==2.4.1
 django-coverage-plugin==1.6.0
 django-debug-toolbar==1.11
 django-environ==0.4.5
@@ -64,7 +64,7 @@ jedi==0.13.3              # via ipython
 jinja2==2.10              # via coreschema, epcpyyes, sphinx
 kombu==4.3.0              # via celery
 list-based-flavorpack==2.0.4
-lxml==4.3.1
+lxml==4.3.2
 markdown==3.0.1
 markupsafe==1.1.1         # via jinja2
 more-itertools==6.0.0     # via pytest
@@ -93,7 +93,7 @@ python-dateutil==2.8.0    # via faker, quartet-epcis
 python3-openid==3.1.0     # via django-allauth
 pytz==2018.9
 quartet-capture==2.2.10
-quartet-epcis==1.4.3
+quartet-epcis==1.4.4
 quartet-manifest==1.0.5
 quartet-masterdata==1.1.7
 quartet-output==2.0.2
@@ -113,7 +113,7 @@ sphinx==1.4.8
 sqlparse==0.2.4           # via django-debug-toolbar
 termcolor==1.1.0          # via pytest-sugar
 text-unidecode==1.2       # via faker
-tornado==5.1.1            # via flower
+tornado==6.0              # via flower
 traitlets==4.3.2          # via ipython
 unicodecsv==0.14.1        # via djangorestframework-csv
 unidecode==0.4.21         # via awesome-slugify
