@@ -98,7 +98,7 @@ six==1.12.0               # via argon2-cffi, bcrypt, cryptography, django-covera
 sqlparse==0.2.4           # via django-debug-toolbar
 termcolor==1.1.0          # via pytest-sugar
 text-unidecode==1.2       # via faker
-tornado==6.0.1            # via flower
+tornado==5.1.1
 unicodecsv==0.14.1        # via djangorestframework-csv
 unidecode==0.4.21         # via awesome-slugify
 uritemplate==3.0.0        # via coreapi

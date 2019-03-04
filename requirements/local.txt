@@ -113,7 +113,7 @@ sphinx==1.4.8
 sqlparse==0.2.4           # via django-debug-toolbar
 termcolor==1.1.0          # via pytest-sugar
 text-unidecode==1.2       # via faker
-tornado==6.0.1            # via flower
+tornado==5.1.1
 traitlets==4.3.2          # via ipython
 unicodecsv==0.14.1        # via djangorestframework-csv
 unidecode==0.4.21         # via awesome-slugify

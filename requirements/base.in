@@ -34,3 +34,4 @@ quartet_output
 quartet_templates
 quartet_trail
 gs123
+tornado==5.1.1
