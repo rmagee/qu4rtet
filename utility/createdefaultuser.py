@@ -50,10 +50,9 @@ def create_launch_file(instance_id):
 
 def run():
     instance_id = get_instance_id()
-    launch = create_launch_file(instance_id)
-    if launch:
+    file_exists = create_launch_file(instance_id)
+    if not file_exists:
         create_default_user(instance_id)
-
     print('complete.')
 
 
