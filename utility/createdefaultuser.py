@@ -1,7 +1,13 @@
 import os
+import sys
 import requests
 import django
 
+quartet_path = '/srv/qu4rtet'
+try:
+    sys.path.index(quartet_path)  # Or os.getcwd() for this directory
+except ValueError:
+    sys.path.append(quartet_path)  # Or os.getcwd() for this directory
 os.environ['DJANGO_SETTINGS_MODULE'] = 'config.settings.production'
 django.setup()
 
@@ -16,7 +22,7 @@ def create_default_user(instance_id):
             'qu4rtet@serial-lab.local',
             instance_id
         )
-        print('user %s was already in the system' % instance_id)
+        print('user %s was created in the system' % username)
 
 
 def get_instance_id():
@@ -26,12 +32,13 @@ def get_instance_id():
 
 
 def create_launch_file(instance_id):
-    directory_path = '/var/qu4rtet/'
+    directory_path = '/var/quartet/'
     file_path = '%s%s' % (directory_path, instance_id)
     if os.path.exists(file_path):
         ret = False
     else:
-        os.mkdir(directory_path)
+        if not os.path.exists(directory_path):
+            os.mkdir(directory_path)
         print('Creating instance id file.')
         with open(file_path, 'w') as f:
             f.write(instance_id)
@@ -43,8 +50,10 @@ def create_launch_file(instance_id):
 
 def run():
     instance_id = get_instance_id()
-    create_default_user(instance_id)
-    create_launch_file(instance_id)
+    launch = create_launch_file(instance_id)
+    if launch:
+        create_default_user(instance_id)
+
     print('complete.')
 
 
