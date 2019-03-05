@@ -92,3 +92,7 @@ div.breadcrumbs {
   color: #96cc47;
 }
 
+.delete-confirmation form .cancel-link {
+    height: inherit;
+    line-height: inherit;
+}
