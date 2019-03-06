@@ -15,7 +15,10 @@
 from quartet_epcis import admin as epcis_admin
 from quartet_capture import admin as capture_admin
 from list_based_flavorpack import admin as lbf_admin
+from serialbox import admin as sb_admin
 from quartet_output import admin as output_admin
+from quartet_masterdata import admin as md_admin
+from quartet_templates import admin as t_admin
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
 from django.contrib import admin
@@ -35,4 +38,6 @@ epcis_admin.register_to_site(admin_site)
 capture_admin.register_to_site(admin_site)
 lbf_admin.register_to_site(admin_site)
 output_admin.register_to_site(admin_site)
-
+md_admin.register_to_site(admin_site)
+t_admin.register_to_site(admin_site)
+sb_admin.register_to_site(admin_site)
