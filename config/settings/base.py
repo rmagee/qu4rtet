@@ -76,6 +76,7 @@ LOCAL_APPS = [
     'list_based_flavorpack.apps.ListBasedFlavorpackConfig',
     'quartet_templates.apps.QuartetTemplatesConfig',
     'rest_framework',
+    'rest_framework_xml',
     'rest_framework.authtoken',
     'allauth',
     'rest_auth',
