@@ -12,9 +12,9 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'config.settings.production'
 django.setup()
 
 
-def create_default_user(instance_id):
+def create_default_user(instance_id, reservation_id):
     from django.contrib.auth.models import User
-    username = 'qu4rtet-%s' % instance_id
+    username = 'qu4rtet-%s' % reservation_id
     print('creating default user %s', username)
     if not User.objects.filter(username=username).exists():
         User.objects.create_superuser(
@@ -30,6 +30,10 @@ def get_instance_id():
                             'meta-data/instance-id')
     return response.text
 
+def get_reservation_id():
+    response = requests.get('http://169.254.169.254/latest/'
+                            'meta-data/reservation-id')
+    return response.text
 
 def create_launch_file(instance_id):
     directory_path = '/var/quartet/'
@@ -50,9 +54,10 @@ def create_launch_file(instance_id):
 
 def run():
     instance_id = get_instance_id()
+    reservation_id = get_reservation_id()
     file_exists = create_launch_file(instance_id)
     if not file_exists:
-        create_default_user(instance_id)
+        create_default_user(instance_id, reservation_id)
     print('complete.')
 
 
