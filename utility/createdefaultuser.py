@@ -15,7 +15,7 @@ django.setup()
 def create_default_user(instance_id, reservation_id):
     from django.contrib.auth.models import User
     username = 'qu4rtet-%s' % reservation_id
-    print('creating default user %s', username)
+    print('creating default user %s' % username)
     if not User.objects.filter(username=username).exists():
         User.objects.create_superuser(
             username,
@@ -55,8 +55,8 @@ def create_launch_file(instance_id):
 def run():
     instance_id = get_instance_id()
     reservation_id = get_reservation_id()
-    file_exists = create_launch_file(instance_id)
-    if not file_exists:
+    file_created = create_launch_file(instance_id)
+    if file_created:
         create_default_user(instance_id, reservation_id)
     print('complete.')
 
