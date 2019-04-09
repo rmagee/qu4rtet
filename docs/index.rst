@@ -13,8 +13,10 @@ Contents:
    readme
    development
    install_ubuntu
+   install_redhat
    install
    virtualbox
+   sftp
 
 
 
