@@ -105,7 +105,7 @@ the database:
 Create The QU4RTET Database
 +++++++++++++++++++++++++++
 
-Next you will create the q4 database along with the q4 database user.
+Next you will create the QU4RTET database along with the QU4RTET database user.
 
 .. code-block:: text
 
@@ -339,7 +339,7 @@ Use the following to install NGINX.
     sudo yum --enablerepo=epel install nginx
     rm epel-release-latest-7.noarch.rpm
 
-Once NGINX is installed, we can configure it to communicate with q4 through
+Once NGINX is installed, we can configure it to communicate with QU4RTET through
 gunicorn.
 
 Edit the nginx.conf file:

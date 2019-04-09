@@ -69,8 +69,8 @@ About the `watch_inbound_folders` management command
 
 This is django management command that is part of the `quartet_capture`
 python package.  Configuring it to run as a daemon is documented here since
-this is a default package with q4 and the daemonization of the management
-command is specific to server / platform rollouts.
+this is a default package with QU4RTET and the daemonization of the management
+command is specific to server / platform roll-outs.
 
 You provide three parameters to the command.  The first is the directory to
 monitor.  The second is the directory to place files that have been processed.
