@@ -14,7 +14,7 @@ djangorestframework-csv==2.1.0  # via serialbox
 djangorestframework-xml==1.4.0  # via serialbox
 djangorestframework==3.9.2  # via djangorestframework-csv, serialbox
 docutils==0.14            # via serialbox
-eparsecis==2.0.10
+eparsecis==3.0.0
 epcpyyes==2.0.1
 future==0.17.1            # via commonmark
 gs123==1.0.5

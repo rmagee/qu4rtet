@@ -43,7 +43,7 @@ djangorestframework-xml==1.4.0
 djangorestframework==3.9.2
 docutils==0.14            # via serialbox
 entrypoints==0.3          # via flake8
-eparsecis==2.0.10
+eparsecis==3.0.0
 epcpyyes==2.0.1
 factory-boy==2.11.1
 faker==1.0.5              # via factory-boy
