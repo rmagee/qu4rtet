@@ -76,7 +76,7 @@ quartet-capture==2.6.2
 quartet-epcis==1.4.9
 quartet-integrations==1.0.1
 quartet-manifest==1.0.5
-quartet-masterdata==1.2.1
+quartet-masterdata==1.3.0
 quartet-output==2.0.4
 quartet-templates==1.0.5
 quartet-trail==0.2.6
