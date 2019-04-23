@@ -3,6 +3,7 @@ FROM python:3.6
 ENV PYTHONUNBUFFERED 1
 
 RUN export DOCKER=true
+RUN export HTTPS_ONLY=False
 
 RUN mkdir -p /root/.ssh
 ADD ./compose/local/django/gitlab_deploy_key_rsa /root/.ssh/id_rsa
@@ -37,14 +38,17 @@ RUN sed -i 's/\r//' /start-celerybeat.sh
 RUN chmod +x /start-celerybeat.sh
 
 COPY . /app
+# if an env file got coppied remove it.  the
+# env files should be used from the .envs folder
+RUN rm /app/.env
 
 RUN chown -R django /app
 
 USER django
 
 WORKDIR /app
-VOLUME ["/app/staticfiles", "/app/media/"]
-#VOLUME /static
-#VOLUME /media
+#VOLUME ["/app/static/", "/app/media/"]
+VOLUME /static
+VOLUME /media
 
 ENTRYPOINT ["/entrypoint.sh"]
