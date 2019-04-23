@@ -38,6 +38,8 @@ if USE_ELASTIC_APM:
 
 if env.bool('HTTPS_ONLY', True):
     from .secure import *
+if os.environ.get('USE_DOCKER') == 'yes':
+    SESSION_COOKIE_SECURE = False
 
 CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'

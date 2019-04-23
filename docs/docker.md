@@ -1,6 +1,6 @@
 # Docker
 
-QU4RTET has two docker-compose scripts in the root directory of the project 
+The open-source EPCIS/Level-4 QU4RTET project has two docker-compose scripts in the root directory of the project 
 that allow you to deploy the application framework for both production and
 for local development, testing and sandbox instances, for example. 
 
@@ -53,7 +53,14 @@ looking to run a development environment:
     python manage.py createsuperuser 
     # follow the prompts
     exit
-  
+
+## Stopping the Stack
+
+Stop the stack by issuing
+
+    docker-compose -f prodcuction.yml stop
+
+
 ## Testing the Launch
 
 The environment will load to port 80 for HTTP for the `production` build
@@ -87,3 +94,11 @@ enable HTTPS. If you'd like to use `certbot` and `let's encrypt` there is a
 a script in the `utility` directory named `enable-https.sh` that you
 can utilize.  Otherwise, you will have to follow the NGINX documentation 
 for securing the web server.
+
+## Info
+
+For more on QU4RTET and SerialLab see
+
+http://serial-lab.com
+
+https://qu4rtet.com
