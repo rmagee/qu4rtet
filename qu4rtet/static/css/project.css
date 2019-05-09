@@ -87,3 +87,16 @@ div.breadcrumbs {
 .object-tools a:focus, .object-tools a:hover {
     background-color: grey;
 }
+
+#user-tools{
+  color: #96cc47;
+}
+
+.delete-confirmation form .cancel-link {
+    height: inherit;
+    line-height: inherit;
+}
+
+body.login {
+    background: #5f5f5f;
+}

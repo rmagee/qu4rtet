@@ -3,11 +3,7 @@
 set -o errexit
 set -o nounset
 set -o xtrace
-
-echo "RUNNING makemigrations..."
-python manage.py makemigrations
-echo "RUNNING migrage..."
-python manage.py migrate --run-syncdb
+pip install -r ../../requirements/local.txt
 python manage.py migrate
 python manage.py collectstatic --no-input
 python manage.py runserver_plus 0.0.0.0:8000

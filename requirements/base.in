@@ -1,3 +1,5 @@
+-r serial-lab.in
+
 wheel
 django-model-utils
 django
@@ -19,18 +21,6 @@ lxml
 django-cors-headers
 django-filter
 django-simple-history
-eparsecis
-epcpyyes
 paramiko
 factory_boy
-quartet_capture
-quartet_epcis
-serialbox
-random_flavorpack
-list_based_flavorpack
-quartet_manifest
-quartet_masterdata
-quartet_output
-quartet_templates
-quartet_trail
-gs123
+tornado==5.1.1

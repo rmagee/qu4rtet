@@ -38,6 +38,8 @@ if USE_ELASTIC_APM:
 
 if env.bool('HTTPS_ONLY', True):
     from .secure import *
+if os.environ.get('USE_DOCKER') == 'yes':
+    SESSION_COOKIE_SECURE = False
 
 CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
@@ -175,3 +177,5 @@ if env.bool('DJANGO_ENABLE_ADMIN', True):
 
 logging.info('Default database host: %s', database_host)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+DATA_UPLOAD_MAX_MEMORY_SIZE=6553600
+FILE_UPLOAD_MAX_MEMORY_SIZE=6553600
