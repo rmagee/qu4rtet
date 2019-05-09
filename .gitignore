@@ -357,3 +357,6 @@ pip-selfcheck.json
 qu4rtet/media/
 *.dat
 
+.idea/qu4rtet.iml
+.idea/vcs.xml
+.idea/httpRequests/http-requests-log.http
