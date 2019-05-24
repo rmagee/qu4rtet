@@ -71,6 +71,7 @@ LOCAL_APPS = [
     'quartet_capture.apps.QuartetCaptureConfig',
     'quartet_masterdata.apps.QuartetMasterdataConfig',
     'quartet_output.apps.QuartetOutputConfig',
+    'quartet_vrs.apps.QuartetVrsConfig',
     'serialbox.apps.PoolsConfig',
     'random_flavorpack.apps.RandomFlavorpackConfig',
     'list_based_flavorpack.apps.ListBasedFlavorpackConfig',
