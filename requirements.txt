@@ -11,8 +11,8 @@ awesome-slugify==1.6.5
 babel==2.7.0              # via flower
 bcrypt==3.1.6             # via paramiko
 billiard==3.6.0.0         # via celery
-boto3==1.9.167
-botocore==1.12.167        # via boto3, s3transfer
+boto3==1.9.168
+botocore==1.12.168        # via boto3, s3transfer
 celery==4.3.0
 certifi==2019.3.9         # via elastic-apm, requests, sentry-sdk
 cffi==1.12.3              # via argon2-cffi, bcrypt, cryptography, pynacl
@@ -78,7 +78,7 @@ quartet-manifest==1.0.5
 quartet-masterdata==1.4.0
 quartet-output==2.0.4
 quartet-templates==1.0.5
-quartet-trail==0.3.0
+quartet-trail==1.0.0
 random-flavorpack==1.0.4
 raven==6.10.0
 regex==2019.6.8           # via awesome-slugify
