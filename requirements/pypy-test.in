@@ -1,5 +1,5 @@
 -r base.in
--r postgres.in
+-r pypy.in
 django-debug-toolbar
 coverage
 flake8
