@@ -81,12 +81,6 @@ if env.bool('USE_AWS', default=False):
     MEDIA_URL = 'https://s3.amazonaws.com/%s/media/' % AWS_STORAGE_BUCKET_NAME
     AWS_PRELOAD_METADATA = True
 
-# EMAIL
-# ------------------------------------------------------------------------------
-DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
-                         default='QU4RTET <noreply@serial-lab.local>')
-EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[QU4RTET]')
-SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
 # Uncomment for Anymail with Mailgun
 # INSTALLED_APPS += ['anymail', ]

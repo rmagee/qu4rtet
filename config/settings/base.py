@@ -318,6 +318,20 @@ CORS_ORIGIN_ALLOW_ALL = env('CORS_ORIGIN_ALLOW_ALL', default=True)
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
 ADMIN_URL = 'qu4rtetadmin/'
 
+
+# EMAIL
+# ------------------------------------------------------------------------------
+DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
+                         default='QU4RTET <noreply@qu4rtet.io>')
+EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[QU4RTET]')
+SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
+EMAIL_HOST = env('DJANGO_EMAIL_HOST', default=None)
+EMAIL_USE_TLS = env.bool('DJANGO_EMAIL_USE_TLS', False)
+EMAIL_PORT = env.int('DJANGO_EMAIL_PORT', 587)
+EMAIL_HOST_USER = env('DJANGO_EMAIL_HOST_USER', None)
+EMAIL_HOST_PASSWORD = env('DJANGO_EMAIL_HOST_PASSWORD', None)
+ADMINS = env.list('DJANGO_ADMINS', [])
+
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
