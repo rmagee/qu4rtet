@@ -9,7 +9,7 @@ commonmark==0.9.0         # via epcpyyes
 decorator==4.4.0          # via serialbox
 defusedxml==0.6.0         # via djangorestframework-xml
 django-model-utils==3.2.0  # via quartet-epcis, quartet-trail
-django==2.2.2             # via django-model-utils, serialbox
+django==2.2.3             # via django-model-utils, serialbox
 djangorestframework-csv==2.1.0  # via serialbox
 djangorestframework-xml==1.4.0  # via serialbox
 djangorestframework==3.9.4  # via djangorestframework-csv, serialbox
@@ -31,7 +31,7 @@ quartet-epcis==1.6.6
 quartet-integrations==1.2.3
 quartet-manifest==1.0.5
 quartet-masterdata==1.4.0
-quartet-output==2.1.1
+quartet-output==2.2.1
 quartet-templates==1.0.5
 quartet-trail==1.0.0
 random-flavorpack==1.0.4
