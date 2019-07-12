@@ -124,7 +124,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = [
+ADMINS = env.list('DJANGO_ADMINS', default=None) or [
     ("""SerialLab Corp""", 'slab@serial-lab.com'),
 ]
 
