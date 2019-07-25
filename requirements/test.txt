@@ -30,23 +30,23 @@ django-cors-headers==3.0.2
 django-coverage-plugin==1.6.0
 django-debug-toolbar==2.0
 django-environ==0.4.5
-django-extensions==2.1.9
-django-filter==2.1.0
+django-extensions==2.2.1
+django-filter==2.2.0
 django-model-utils==3.2.0
 django-rest-auth==0.9.5
 django-rest-swagger==2.2.0
-django-simple-history==2.7.2
+django-simple-history==2.7.3
 django-test-plus==1.2.1
 django==2.2.3
 djangorestframework-csv==2.1.0  # via serialbox
 djangorestframework-xml==1.4.0
-djangorestframework==3.9.4
-docutils==0.14            # via serialbox
+djangorestframework==3.10.1
+docutils==0.15.1.post1    # via serialbox
 entrypoints==0.3          # via flake8
 eparsecis==3.1.0
 epcpyyes==2.0.3
 factory-boy==2.12.0
-faker==1.0.7              # via factory-boy
+faker==2.0.0              # via factory-boy
 flake8==3.7.8
 flower==0.9.3
 future==0.17.1            # via commonmark
@@ -62,7 +62,7 @@ lxml==4.3.4
 markdown==3.1.1
 markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1             # via flake8
-more-itertools==7.1.0     # via pytest
+more-itertools==7.2.0     # via pytest
 oauthlib==3.0.2           # via requests-oauthlib
 openapi-codec==1.3.2      # via django-rest-swagger
 packaging==19.0           # via pytest, pytest-sugar
@@ -74,7 +74,7 @@ pycodestyle==2.5.0        # via flake8
 pycparser==2.19           # via cffi
 pyflakes==2.1.1           # via flake8
 pynacl==1.3.0             # via paramiko
-pyparsing==2.4.0          # via packaging
+pyparsing==2.4.1.1        # via packaging
 pytest-django==3.5.1
 pytest-sugar==0.9.2
 pytest==5.0.1             # via pytest-django, pytest-sugar
@@ -82,18 +82,18 @@ python-dateutil==2.8.0    # via faker, quartet-epcis
 python3-openid==3.1.0     # via django-allauth
 pytz==2019.1
 quartet-capture==2.7.0
-quartet-epcis==1.6.6
-quartet-integrations==1.2.3
+quartet-epcis==1.6.7
+quartet-integrations==1.3.2
 quartet-manifest==1.0.5
 quartet-masterdata==1.4.0
-quartet-output==2.2.1
+quartet-output==2.2.6
 quartet-templates==1.0.5
 quartet-trail==1.0.0
 random-flavorpack==1.0.4
 regex==2019.6.8           # via awesome-slugify
 requests-oauthlib==1.2.0  # via django-allauth
 requests==2.22.0          # via coreapi, django-allauth, requests-oauthlib
-serialbox==1.3.0
+serialbox==1.3.2
 simplejson==3.16.0        # via django-rest-swagger
 six==1.12.0               # via argon2-cffi, bcrypt, cryptography, django-coverage-plugin, django-extensions, django-rest-auth, django-simple-history, djangorestframework-csv, faker, packaging, pynacl, python-dateutil, serialbox
 sqlparse==0.3.0           # via django, django-debug-toolbar
