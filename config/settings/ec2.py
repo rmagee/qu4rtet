@@ -128,8 +128,7 @@ def get_values():
                 name = os.path.basename(parameter['Name'])
                 os.environ[name] = parameter['Value']
                 found_parameters[name] = parameter['Value']
-                logger.info('Setting os.environ key %s to %s',
-                            name, parameter['Value'])
+                logger.info('Setting os.environ key %s', name)
     else:
         print('No parameter group was defined in the user-data.')
 
