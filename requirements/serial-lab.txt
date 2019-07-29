@@ -28,7 +28,7 @@ python-dateutil==2.8.0    # via quartet-epcis
 pytz==2019.1              # via django
 quartet-capture==2.7.0
 quartet-epcis==1.6.8
-quartet-integrations==3.0.3
+quartet-integrations==3.0.5
 quartet-manifest==1.0.5
 quartet-masterdata==1.4.0
 quartet-output==2.2.7
