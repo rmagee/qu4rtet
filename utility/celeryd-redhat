@@ -14,7 +14,7 @@ CELERYD_CHDIR="/srv/qu4rtet"
 ENV_PYTHON="/home/ec2-user/.virtualenvs/qu4rtet/bin/python"
 
 # Extra command-line arguments to the worker
-CELERYD_OPTS="--time-limit=1600"
+CELERYD_OPTS="--time-limit=11000 --soft-time-limit=10800" #three hours
 
 # Only set logging level to DEBUG if you're having problems
 #CELERYD_LOG_LEVEL="DEBUG"

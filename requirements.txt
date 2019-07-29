@@ -11,8 +11,8 @@ awesome-slugify==1.6.5
 babel==2.7.0              # via flower
 bcrypt==3.1.7             # via paramiko
 billiard==3.6.0.0         # via celery
-boto3==1.9.195
-botocore==1.12.195        # via boto3, s3transfer
+boto3==1.9.197
+botocore==1.12.197        # via boto3, s3transfer
 celery==4.3.0
 certifi==2019.6.16        # via elastic-apm, requests, sentry-sdk
 cffi==1.12.3              # via argon2-cffi, bcrypt, cryptography, pynacl
@@ -39,7 +39,7 @@ django-storages==1.7.1
 django==2.2.3
 djangorestframework-csv==2.1.0  # via serialbox
 djangorestframework-xml==1.4.0
-djangorestframework==3.10.1
+djangorestframework==3.10.2
 docutils==0.14            # via botocore, serialbox
 elastic-apm==4.2.2
 eparsecis==3.1.0
@@ -59,7 +59,7 @@ jinja2==2.10.1            # via coreschema, epcpyyes
 jmespath==0.9.4           # via boto3, botocore
 kombu==4.6.3              # via celery
 list-based-flavorpack==2.0.4
-lxml==4.3.4
+lxml==4.4.0
 markdown==3.1.1
 markupsafe==1.1.1         # via jinja2
 oauthlib==3.0.2           # via requests-oauthlib
@@ -72,11 +72,11 @@ python-dateutil==2.8.0    # via botocore, faker, quartet-epcis
 python3-openid==3.1.0     # via django-allauth
 pytz==2019.1
 quartet-capture==2.7.0
-quartet-epcis==1.6.7
-quartet-integrations==1.3.2
+quartet-epcis==1.6.8
+quartet-integrations==3.0.3
 quartet-manifest==1.0.5
 quartet-masterdata==1.4.0
-quartet-output==2.2.6
+quartet-output==2.2.7
 quartet-templates==1.0.5
 quartet-trail==1.0.0
 random-flavorpack==1.0.4

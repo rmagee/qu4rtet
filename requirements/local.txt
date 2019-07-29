@@ -25,7 +25,7 @@ click==7.0                # via gs123, pip-tools
 commonmark==0.9.0         # via epcpyyes, recommonmark
 coreapi==2.3.3            # via django-rest-swagger, openapi-codec
 coreschema==0.0.4         # via coreapi
-coverage==4.5.3
+coverage==4.5.4
 cryptography==2.7         # via paramiko
 decorator==4.4.0          # via ipython, serialbox, traitlets
 defusedxml==0.6.0         # via djangorestframework-xml, python3-openid
@@ -44,7 +44,7 @@ django-test-plus==1.2.1
 django==2.2.3
 djangorestframework-csv==2.1.0  # via serialbox
 djangorestframework-xml==1.4.0
-djangorestframework==3.10.1
+djangorestframework==3.10.2
 docutils==0.15.1.post1    # via recommonmark, serialbox, sphinx
 eparsecis==3.1.0
 epcpyyes==2.0.3
@@ -56,16 +56,16 @@ gs123==1.0.13
 haikunator==2.1.0         # via quartet-capture
 idna==2.8                 # via requests
 imagesize==1.1.0          # via sphinx
-importlib-metadata==0.18  # via pluggy, pytest
-ipdb==0.12
+importlib-metadata==0.19  # via pluggy, pytest
+ipdb==0.12.1
 ipython-genutils==0.2.0   # via traitlets
-ipython==7.6.1            # via ipdb
+ipython==7.7.0            # via ipdb
 itypes==1.1.0             # via coreapi
 jedi==0.14.1              # via ipython
 jinja2==2.10.1            # via coreschema, epcpyyes, sphinx
 kombu==4.6.3              # via celery
 list-based-flavorpack==2.0.4
-lxml==4.3.4
+lxml==4.4.0
 markdown==3.1.1
 markupsafe==1.1.1         # via jinja2
 more-itertools==7.2.0     # via pytest
@@ -92,11 +92,11 @@ python-dateutil==2.8.0    # via faker, quartet-epcis
 python3-openid==3.1.0     # via django-allauth
 pytz==2019.1
 quartet-capture==2.7.0
-quartet-epcis==1.6.7
-quartet-integrations==1.3.2
+quartet-epcis==1.6.8
+quartet-integrations==3.0.3
 quartet-manifest==1.0.5
 quartet-masterdata==1.4.0
-quartet-output==2.2.6
+quartet-output==2.2.7
 quartet-templates==1.0.5
 quartet-tracelink==1.0.14
 quartet-trail==1.0.0
