@@ -13,9 +13,9 @@ django==2.2.3             # via django-model-utils, serialbox
 djangorestframework-csv==2.1.0  # via serialbox
 djangorestframework-xml==1.4.0  # via serialbox
 djangorestframework==3.10.2  # via djangorestframework-csv, serialbox
-docutils==0.15.1.post1    # via serialbox
+docutils==0.15.2          # via serialbox
 eparsecis==3.1.0
-epcpyyes==2.0.3
+epcpyyes==2.0.4
 future==0.17.1            # via commonmark
 gs123==1.0.13
 haikunator==2.1.0         # via quartet-capture
@@ -25,10 +25,10 @@ lxml==4.4.0               # via eparsecis, epcpyyes
 markdown==3.1.1           # via serialbox
 markupsafe==1.1.1         # via jinja2
 python-dateutil==2.8.0    # via quartet-epcis
-pytz==2019.1              # via django
+pytz==2019.2              # via django
 quartet-capture==2.7.0
 quartet-epcis==1.6.8
-quartet-integrations==3.0.6
+quartet-integrations==3.0.7
 quartet-manifest==1.0.5
 quartet-masterdata==1.4.0
 quartet-output==2.2.7
