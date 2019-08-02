@@ -46,6 +46,11 @@ a:link, a:visited {
   color: white;
 }
 
+#user_form > div > fieldset:nth-child(1) > div.form-row.field-password > div > div.help > a{
+  color: black;
+  text-decoration: underline;
+}
+
 #content-related {
     visibility: hidden;
     background: #f8f8f8;

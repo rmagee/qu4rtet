@@ -40,7 +40,7 @@ RUN chmod +x /start-celerybeat.sh
 COPY . /app
 # if an env file got coppied remove it.  the
 # env files should be used from the .envs folder
-RUN rm /app/.env
+RUN rm /app/.env; exit 0
 
 RUN chown -R django /app
 
