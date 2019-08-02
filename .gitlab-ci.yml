@@ -23,8 +23,7 @@ pypy3_6_unit_test:
   script:
   - apt-get install -y git
   - export PYTHONPATH=$PYTHONPATH:$CI_PROJECT_DIR
-  - pip install -r ./requirements/test.txt
-  - pip install -r ./requirements/pypy.txt
+  - pip install -r ./requirements/pypy-test.txt
   - export TESTING=True
   - coverage run manage.py test --settings=config.settings.test
   - coverage report -m

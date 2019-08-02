@@ -6,7 +6,6 @@ django
 django-environ
 django-extensions
 argon2-cffi
-psycopg2-binary
 awesome-slugify
 pytz
 celery

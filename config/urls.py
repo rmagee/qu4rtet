@@ -16,8 +16,8 @@ schema_view = get_schema_view(title='QU4RTET API',
 swagger_view = get_swagger_view(title='QU4RTET API')
 urlpatterns = [
                   url(r'^$', APIRoot.as_view()),
-                  url(r'^schema/', schema_view, name='schema'),
-                  url(r'^swagger', swagger_view, name='swagger'),
+                  url(r'^schema/?', schema_view, name='schema'),
+                  url(r'^swagger/?', swagger_view, name='swagger'),
                   url(r'^manifest/', include('quartet_manifest.urls',
                                              namespace='manifest')),
                   url(r'^capture/', include('quartet_capture.urls',
