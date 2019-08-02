@@ -4,13 +4,8 @@
 #
 #    pip-compile ec2.in -o ec2.txt --upgrade
 #
-<<<<<<< HEAD
-boto3==1.9.155
-botocore==1.12.155        # via boto3, s3transfer
-=======
 boto3==1.9.199
 botocore==1.12.199        # via boto3, s3transfer
->>>>>>> 552521446bcf486b9aed4575206649c4fc5cf7ef
 cached-property==1.5.1    # via ec2-metadata
 certifi==2019.6.16        # via requests
 chardet==3.0.4            # via requests
