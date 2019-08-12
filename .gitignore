@@ -360,3 +360,4 @@ qu4rtet/media/
 config/settings/dev_settings.py
 
 postgres_*
+config/local_urls.py
