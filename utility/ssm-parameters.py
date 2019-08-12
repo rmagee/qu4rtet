@@ -48,7 +48,9 @@ keys = [
               help="Whether or not to overwrite an existing group's values"
                    " with the same name as group_name.")
 def create_parameters(group_name, overwrite=False):
-    client = boto3.client('ssm')
+    client = boto3.client(
+        'ssm'
+    )
 
     for key in keys:
         client.put_parameter(

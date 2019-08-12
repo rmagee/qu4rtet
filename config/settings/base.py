@@ -76,6 +76,7 @@ LOCAL_APPS = [
     'list_based_flavorpack.apps.ListBasedFlavorpackConfig',
     'quartet_templates.apps.QuartetTemplatesConfig',
     'rest_framework',
+    'rest_framework_xml',
     'rest_framework.authtoken',
     'allauth',
     'rest_auth',
@@ -123,7 +124,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = [
+ADMINS = env.list('DJANGO_ADMINS', default=None) or [
     ("""SerialLab Corp""", 'slab@serial-lab.com'),
 ]
 
@@ -317,6 +318,19 @@ CORS_ORIGIN_ALLOW_ALL = env('CORS_ORIGIN_ALLOW_ALL', default=True)
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
 ADMIN_URL = 'qu4rtetadmin/'
 
+
+# EMAIL
+# ------------------------------------------------------------------------------
+DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
+                         default='QU4RTET <noreply@qu4rtet.io>')
+EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[QU4RTET]')
+SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
+EMAIL_HOST = env('DJANGO_EMAIL_HOST', default=None)
+EMAIL_USE_TLS = env.bool('DJANGO_EMAIL_USE_TLS', default=False)
+EMAIL_PORT = env.int('DJANGO_EMAIL_PORT', default=587)
+EMAIL_HOST_USER = env('DJANGO_EMAIL_HOST_USER', default=None)
+EMAIL_HOST_PASSWORD = env('DJANGO_EMAIL_HOST_PASSWORD', default=None)
+
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
@@ -350,7 +364,8 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
         'rest_framework_xml.parsers.XMLParser',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 SWAGGER_SETTINGS = {

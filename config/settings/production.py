@@ -38,6 +38,8 @@ if USE_ELASTIC_APM:
 
 if env.bool('HTTPS_ONLY', True):
     from .secure import *
+if os.environ.get('USE_DOCKER') == 'yes':
+    SESSION_COOKIE_SECURE = False
 
 CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
@@ -79,12 +81,6 @@ if env.bool('USE_AWS', default=False):
     MEDIA_URL = 'https://s3.amazonaws.com/%s/media/' % AWS_STORAGE_BUCKET_NAME
     AWS_PRELOAD_METADATA = True
 
-# EMAIL
-# ------------------------------------------------------------------------------
-DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
-                         default='QU4RTET <noreply@serial-lab.local>')
-EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[QU4RTET]')
-SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
 # Uncomment for Anymail with Mailgun
 # INSTALLED_APPS += ['anymail', ]
@@ -138,7 +134,8 @@ else:
         'formatters': {
             'verbose': {
                 'format': '%(levelname)s %(asctime)s %(module)s '
-                          '%(process)d %(thread)d %(message)s'
+                          '%(process)d %(thread)d %(funcName)s %(lineno)d '
+                          '%(message)s'
             },
         },
         'handlers': {
@@ -175,3 +172,5 @@ if env.bool('DJANGO_ENABLE_ADMIN', True):
 
 logging.info('Default database host: %s', database_host)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+DATA_UPLOAD_MAX_MEMORY_SIZE=6553600
+FILE_UPLOAD_MAX_MEMORY_SIZE=6553600

@@ -26,10 +26,10 @@ SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
 # Mail settings
 # ------------------------------------------------------------------------------
-
-EMAIL_PORT = 1025
-
-EMAIL_HOST = env('EMAIL_HOST', default='localhost')
+#
+# EMAIL_PORT = 1025
+#
+# EMAIL_HOST = env('EMAIL_HOST', default='localhost')
 
 # CACHING
 # ------------------------------------------------------------------------------
@@ -107,7 +107,8 @@ LOGGING = {
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s '
-                      '%(process)d %(thread)d %(message)s'
+                      '%(process)d %(thread)d %(funcName)s %(lineno)d '
+                      '%(message)s'
         },
     },
     'handlers': {
@@ -141,3 +142,8 @@ pil_logger.setLevel(logging.INFO)
 
 # allow restful registration API endpoints
 ENABLE_REGISTRATION = False
+
+try:
+    from config.settings.dev_settings import *
+except ImportError:
+    pass

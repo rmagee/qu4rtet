@@ -357,3 +357,4 @@ pip-selfcheck.json
 qu4rtet/media/
 *.dat
 
+config/settings/dev_settings.py
