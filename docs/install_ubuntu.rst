@@ -12,11 +12,16 @@ Make sure to:
 
 Install The Requirements
 ------------------------
+As you can see below, you will need a flavor of python3 and pip3 which may or may not be present on
+your base installation of Debian or Ubuntu.  Installing Python and using the
+setup tools is well documented and is beyond the scope of this document.  The pip
+installation is included below.
+
 
 .. code-block:: text
 
     sudo apt-get -y update
-    sudo apt-get -y install rabbitmq-server python3-pip postgresql postgresql-contrib gunicorn nginx supervisor apache2-utils
+    sudo apt-get -y install rabbitmq-server python3-pip postgresql postgresql-contrib gunicorn nginx supervisor apache2-utils python3-dev
     sudo ln -s /usr/bin/pip3 /usr/bin/pip
     cd /srv
     sudo git clone https://gitlab.com/serial-lab/qu4rtet.git
@@ -24,10 +29,10 @@ Install The Requirements
     cd qu4rtet
     # for production
     sudo pip3 install -r requirements/production.txt
+    # the local packages are not required but will make your life easier if
+    # you have problems getting the system running
+    sudo pip3 install -r requirements/local.txt
     sudo pip3 install celery-flower
-    # for running the dev server local, uncomment out below and/or execute
-    # on the command line:
-    # sudo pip3 install -r requirements/local.txt
 
 
 Configure Database
