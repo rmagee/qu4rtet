@@ -3,12 +3,21 @@ Ubuntu/Debian Installation
 
 Before You Begin
 ----------------
-It is important to follow all of the recommended paths and commands in this
-document.  Not doing so will result in much heartache and wasting of time.
+If you are familiar with python and have good unix skills, you may want to
+consider using a virtual environment and adjusting the paths in this document
+as necessary where necessary.  The only paths that will change for the install
+if you decide to do this would be the celery, gunicorn and flower paths.
+
+ALSO!  It is important to follow all of the recommended paths and commands in this
+document.  Not doing so will result in much heartache and wasting of time.  If you
+decide to use different locations, naming conventions, etc. any support for issues
+you may find in the docs will be promptly ignored.
+
 Make sure to:
 
-# Always copy and paste the commands as expressed in the doc.
-# When an example says "change this setting", etc. make sure to change the setting.
+    1. Always copy and paste the commands as expressed in the doc.
+    2. When an example says "change this setting", etc. make sure to change the setting.
+
 
 Install The Requirements
 ------------------------
