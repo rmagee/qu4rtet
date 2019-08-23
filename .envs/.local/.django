@@ -8,3 +8,5 @@ POSTGRES_USER=qu4rtet
 POSTGRES_PASSWORD=onetwothreefour4321
 DOCKER_DATABASE_HOST=postgres
 DJANGO_DEBUG=True
+DJANGO_SECRET_KEY='this key is only for local development do not use elsewhere!'
+LOGGING_PATH=/tmp
