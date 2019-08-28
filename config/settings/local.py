@@ -80,7 +80,7 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 ########## END CELERY
 
 # When not running in debug mode
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 # get the logging path from the .env file
 CELERYD_HIJACK_ROOT_LOGGER = False
