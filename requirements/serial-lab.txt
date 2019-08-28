@@ -26,9 +26,9 @@ markdown==3.1.1           # via serialbox
 markupsafe==1.1.1         # via jinja2
 python-dateutil==2.8.0    # via quartet-epcis
 pytz==2019.2              # via django
-quartet-capture==2.7.0
-quartet-epcis==1.6.9
-quartet-integrations==3.0.10
+quartet-capture==2.7.2
+quartet-epcis==1.6.10
+quartet-integrations==3.1.0
 quartet-manifest==1.0.5
 quartet-masterdata==1.7.0
 quartet-output==2.2.8
