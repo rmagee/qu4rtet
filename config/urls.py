@@ -35,6 +35,13 @@ urlpatterns = [
 
 urlpatterns += routers.urlpatterns
 urlpatterns += trail_patterns
+try:
+    from .local_urls import urlpatterns as local_urlpatterns
+    urlpatterns += local_urlpatterns
+    print('LOCAL URLS FOUND')
+except ImportError:
+    print('NO LOCAL URLS FOUND')
+
 registration = getattr(settings, 'ENABLE_REGISTRATION', False)
 
 if registration:

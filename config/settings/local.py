@@ -68,7 +68,7 @@ INSTALLED_APPS += ['django_extensions', ]
 
 # uncomment for django admin
 # -----------------------------------------------------------------------------
-INSTALLED_APPS += ['django.contrib.admin']
+INSTALLED_APPS += ['django.contrib.admin', 'quartet_integrations']
 
 # TESTING
 # ------------------------------------------------------------------------------
