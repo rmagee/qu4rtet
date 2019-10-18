@@ -51,7 +51,7 @@ def create_parameters(group_name, overwrite=False):
     client = boto3.client(
         'ssm'
     )
-
+    print(boto3.session.Config)
     for key in keys:
         client.put_parameter(
             Name=key[0].format(group_name),
