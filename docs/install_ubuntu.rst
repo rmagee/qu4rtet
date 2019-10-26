@@ -124,7 +124,7 @@ https://www.miniwebtool.com/django-secret-key-generator/
     # Generate a new secret key here: https://www.miniwebtool.com/django-secret-key-generator/
     DJANGO_SECRET_KEY=## CHANGE THIS - generate a new secret key ##
     ### Change Below ###
-    DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1' ## add your server ip / host name here ###
+    DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1'
     DJANGO_DEBUG=False
     DJANGO_MEDIA_ROOT=/var/quartet/media/
     DJANGO_MEDIA_URL=/media/
