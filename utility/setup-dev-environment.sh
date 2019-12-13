@@ -11,6 +11,8 @@ git clone https://gitlab.com/serial-lab/quartet_trail.git
 git clone https://gitlab.com/serial-lab/EPCPyYes.git
 git clone https://gitlab.com/serial-lab/EParseCIS.git
 git clone https://gitlab.com/serial-lab/gs123.git
+git clone https://gitlab.com/serial-lab/serialbox.git
+git clone https://gitlab.com/serial-lab/random-flavorpack.git
 
 pip install -e ./quartet_epcis
 pip install -e ./quartet_capture
@@ -23,4 +25,7 @@ pip install -e ./quartet_trail
 pip install -e ./EPCPyYes
 pip install -e ./EParseCIS
 pip install -e ./gs123
+pip install -e ./serialbox
+pip install -e ./random_flavorpack
+
 
