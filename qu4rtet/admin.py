@@ -42,4 +42,4 @@ output_admin.register_to_site(admin_site)
 md_admin.register_to_site(admin_site)
 t_admin.register_to_site(admin_site)
 sb_admin.register_to_site(admin_site)
-ww_admin.register_to_site(admin_site)
+
