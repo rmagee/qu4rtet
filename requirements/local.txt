@@ -104,7 +104,7 @@ recommonmark==0.6.0
 regex==2019.12.19         # via awesome-slugify
 requests-oauthlib==1.3.0  # via django-allauth
 requests==2.22.0          # via coreapi, django-allauth, requests-oauthlib
-serialbox==2.0.0
+serialbox==2.0.1
 simplejson==3.17.0        # via django-rest-swagger
 six==1.13.0               # via argon2-cffi, bcrypt, cryptography, django-coverage-plugin, django-extensions, django-rest-auth, django-simple-history, djangorestframework-csv, faker, packaging, pip-tools, pynacl, python-dateutil, serialbox, sphinx, traitlets
 snowballstemmer==2.0.0    # via sphinx
