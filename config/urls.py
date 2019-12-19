@@ -65,10 +65,13 @@ if settings.DEBUG:
             kwargs={'exception': Exception('Page not Found')}),
         url(r'^500/$', default_views.server_error),
     ]
-    if 'debug_toolbar' in settings.INSTALLED_APPS:
-        import debug_toolbar
 
-        urlpatterns = [
-                          url(r'^__debug__/', include(debug_toolbar.urls)),
-                      ] + urlpatterns
+    try:
+        if 'debug_toolbar' in settings.INSTALLED_APPS:
+            import debug_toolbar
 
+            urlpatterns = [
+                              url(r'^__debug__/', include(debug_toolbar.urls)),
+                          ] + urlpatterns
+    except ImportError:
+        print('Could not import the debug toolbar.')
