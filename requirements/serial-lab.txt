@@ -26,16 +26,16 @@ markdown==3.1.1           # via serialbox
 markupsafe==1.1.1         # via jinja2
 python-dateutil==2.8.1    # via quartet-epcis
 pytz==2019.3              # via django
-quartet-capture==3.0.1
+quartet-capture==3.0.2
 quartet-epcis==2.0.0
 quartet-integrations==4.2.0
 quartet-manifest==1.0.5
 quartet-masterdata==1.8.3
 quartet-output==3.0.0
 quartet-templates==2.0.0
-quartet-trail==2.0.0
+quartet-trail==2.0.1
 random-flavorpack==2.0.1
-serialbox==2.0.2
+serialbox==2.0.3
 six==1.13.0               # via djangorestframework-csv, python-dateutil, serialbox
 sqlparse==0.3.0           # via django
 unicodecsv==0.14.1        # via djangorestframework-csv
