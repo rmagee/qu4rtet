@@ -14,6 +14,7 @@ markdown
 djangorestframework
 -e git://github.com/rmagee/django-rest-framework-xml.git#egg=djangorestframework-xml
 django-rest-auth
+django-rest-swagger
 drf_yasg
 django-allauth
 lxml
