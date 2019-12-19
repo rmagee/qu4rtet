@@ -33,7 +33,7 @@ quartet-manifest==1.0.5
 quartet-masterdata==1.8.3
 quartet-output==3.0.0
 quartet-templates==2.0.0
-quartet-trail==1.0.3
+quartet-trail==2.0.0
 random-flavorpack==2.0.1
 serialbox==2.0.0
 six==1.13.0               # via djangorestframework-csv, python-dateutil, serialbox

@@ -98,7 +98,7 @@ quartet-masterdata==1.8.3
 quartet-output==3.0.0
 quartet-templates==2.0.0
 quartet-tracelink==1.0.18
-quartet-trail==1.0.3
+quartet-trail==2.0.0
 random-flavorpack==2.0.1
 recommonmark==0.6.0
 regex==2019.12.19         # via awesome-slugify
