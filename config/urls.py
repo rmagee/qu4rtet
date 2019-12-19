@@ -7,17 +7,30 @@ from rest_framework.schemas import get_schema_view
 from qu4rtet.api.renderers import JSONOpenAPIRenderer
 from qu4rtet.api import routers
 from qu4rtet.api.views import APIRoot
-from rest_framework_swagger.views import get_swagger_view
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view as yasg_get_shemea_view
+from drf_yasg import openapi
+
 from quartet_trail.urls import urlpatterns as trail_patterns
 
 schema_view = get_schema_view(title='QU4RTET API',
                               renderer_classes=[JSONOpenAPIRenderer])
 
-swagger_view = get_swagger_view(title='QU4RTET API')
+yasg_schema_view = yasg_get_shemea_view(
+   openapi.Info(
+      title="QU4RTET API",
+      default_version='v1',
+      description="The QU4RTET API",
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
 urlpatterns = [
                   url(r'^$', APIRoot.as_view()),
                   url(r'^schema/?', schema_view, name='schema'),
-                  url(r'^swagger/?', swagger_view, name='swagger'),
+                  url(r'^swagger(?P<format>\.json|\.yaml)$', yasg_schema_view.without_ui(cache_timeout=0), name='schema-json'),
+                  url(r'^swagger/$', yasg_schema_view.with_ui('swagger', cache_timeout=0), name='swagger'),
+                    url(r'^redoc/$', yasg_schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
                   url(r'^manifest/', include('quartet_manifest.urls',
                                              namespace='manifest')),
                   url(r'^capture/', include('quartet_capture.urls',

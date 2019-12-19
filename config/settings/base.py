@@ -81,7 +81,7 @@ LOCAL_APPS = [
     'allauth',
     'rest_auth',
     'rest_auth.registration',
-    'rest_framework_swagger',
+    'drf_yasg',
     'corsheaders',
     'django_filters',
     'simple_history',
