@@ -62,7 +62,7 @@ itypes==1.1.0             # via coreapi
 jedi==0.15.1              # via ipython
 jinja2==2.10.3            # via coreschema, epcpyyes, sphinx
 kombu==4.6.7              # via celery
-list-based-flavorpack==2.2.3
+list-based-flavorpack==3.0.0
 lxml==4.4.2
 markdown==3.1.1
 markupsafe==1.1.1         # via jinja2

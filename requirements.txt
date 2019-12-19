@@ -4,6 +4,7 @@
 #
 #    pip-compile --output-file=../requirements.txt production.in
 #
+-e git+git://github.com/rmagee/django-rest-framework-xml.git#egg=djangorestframework-xml
 amqp==2.5.2               # via kombu
 argon2-cffi==19.2.0
 asgiref==3.2.3            # via django
@@ -24,7 +25,7 @@ coreapi==2.3.3            # via django-rest-swagger, openapi-codec
 coreschema==0.0.4         # via coreapi
 cryptography==2.8         # via paramiko
 decorator==4.4.1          # via serialbox
-defusedxml==0.6.0         # via djangorestframework-xml, python3-openid
+defusedxml==0.6.0         # via python3-openid
 django-allauth==0.41.0
 django-anymail==7.0.0
 django-cors-headers==3.2.0
@@ -38,7 +39,6 @@ django-simple-history==2.8.0
 django-storages==1.8
 django==3.0.1
 djangorestframework-csv==2.1.0  # via serialbox
-djangorestframework-xml==1.4.0
 djangorestframework==3.11.0
 docutils==0.15.2          # via botocore, serialbox
 elastic-apm==5.3.2
@@ -58,7 +58,7 @@ itypes==1.1.0             # via coreapi
 jinja2==2.10.3            # via coreschema, epcpyyes
 jmespath==0.9.4           # via boto3, botocore
 kombu==4.6.7              # via celery
-list-based-flavorpack==2.2.3
+list-based-flavorpack==3.0.0
 lxml==4.4.2
 markdown==3.1.1
 markupsafe==1.1.1         # via jinja2

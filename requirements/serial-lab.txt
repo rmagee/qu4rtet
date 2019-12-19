@@ -20,7 +20,7 @@ epcpyyes==2.0.4
 gs123==1.2.0
 haikunator==2.1.0         # via quartet-capture
 jinja2==2.10.3            # via epcpyyes
-list-based-flavorpack==2.2.3
+list-based-flavorpack==3.0.0
 lxml==4.4.2               # via eparsecis, epcpyyes
 markdown==3.1.1           # via serialbox
 markupsafe==1.1.1         # via jinja2
