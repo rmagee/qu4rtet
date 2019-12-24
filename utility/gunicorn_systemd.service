@@ -8,9 +8,8 @@ Type=notify
 User=www-data
 # uses the celery group since synchronous task execution utilizes all of the same resources
 Group=celery
-EnvironmentFile=/etc/systemd/gunicorn.conf
 WorkingDirectory=/srv/qu4rtet
-ExecStart='${GUNICORN_BIN} --workers ${GUNICORN_WORKERS} --bind config.wsgi.application'
+ExecStart=/home/ubuntu/.virtualenvs/qu4rtet/bin/gunicorn --workers 3 --bind unix:/run/qu4rtet.sock config.wsgi:application
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
