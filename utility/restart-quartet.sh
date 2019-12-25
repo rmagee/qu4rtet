@@ -7,6 +7,6 @@ sudo systemctl status gunicorn.service
 sudo systemctl restart flower.service
 sudo systemctl status flower.service
 sudo systemctl restart nginx
-sudy systemctl status nginx
+sudo systemctl status nginx
 sudo systemctl restart celery.service
 sudo systemctl status celery.service
