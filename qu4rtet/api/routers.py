@@ -20,27 +20,27 @@ router = routers.DefaultRouter()
 router.register(
     r'user',
     viewsets.UserViewSet,
-    base_name='users'
+    basename='users'
 )
 router.register(
     r'group',
     viewsets.GroupViewSet,
-    base_name='group'
+    basename='group'
 )
 router.register(
     r'permission',
     viewsets.PermissionViewSet,
-    base_name='permission'
+    basename='permission'
 )
 router.register(
     r'read-only-users',
     viewsets.ReadOnlyUserViewSet,
-    base_name='read-only-users'
+    basename='read-only-users'
 )
 router.register(
     r'read-only-groups',
     viewsets.ReadOnlyGroupViewSet,
-    base_name='read-only-groups'
+    basename='read-only-groups'
 )
 
 urlpatterns = router.urls

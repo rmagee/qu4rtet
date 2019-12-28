@@ -121,7 +121,7 @@ else:
                       'does not currently have rights to write too.  The '
                       'account which needs these rights is typically that '
                       'of the web server or process running the celery '
-                      'daemon.')
+                      'daemon.' % file_path)
     print('Logging rights are confirmed.')
     LOGGING_LEVEL=env.str('LOGGING_LEVEL', 'WARNING')
     LOGGING = {

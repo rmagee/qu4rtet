@@ -42,8 +42,8 @@ CACHES = {
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
-MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
-INSTALLED_APPS += ['debug_toolbar']
+# MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
+# INSTALLED_APPS += ['debug_toolbar']
 
 INTERNAL_IPS = ['127.0.0.1', '10.0.2.2', ]
 
@@ -55,12 +55,12 @@ if os.environ.get('USE_DOCKER') == 'yes':
     ip = socket.gethostbyname(socket.gethostname())
     INTERNAL_IPS += [ip[:-1] + '1']
 
-DEBUG_TOOLBAR_CONFIG = {
-    'DISABLE_PANELS': [
-        'debug_toolbar.panels.redirects.RedirectsPanel',
-    ],
-    'SHOW_TEMPLATE_CONTEXT': True,
-}
+# DEBUG_TOOLBAR_CONFIG = {
+#     'DISABLE_PANELS': [
+#         'debug_toolbar.panels.redirects.RedirectsPanel',
+#     ],
+#     'SHOW_TEMPLATE_CONTEXT': True,
+# }
 
 # django-extensions
 # ------------------------------------------------------------------------------
@@ -80,12 +80,12 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 ########## END CELERY
 
 # When not running in debug mode
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 # get the logging path from the .env file
 CELERYD_HIJACK_ROOT_LOGGER = False
 # get the logging path from the .env file
-LOGGING_PATH = env.str('LOGGING_PATH', '/var/quartet')
+LOGGING_PATH = env.str('LOGGING_PATH', '/tmp')
 file_path = os.path.join(LOGGING_PATH, 'quartet.log')
 print('Logging to path %s' % file_path)
 # check to make sure that there are write rights to the log location
@@ -94,7 +94,7 @@ if not os.access(LOGGING_PATH, os.W_OK):
                   'does not currently have rights to write too.  The '
                   'account which needs these rights is typically that '
                   'of the web server or process running the celery '
-                  'daemon.')
+                  'daemon.' % file_path)
 print('Logging rights are confirmed.')
 LOGGING_LEVEL=env.str('LOGGING_LEVEL', 'WARNING')
 LOGGING = {

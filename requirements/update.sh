@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # will update all of the quartet dependency files
 echo "Updating QU4RTET dependency files..."
 pip-compile test.in -o test.txt --upgrade

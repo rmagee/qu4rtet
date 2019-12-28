@@ -18,3 +18,5 @@ sphinx_rtd_theme
 pip-tools
 bumpversion
 quartet_tracelink
+psycopg2-binary
+pip-tools

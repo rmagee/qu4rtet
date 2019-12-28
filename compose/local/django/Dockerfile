@@ -4,11 +4,6 @@ ENV PYTHONUNBUFFERED 1
 
 RUN export DOCKER=true
 
-RUN mkdir -p /root/.ssh
-ADD ./compose/local/django/gitlab_deploy_key_rsa /root/.ssh/id_rsa
-RUN chmod 700 /root/.ssh/id_rsa
-RUN echo "Host gitlab.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
-
 # Requirements have to be pulled and installed here, otherwise caching won't work
 COPY ./requirements /requirements
 RUN pip install -r /requirements/local.txt
