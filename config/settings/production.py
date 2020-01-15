@@ -176,7 +176,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE=6553600
 FILE_UPLOAD_MAX_MEMORY_SIZE=6553600
 
 try:
-    from config.settings import local_settings
+    from config.settings.local_settings import *
     print('LOCAL SETTINGS FOUND')
 except ImportError:
     print('No local settings detected.')
