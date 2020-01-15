@@ -358,8 +358,7 @@ qu4rtet/media/
 *.dat
 
 config/settings/dev_settings.py
+config/settings/local_settings.py
 qu4rtet.iml
-untitled text 3.xml
-untitled text 4.txt
 
 config/local_urls.py
