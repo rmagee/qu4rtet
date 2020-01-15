@@ -31,6 +31,8 @@ installation is included below.
 
     sudo apt-get -y update
     sudo apt-get -y install rabbitmq-server python3-pip postgresql postgresql-contrib gunicorn nginx supervisor apache2-utils python3-dev
+    # IF USING PYPY you will need pypy3-dev
+    # sudo apt-get install pypy3-dev
     sudo ln -s /usr/bin/pip3 /usr/bin/pip
     cd /srv
     sudo git clone https://gitlab.com/serial-lab/qu4rtet.git
