@@ -174,3 +174,9 @@ logging.info('Default database host: %s', database_host)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 DATA_UPLOAD_MAX_MEMORY_SIZE=6553600
 FILE_UPLOAD_MAX_MEMORY_SIZE=6553600
+
+try:
+    from config.settings import local_settings
+    print('LOCAL SETTINGS FOUND')
+except ImportError:
+    print('No local settings detected.')
