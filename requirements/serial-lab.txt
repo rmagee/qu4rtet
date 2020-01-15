@@ -10,11 +10,11 @@ commonmark==0.9.1         # via epcpyyes
 decorator==4.4.1          # via serialbox
 defusedxml==0.6.0         # via djangorestframework-xml
 django-model-utils==4.0.0  # via quartet-epcis, quartet-trail
-django==3.0.1             # via django-model-utils, djangorestframework, serialbox
+django==3.0.2             # via django-model-utils, djangorestframework, serialbox
 djangorestframework-csv==2.1.0  # via serialbox
 djangorestframework-xml==1.4.0  # via serialbox
 djangorestframework==3.11.0  # via djangorestframework-csv, serialbox
-docutils==0.15.2          # via serialbox
+docutils==0.16            # via serialbox
 eparsecis==3.1.0
 epcpyyes==2.0.4
 gs123==1.2.0
