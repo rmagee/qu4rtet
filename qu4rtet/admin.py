@@ -23,12 +23,15 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
 from django.contrib import admin
 
+
 class QuartetAdminSite(admin.AdminSite):
     site_header = "QU4RTET Administration"
+
 
 class QUserAdmin(UserAdmin):
     list_filter = ()
     filter_horizontal = ()
+
 
 admin_site = QuartetAdminSite(name='qu4rtetadmin')
 admin_site.register(Group, GroupAdmin)
@@ -41,4 +44,11 @@ output_admin.register_to_site(admin_site)
 md_admin.register_to_site(admin_site)
 t_admin.register_to_site(admin_site)
 sb_admin.register_to_site(admin_site)
+
+try:
+    from qu4rtet.local_admin import register_admins
+
+    register_admins(admin_site)
+except ImportError:
+    print('No local config found')
 
