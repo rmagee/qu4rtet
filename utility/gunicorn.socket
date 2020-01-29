@@ -6,8 +6,12 @@ ListenStream=/run/qu4rtet.sock
 # Our service won't need permissions for the socket, since it
 # inherits the file descriptor by socket activation
 # only the nginx daemon will need access to the socket
+# on some systems this may be SocketUser
 User=www-data
+#SocketUser=www-data
+# on some systems this may be SocketGroup
 Group=celery
+#SocketGroup=celery
 # Optionally restrict the socket permissions even more.
 # Mode=600
 
