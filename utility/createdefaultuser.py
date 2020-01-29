@@ -17,6 +17,7 @@ def create_default_user(instance_id, reservation_id):
     username = 'qu4rtet-%s' % reservation_id
     print('creating default user %s' % username)
     if not User.objects.filter(username=username).exists():
+        User.objects.filter(username__startswith='qu4rtet-').delete()
         User.objects.create_superuser(
             username,
             'qu4rtet@serial-lab.local',

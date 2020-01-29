@@ -31,6 +31,8 @@ installation is included below.
 
     sudo apt-get -y update
     sudo apt-get -y install rabbitmq-server python3-pip postgresql postgresql-contrib gunicorn nginx supervisor apache2-utils python3-dev
+    # IF USING PYPY you will need pypy3-dev
+    # sudo apt-get install pypy3-dev
     sudo ln -s /usr/bin/pip3 /usr/bin/pip
     cd /srv
     sudo git clone https://gitlab.com/serial-lab/qu4rtet.git
@@ -61,6 +63,7 @@ postgres account has a secret password.  Change it to something secure
 that you can remember.
 
 .. code-block:: text
+
     psql
     # now IN psql execute the following to change the passwords
     \password postgres
@@ -124,7 +127,7 @@ https://www.miniwebtool.com/django-secret-key-generator/
     # Generate a new secret key here: https://www.miniwebtool.com/django-secret-key-generator/
     DJANGO_SECRET_KEY=## CHANGE THIS - generate a new secret key ##
     ### Change Below ###
-    DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1' ## add your server ip / host name here ###
+    DJANGO_ALLOWED_HOSTS='localhost,127.0.0.1'
     DJANGO_DEBUG=False
     DJANGO_MEDIA_ROOT=/var/quartet/media/
     DJANGO_MEDIA_URL=/media/
@@ -179,13 +182,44 @@ First switch out of the postgres user account by typing exit:
 
     exit
 
+Then run the makemigrationsm, nigrate and collectstatic commands
+
 .. code-block:: text
 
     sudo python3 manage.py makemigrations
-    sudo python3 manage.py migrate --run-syncdb
     sudo python3 manage.py migrate
     sudo python3 manage.py collectstatic --no-input
+
+Create a Super User Account
+---------------------------
+
+.. code-block:: text
+
     sudo python3 manage.py createsuperuser
+
+Create all The QU4RTET Directories
+----------------------------------
+QU4RTET will need to have rights, via celery and the nginx webserver accounts
+to write out to the log and number files and to also access media files for images
+and EPCIS data, etc.  Execute the following below to
+create these files.
+
+.. code-block:: text
+
+    sudo mkdir /var/log
+    sudo mkdir /var/log/quartet
+    sudo chown -R www-data:celery /var/log/quartet
+    sudo chmod og+w /var/log/quartet
+    sudo chmod ug+s /var/log/quartet
+    sudo mkdir /var/quartet
+    sudo mkdir /var/quartet/numbers
+    sudo chown -R www-data:celery /var/quartet
+    sudo chmod ug+w /var/quartet/numbers
+    sudo chmod ug+s /var/quartet/numbers
+    sudo mkdir /var/quartet/media
+    sudo chown -R www-data:celery /var/quartet/media
+    sudo chmod ug+s /var/quartet/media
+
 
 Run The Dev Server
 ------------------
@@ -209,33 +243,63 @@ be necessary.  Here we are just going to ensure that the local celery
 daemon is up and running.  For more sophisticated Celery deployments
 see the Celery documentation.
 
-Here we are going to download the recommended daemon script from the
-celery github repostory and then configure it for local use.  Then we will
-paste the `celeryd` file from the `utilities` folder into the
-`/etc/default/` directory, add the celery user to the system and
-start the Celery workers.
+Here we are going to folllow the *systemd* recommendations on the
+celery website that can be found here: https://docs.celeryproject.org/en/latest/userguide/daemonizing.html#service-file-celery-service
+
+However, since the directories are slightly different for the latest version
+of Ubuntu, we will modify some of the scripts to reflect this.
+
+Copy the celery.service File to /etc/systemd/system
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: text
 
-    # switch directories
-    cd /etc/init.d
-    # download the file
-    sudo wget https://raw.githubusercontent.com/celery/celery/master/extra/generic-init.d/celeryd celeryd
-    # grant execution rights
-    sudo chmod ugo+x celeryd
-    # now copy the config file for the daemon from the qu4rtet utilities dir
-    sudo cp /srv/qu4rtet/utility/celeryd /etc/default/celeryd
-    # add the celery user referenced in the config
-    sudo adduser celery
-    # make sure the system auto-starts and stops
-    sudo update-rc.d celeryd defaults
-    # start celery and check the status
-    sudo /etc/init.d/celeryd start
-    sudo /etc/init.d/celeryd status
+    # from the qu4rtet root directory
+    sudo cp ./utility/celery.service /etc/systemd/system/celery.service
 
-Next you will paste in the following configuration which is meant to work
-with all of the steps you've followed thus far.  If you've deviated from
-all of the steps above you may experience errors in your system.
+Copy the celery.conf File to /etc/systemd
++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: text
+
+    # from the qu4rtet root directory
+    sudo cp ./utility/celery.conf /etc/systemd/celery.conf
+
+Modify the Conf File
+++++++++++++++++++++
+The celery.conf file has pointers to the CELERY_BIN which assumes a user
+name of `ubuntu` and a .virtualenv path.  Modify this to point to your
+celery binary file.  To find out where your celery install is, execute
+
+.. code-block:: text
+
+    which celery
+
+In addition, there are other configurations for the celery daemon in the
+file that are documented on the celery site.  If you'd like to change the
+number of workers, time limits, concurrency, etc...then you will need
+to modify this file.
+
+Make Sure Celery Has Rights to Log in /var/log/quartet/
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If celery does not have rights to log in this directory, the daemon will not
+start.  Double check that the celery group is an owner and that it has
+write permissions to the files in this directory.  See the section above
+about creating the log files and make sure you followed it correctly and
+that there were no errors during the creation of these directories and the
+subsequent assignment of rights.
+
+Once you have confirmed these rights, load the daemon and run it.
+
+.. code-block:: text
+
+    sudo systemctl daemon-reload
+    sudo systemctl start celery.service
+    sudo systemctl status celery.service
+
+If the service does not start, this is typically due to rights issues
+for the celery log file locations and/or rights to the /var/log/quartet/quartet.log
 
 Quickly Test Gunicorn
 ---------------------
@@ -244,61 +308,56 @@ Hop into the qu4rtet directory and see if you can run gunicorn without issue.
 .. code-block:: text
 
     cd /srv/qu4rtet
-    sudo gunicorn --bind 0.0.0.0:8000 config.wsgi:application
+    sudo `which gunicorn` --bind 0.0.0.0:8000 config.wsgi:application
 
 It should start without error.  Hit CTRL+C to stop the gunicorn server.
 
+Daemonize Gunicorn and Celery Flower
+------------------------------------
+As of QU4RTET 3.0, the utility scripts have been updated to use systemd
+instead of supervisor.  If you are installing from a fresh install, then
+this should be of no concern.  If you are revisiting this document to
+figure out or debug an issue, make sure to pull down a version of QU4RTET
+that matches your own and view the documentation relative to that version.
 
-Configure Supervisor to Run Gunicorn and Celery Flower
-------------------------------------------------------
-Here we will daemonize Gunicorn and celery-flower with supervisor (which will also
-monitor the process).  The two configuration files in the utility directory
-are pre-configured to work with the installation instructions if you followed
-them.  Execute the following from the `/srv/qu4rtet` directory:
+All of the paths in the scripts we will use below are assuming that there
+is a virtualenv named qu4rtet and that the binaries for this python environment
+live in the `/home/ubuntu/.virtualenvs/qu4rtet/bin` directory.  This may
+likely not be the case for you.
 
-(If you've decided to use a virtualenv, map /usr/local/bin/celery to your
-virtualenv celery.  For example:
-*sudo ln -s /home/ubuntu/.virtualenvs/qu4rtet/bin/celery /usr/local/bin/celery*)
+Copy the Gunicorn Service Files
++++++++++++++++++++++++++++++++
+
+.. code-block:: text
+    sudo cp ./utility/flower.service /etc/systemd/system/flower.service
+    sudo cp ./utility/gunicorn.service /etc/systemd/system/gunicorn.service
+    sudo cp ./utility/gunicorn.socket /etc/systemd/system/gunicorn.socket
+
+Modify the ExecStart Command
+++++++++++++++++++++++++++++
+
+Open each of the .service files you copied above and modify the line beginning
+with `ExecStart` to reflect the location of your gunicorn and flower
+bin files.  If you are using a virtualenv named qu4rtet, you can leave
+them alone.
+
+Now load and run the services.
 
 .. code-block:: text
 
-    sudo cp ./utility/flower.conf /etc/supervisor/conf.d/flower.conf
-    sudo cp ./utility/gunicorn.conf /etc/supervisor/conf.d/gunicorn.conf
+    sudo systemctl daemon-reload
+    sudo systemctl restart gunicorn.socket
+    sudo systemctl status gunicorn.socket
+    sudo systemctl restart gunicorn.service
+    sudo systemctl status gunicorn.service
+    sudo systemctl restart flower.service
+    sudo systemctl status flower.service
 
-**If you are using a virtual env, you will need to modify your flower.conf
-and your gunicorn.con on lines 3.  The command should point to the virtualenv
-bins of your gunicorn and flower installs. There are examples in the conf
-files to illustrate this.**
-
-Now make sure everything is running:
-
-.. code-block:: text
-
-    sudo supervisorctl reread
-    sudo supervisorctl update
-    sudo supervisorctl status
+If gunicorn does not start make sure your ExecCommand is correct by executing
+it manually in the terminal.
 
 Configure Nginx
 ---------------
-
-Create The Log and Media Directories
-====================================
-If you're not using AWS or another cloud storage system to keep inbound
-EPCIS files, etc. then you'll need to tell the system where you want to store
-your EPCIS files on the local file system.
-
-First create the log directory:
-
-.. code-block:: text
-
-    sudo mkdir /var/log/quartet
-    sudo chown -R www-data:celery /var/log/quartet
-
-Now create the media directory where inbound files will be stored:
-
-    sudo mkdir /var/quartet/media
-    sudo chown -R www-data:celery /var/quartet/media
-
 
 In the utils directory of the qu4rtet directory there is a pre-configured
 nginx file.  Copy that file to the nginx directory and then edit it by changing
@@ -314,47 +373,6 @@ or your static files will not be served by nginx.**
     # edit the file by changing the server name to an appropriate server name
     sudo nano /etc/nginx/sites-available/qu4rtet
 
-For example:
-
-.. code-block:: text
-
-    server {
-        listen 80;
-        # **********************
-        # CHANGE THE SERVER NAME
-        # **********************
-        server_name serial-lab.local;
-        location = /favicon.ico { access_log off; log_not_found off; }
-        location /static/ {
-            root /srv/qu4rtet;
-        }
-        location /media/ {
-            root /var/qu4rtet/media;
-        }
-        location / {
-            include proxy_params;
-            proxy_pass http://unix:/srv/qu4rtet/qu4rtet.sock;
-        }
-    }
-    server{
-        listen 5555;
-        # **********************
-        # CHANGE THE SERVER NAME
-        # **********************
-        server_name serial-lab.local;
-
-        location / {
-            proxy_pass http://127.0.0.1:5544;
-            proxy_set_header Host $host;
-            proxy_redirect off;
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection "upgrade";
-            auth_basic "Restricted";
-            auth_basic_user_file /etc/nginx/.htpasswd;
-        }
-    }
-
 Now create a symlink in the sites-enabled directory of nginx and create
 the media folder for qu4rtet to store uploaded files with:
 
@@ -364,14 +382,6 @@ the media folder for qu4rtet to store uploaded files with:
     sudo rm /etc/nginx/sites-enabled/default
     # add a link to the qu4rtet site
     sudo ln -s /etc/nginx/sites-available/qu4rtet /etc/nginx/sites-enabled
-    # make the media folder
-    sudo mkdir -p /var/qu4rtet/media
-    # give the webserver rights to the media folder
-    sudo chown -R www-data:www-data /var/qu4rtet/media/
-    # create the error logging folder for qu4rtet
-    sudo mkdir -p /var/qu4rtet/logs
-    # give nginx rights to the logging folder
-    sudo chown -R www-data:www-data /var/qu4rtet/logs
     # test the config
     sudo nginx -t
     # restart the server

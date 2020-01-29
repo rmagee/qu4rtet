@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # assumes you set up using the ubuntu/debian setup instructions
-sudo supervisorctl stop guni:gunicorn
-sudo supervisorctl start guni:gunicorn
-sudo supervisorctl stop flower
-sudo supervisorctl start flower
+#!/usr/bin/env bash
+# assumes you set up using the ubuntu/debian setup instructions
+sudo systemctl restart gunicorn.socket
+sudo systemctl restart gunicorn.service
+sudo systemctl restart flower.service
 sudo systemctl restart nginx
-sudo /etc/init.d/celeryd stop
-sudo /etc/init.d/celeryd start
+sudo systemctl restart celery.service
+sudo systemctl status celery nginx flower gunicorn
+
