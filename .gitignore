@@ -362,3 +362,4 @@ config/settings/local_settings.py
 qu4rtet.iml
 
 config/local_urls.py
+/qu4rtet/local_admin.py

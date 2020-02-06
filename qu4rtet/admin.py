@@ -42,3 +42,8 @@ md_admin.register_to_site(admin_site)
 t_admin.register_to_site(admin_site)
 sb_admin.register_to_site(admin_site)
 
+try:
+    from qu4rtet.local_admin import register_admins
+    register_admins(admin_site)
+except ImportError:
+    print('No local_admin module detected.')

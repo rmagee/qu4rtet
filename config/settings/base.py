@@ -381,4 +381,8 @@ SWAGGER_SETTINGS = {
     }
 }
 
-
+try:
+    from config.settings.local_settings import *
+    print('LOCAL SETTINGS FOUND')
+except ImportError:
+    print('No local settings detected.')
