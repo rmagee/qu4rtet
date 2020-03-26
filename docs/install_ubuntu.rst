@@ -220,7 +220,8 @@ create these files.
     sudo mkdir /var/quartet/media
     sudo chown -R www-data:celery /var/quartet/media
     sudo chmod ug+s /var/quartet/media
-
+    sudo mkdir /var/run/celery
+    sudo chown celery:celery /var/run/celery
 
 Run The Dev Server
 ------------------
