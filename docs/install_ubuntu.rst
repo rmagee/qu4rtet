@@ -206,6 +206,7 @@ create these files.
 
 .. code-block:: text
 
+    sudo useradd -r celery
     sudo mkdir /var/log
     sudo mkdir /var/log/quartet
     sudo chown -R www-data:celery /var/log/quartet
