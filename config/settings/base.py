@@ -35,6 +35,8 @@ if READ_DOT_ENV_FILE:
     env.read_env(env_file)
     print('The .env file has been loaded. See base.py for more information')
 
+SECRET_KEY = env.str('DJANGO_SECRET_KEY')
+
 # if the system is running in EC2, we can check parameter store for certain
 # environment variables
 EC2 = env.bool('EC2', False)

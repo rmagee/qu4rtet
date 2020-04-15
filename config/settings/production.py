@@ -16,12 +16,6 @@ import logging
 import os
 from .base import *  # noqa
 
-# SECRET CONFIGURATION
-# ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-# Raises ImproperlyConfigured exception if DJANGO_SECRET_KEY not in os.environ
-SECRET_KEY = env.str('DJANGO_SECRET_KEY')
-
 USE_SENTRY = env.bool('USE_SENTRY', False)
 USE_ELASTIC_APM = env.bool('USE_ELASTIC_APM', False)
 
