@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=pypy.txt pypy.in
 #
-cffi==1.13.2              # via psycopg2cffi
+cffi==1.14.0              # via psycopg2cffi
 psycopg2cffi==2.8.1
-pycparser==2.19           # via cffi
-six==1.13.0               # via psycopg2cffi
+pycparser==2.20           # via cffi
+six==1.14.0               # via psycopg2cffi
