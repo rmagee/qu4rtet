@@ -105,3 +105,8 @@ div.breadcrumbs {
 body.login {
     background: #5f5f5f;
 }
+
+.download-task{
+  background: #96cc47;
+  padding: 2px;
+}
