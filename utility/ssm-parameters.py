@@ -53,12 +53,13 @@ def create_parameters(group_name, overwrite=False):
     )
     print(boto3.session.Config)
     for key in keys:
+        overwrite = overwrite.lower() == 'true'
         client.put_parameter(
             Name=key[0].format(group_name),
             Description='Parameter Group %s %s value.' % (group_name, key[0]),
             Value=key[2],
             Type=key[1],
-            Overwrite=bool(overwrite)
+            Overwrite=overwrite
         )
 
 if __name__ == '__main__':
