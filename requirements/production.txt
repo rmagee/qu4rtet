@@ -5,96 +5,96 @@
 #    pip-compile --output-file=production.txt production.in
 #
 -e git+git://github.com/rmagee/django-rest-framework-xml.git#egg=djangorestframework-xml
-amqp==2.5.2               # via kombu
-argon2-cffi==19.2.0
+amqp==2.6.0               # via kombu
+argon2-cffi==20.1.0
 asgiref==3.2.7            # via django
 awesome-slugify==1.6.5
 bcrypt==3.1.7             # via paramiko
 billiard==3.6.3.0         # via celery
-boto3==1.12.39
-botocore==1.15.39         # via boto3, s3transfer
-celery==4.4.2
+boto3==1.13.24
+botocore==1.16.24         # via boto3, s3transfer
+celery==4.4.4
 certifi==2020.4.5.1       # via elastic-apm, requests, sentry-sdk
 cffi==1.14.0              # via argon2-cffi, bcrypt, cryptography, pynacl
 chardet==3.0.4            # via requests
-click==7.1.1              # via gs123
-collectfast==2.1.0
+click==7.1.2              # via gs123
+collectfast==2.2.0
 commonmark==0.9.1         # via epcpyyes
 coreapi==2.3.3            # via django-rest-swagger, drf-yasg, openapi-codec
 coreschema==0.0.4         # via coreapi, drf-yasg
-cryptography==2.9         # via paramiko
+cryptography==2.9.2       # via paramiko
 decorator==4.4.2          # via serialbox
 defusedxml==0.6.0         # via python3-openid
-django-allauth==0.41.0
+django-allauth==0.42.0
 django-anymail==7.1.0
-django-cors-headers==3.2.1
+django-cors-headers==3.3.0
 django-environ==0.4.5
 django-extensions==2.2.9
-django-filter==2.2.0
+django-filter==2.3.0
 django-model-utils==4.0.0
 django-rest-auth==0.9.5
 django-rest-swagger==2.2.0
-django-simple-history==2.8.0
+django-simple-history==2.10.0
 django-storages==1.9.1
-django==3.0.5
+django==3.0.7
 djangorestframework-csv==2.1.0  # via serialbox
 djangorestframework==3.11.0
 docutils==0.15.2          # via botocore, serialbox
 drf-yasg==1.17.1
-elastic-apm==5.5.2
+elastic-apm==5.6.0
 eparsecis==3.1.0
 epcpyyes==2.0.5
 factory-boy==2.12.0
-faker==4.0.3              # via factory-boy
+faker==4.1.0              # via factory-boy
 flower==0.9.4
-gevent==1.5.0
-greenlet==0.4.15          # via gevent
-gs123==1.2.0
+gevent==20.6.0
+greenlet==0.4.16          # via gevent
+gs123==2.0.5
 gunicorn==20.0.4
 haikunator==2.1.0         # via quartet-capture
 humanize==0.5.1           # via flower
 idna==2.9                 # via requests
-importlib-metadata==1.6.0  # via kombu
-inflection==0.4.0         # via drf-yasg
-itypes==1.1.0             # via coreapi
+importlib-metadata==1.6.1  # via kombu, markdown
+inflection==0.5.0         # via drf-yasg
+itypes==1.2.0             # via coreapi
 jinja2==2.11.2            # via coreschema, epcpyyes
-jmespath==0.9.5           # via boto3, botocore
-kombu==4.6.8              # via celery
-list-based-flavorpack==3.1.1
-lxml==4.5.0
-markdown==3.2.1
+jmespath==0.10.0          # via boto3, botocore
+kombu==4.6.10             # via celery
+list-based-flavorpack==3.2.0
+lxml==4.5.1
+markdown==3.2.2
 markupsafe==1.1.1         # via jinja2
 oauthlib==3.1.0           # via requests-oauthlib
 openapi-codec==1.3.2      # via django-rest-swagger
-packaging==20.3           # via drf-yasg
+packaging==20.4           # via drf-yasg
 paramiko==2.7.1
 psycopg2-binary==2.8.5
 pycparser==2.20           # via cffi
-pynacl==1.3.0             # via paramiko
+pynacl==1.4.0             # via paramiko
 pyparsing==2.4.7          # via packaging
 python-dateutil==2.8.1    # via botocore, faker, quartet-epcis
 python3-openid==3.1.0     # via django-allauth
-pytz==2019.3
-quartet-capture==3.3.0
+pytz==2020.1
+quartet-capture==3.3.4
 quartet-epcis==2.1.1
-quartet-integrations==5.0.3
+quartet-integrations==5.0.10
 quartet-manifest==1.0.5
-quartet-masterdata==2.2.0
-quartet-output==3.1.1
+quartet-masterdata==2.2.1
+quartet-output==3.1.3
 quartet-templates==2.0.0
 quartet-trail==2.0.3
 random-flavorpack==2.0.1
 raven==6.10.0
-regex==2020.4.4           # via awesome-slugify
+regex==2020.5.14          # via awesome-slugify
 requests-oauthlib==1.3.0  # via django-allauth
 requests==2.23.0          # via coreapi, django-allauth, django-anymail, requests-oauthlib
 ruamel.yaml.clib==0.2.0   # via ruamel.yaml
 ruamel.yaml==0.16.10      # via drf-yasg
 s3transfer==0.3.3         # via boto3
-sentry-sdk==0.14.3
-serialbox==2.1.1
+sentry-sdk==0.14.4
+serialbox==2.2.0
 simplejson==3.17.0        # via django-rest-swagger
-six==1.14.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-extensions, django-rest-auth, django-simple-history, djangorestframework-csv, drf-yasg, packaging, pynacl, python-dateutil, serialbox
+six==1.15.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-extensions, django-rest-auth, django-simple-history, djangorestframework-csv, drf-yasg, packaging, pynacl, python-dateutil, serialbox
 sqlparse==0.3.1           # via django
 text-unidecode==1.3       # via faker
 tornado==5.1.1
@@ -102,10 +102,12 @@ typing-extensions==3.7.4.2  # via collectfast
 unicodecsv==0.14.1        # via djangorestframework-csv
 unidecode==0.4.21         # via awesome-slugify
 uritemplate==3.0.1        # via coreapi, drf-yasg
-urllib3==1.25.8           # via botocore, elastic-apm, requests, sentry-sdk
+urllib3==1.25.9           # via botocore, elastic-apm, requests, sentry-sdk
 vine==1.3.0               # via amqp, celery
 wheel==0.34.2
 zipp==3.1.0               # via importlib-metadata
+zope.event==4.4           # via gevent
+zope.interface==5.1.0     # via gevent
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
