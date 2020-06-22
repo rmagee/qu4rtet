@@ -69,12 +69,12 @@ if env.bool('USE_AWS', default=False):
         'CacheControl': control,
     }
     from storages.backends.s3boto3 import S3Boto3Storage
+
     MediaRootS3BotoStorage = lambda: S3Boto3Storage(location='media',
                                                     file_overwrite=False)
     DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3BotoStorage'
     MEDIA_URL = 'https://s3.amazonaws.com/%s/media/' % AWS_STORAGE_BUCKET_NAME
     AWS_PRELOAD_METADATA = True
-
 
 # Uncomment for Anymail with Mailgun
 # INSTALLED_APPS += ['anymail', ]
@@ -98,10 +98,13 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 if USE_SENTRY:
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
+    from sentry_sdk.integrations.tornado import TornadoIntegration
+    from sentry_sdk.integrations.celery import CeleryIntegration
 
     sentry_sdk.init(
         dsn=env('DJANGO_SENTRY_DSN'),
-        integrations=[DjangoIntegration()]
+        integrations=[DjangoIntegration(), CeleryIntegration(),
+                      TornadoIntegration()]
     )
 else:
     CELERYD_HIJACK_ROOT_LOGGER = False
@@ -117,7 +120,7 @@ else:
                       'of the web server or process running the celery '
                       'daemon.' % file_path)
     print('Logging rights are confirmed.')
-    LOGGING_LEVEL=env.str('LOGGING_LEVEL', 'WARNING')
+    LOGGING_LEVEL = env.str('LOGGING_LEVEL', 'WARNING')
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': True,
@@ -166,11 +169,12 @@ if env.bool('DJANGO_ENABLE_ADMIN', True):
 
 logging.info('Default database host: %s', database_host)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-DATA_UPLOAD_MAX_MEMORY_SIZE=6553600
-FILE_UPLOAD_MAX_MEMORY_SIZE=6553600
+DATA_UPLOAD_MAX_MEMORY_SIZE = 6553600
+FILE_UPLOAD_MAX_MEMORY_SIZE = 6553600
 
 try:
     from config.settings.local_settings import *
+
     print('LOCAL SETTINGS FOUND')
 except ImportError:
     print('No local settings detected.')
