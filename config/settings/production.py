@@ -106,61 +106,61 @@ if USE_SENTRY:
         integrations=[DjangoIntegration(), CeleryIntegration(),
                       TornadoIntegration()]
     )
-else:
-    CELERYD_HIJACK_ROOT_LOGGER = False
-    # get the logging path from the .env file
-    LOGGING_PATH = env.str('LOGGING_PATH', '/tmp')
-    file_path = os.path.join(LOGGING_PATH, 'quartet.log')
-    print('Logging to path %s' % file_path)
-    # check to make sure that there are write rights to the log location
-    if not os.access(LOGGING_PATH, os.W_OK):
-        raise IOError('Logging is configured for a path (%s) which QU4RTET '
-                      'does not currently have rights to write too.  The '
-                      'account which needs these rights is typically that '
-                      'of the web server or process running the celery '
-                      'daemon.' % file_path)
-    print('Logging rights are confirmed.')
-    LOGGING_LEVEL = env.str('LOGGING_LEVEL', 'WARNING')
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': True,
-        'root': {
+
+CELERYD_HIJACK_ROOT_LOGGER = False
+# get the logging path from the .env file
+LOGGING_PATH = env.str('LOGGING_PATH', '/tmp')
+file_path = os.path.join(LOGGING_PATH, 'quartet.log')
+print('Logging to path %s' % file_path)
+# check to make sure that there are write rights to the log location
+if not os.access(LOGGING_PATH, os.W_OK):
+    raise IOError('Logging is configured for a path (%s) which QU4RTET '
+                  'does not currently have rights to write too.  The '
+                  'account which needs these rights is typically that '
+                  'of the web server or process running the celery '
+                  'daemon.' % file_path)
+print('Logging rights are confirmed.')
+LOGGING_LEVEL = env.str('LOGGING_LEVEL', 'WARNING')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': LOGGING_LEVEL,
+        'handlers': ['file', ],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(funcName)s %(lineno)d '
+                      '%(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
             'level': LOGGING_LEVEL,
-            'handlers': ['file', ],
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': file_path,
+            'formatter': 'verbose',
         },
-        'formatters': {
-            'verbose': {
-                'format': '%(levelname)s %(asctime)s %(module)s '
-                          '%(process)d %(thread)d %(funcName)s %(lineno)d '
-                          '%(message)s'
-            },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
         },
-        'handlers': {
-            'file': {
-                'level': LOGGING_LEVEL,
-                'class': 'logging.handlers.WatchedFileHandler',
-                'filename': file_path,
-                'formatter': 'verbose',
-            },
+        'celery': {
+            'handlers': ['file'],
+            'level': LOGGING_LEVEL,
+            'propagate': False
         },
-        'loggers': {
-            'django': {
-                'handlers': ['file'],
-                'level': 'ERROR',
-                'propagate': True,
-            },
-            'celery': {
-                'handlers': ['file'],
-                'level': LOGGING_LEVEL,
-                'propagate': False
-            },
-            'celery.task': {
-                'handlers': ['file'],
-                'level': LOGGING_LEVEL,
-                'propagate': False
-            }
-        },
-    }
+        'celery.task': {
+            'handlers': ['file'],
+            'level': LOGGING_LEVEL,
+            'propagate': False
+        }
+    },
+}
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
