@@ -52,8 +52,9 @@ try:
     from .local_urls import urlpatterns as local_urlpatterns
     urlpatterns += local_urlpatterns
     print('LOCAL URLS FOUND')
-except ImportError:
-    print('NO LOCAL URLS FOUND')
+except ImportError as ie:
+    if 'local_urls' not in str(ie):
+        raise
 
 registration = getattr(settings, 'ENABLE_REGISTRATION', False)
 
