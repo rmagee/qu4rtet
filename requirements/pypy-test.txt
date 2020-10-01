@@ -5,70 +5,72 @@
 #    pip-compile --output-file=pypy-test.txt pypy-test.in
 #
 -e git+git://github.com/rmagee/django-rest-framework-xml.git#egg=djangorestframework-xml  # via -r base.in, serialbox
-amqp==2.6.1               # via kombu
+amqp==5.0.1               # via kombu
 argon2-cffi==20.1.0       # via -r base.in
 asgiref==3.2.10           # via django
 attrs==20.2.0             # via pytest
 awesome-slugify==1.6.5    # via -r base.in
 bcrypt==3.2.0             # via paramiko
 billiard==3.6.3.0         # via celery
-celery==4.4.7             # via -r base.in, flower
+celery==5.0.0             # via -r base.in, flower
 certifi==2020.6.20        # via requests
 cffi==1.14.3              # via argon2-cffi, bcrypt, cryptography, psycopg2cffi, pynacl
 chardet==3.0.4            # via requests
-click==7.1.2              # via gs123
+click-didyoumean==0.0.3   # via celery
+click-repl==0.1.6         # via celery
+click==7.1.2              # via celery, click-didyoumean, click-repl, gs123
 commonmark==0.9.1         # via epcpyyes
 coreapi==2.3.3            # via django-rest-swagger, drf-yasg, openapi-codec
 coreschema==0.0.4         # via coreapi, drf-yasg
 coverage==5.3             # via -r pypy-test.in, django-coverage-plugin
-cryptography==3.1         # via paramiko
+cryptography==3.1.1       # via paramiko
 decorator==4.4.2          # via serialbox
 defusedxml==0.6.0         # via djangorestframework-xml, python3-openid
 django-allauth==0.42.0    # via -r base.in
 django-cors-headers==3.5.0  # via -r base.in
 django-coverage-plugin==1.8.0  # via -r pypy-test.in
-django-debug-toolbar==3.0  # via -r pypy-test.in
+django-debug-toolbar==3.1.1  # via -r pypy-test.in
 django-environ==0.4.5     # via -r base.in
 django-extensions==3.0.9  # via -r base.in
-django-filter==2.3.0      # via -r base.in
+django-filter==2.4.0      # via -r base.in
 django-model-utils==4.0.0  # via -r base.in, quartet-epcis, quartet-trail
 django-rest-auth==0.9.5   # via -r base.in
 django-rest-swagger==2.2.0  # via -r base.in
 django-simple-history==2.11.0  # via -r base.in
 django-test-plus==1.4.0   # via -r pypy-test.in
-django==3.1.1             # via -r base.in, django-allauth, django-cors-headers, django-debug-toolbar, django-filter, django-model-utils, django-rest-auth, djangorestframework, drf-yasg, serialbox
+django==3.1.2             # via -r base.in, django-allauth, django-cors-headers, django-debug-toolbar, django-filter, django-model-utils, django-rest-auth, djangorestframework, drf-yasg, serialbox
 djangorestframework-csv==2.1.0  # via serialbox
-djangorestframework==3.11.1  # via -r base.in, django-rest-auth, django-rest-swagger, djangorestframework-csv, drf-yasg, serialbox
+djangorestframework==3.12.1  # via -r base.in, django-rest-auth, django-rest-swagger, djangorestframework-csv, drf-yasg, serialbox
 docutils==0.16            # via serialbox
 drf-yasg==1.17.1          # via -r base.in
 eparsecis==3.1.0          # via -r serial-lab.in, quartet-epcis
 epcpyyes==2.0.5           # via -r serial-lab.in, eparsecis, quartet-epcis
 factory-boy==3.0.1        # via -r base.in, -r pypy-test.in
-faker==4.1.3              # via factory-boy
+faker==4.1.5              # via factory-boy
 flake8==3.8.3             # via -r pypy-test.in
 flower==0.9.5             # via -r base.in
 gs123==2.0.5              # via -r serial-lab.in
 haikunator==2.1.0         # via quartet-capture
-humanize==2.6.0           # via flower
+humanize==3.0.0           # via flower
 idna==2.10                # via requests
-importlib-metadata==1.7.0  # via flake8, kombu, markdown, pluggy, pytest
+importlib-metadata==2.0.0  # via flake8, kombu, markdown, pluggy, pytest
 inflection==0.5.1         # via drf-yasg
 iniconfig==1.0.1          # via pytest
 itypes==1.2.0             # via coreapi
 jinja2==2.11.2            # via coreschema, epcpyyes
-kombu==4.6.11             # via celery
-list-based-flavorpack==3.2.0  # via -r serial-lab.in
+kombu==5.0.2              # via celery
+list-based-flavorpack==3.2.2  # via -r serial-lab.in
 lxml==4.5.2               # via -r base.in, eparsecis, epcpyyes
 markdown==3.2.2           # via -r base.in, serialbox
 markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1             # via flake8
-more-itertools==8.5.0     # via pytest
 oauthlib==3.1.0           # via requests-oauthlib
 openapi-codec==1.3.2      # via django-rest-swagger
 packaging==20.4           # via drf-yasg, pytest, pytest-sugar
 paramiko==2.7.2           # via -r base.in
 pluggy==0.13.1            # via pytest
 prometheus-client==0.8.0  # via flower
+prompt-toolkit==3.0.7     # via click-repl
 psycopg2cffi==2.8.1       # via -r pypy.in
 py==1.9.0                 # via pytest
 pycodestyle==2.6.0        # via flake8
@@ -78,12 +80,12 @@ pynacl==1.4.0             # via paramiko
 pyparsing==2.4.7          # via packaging
 pytest-django==3.10.0     # via -r pypy-test.in
 pytest-sugar==0.9.4       # via -r pypy-test.in
-pytest==6.0.2             # via pytest-django, pytest-sugar
+pytest==6.1.0             # via pytest-django, pytest-sugar
 python-dateutil==2.8.1    # via faker, quartet-epcis
 python3-openid==3.2.0     # via django-allauth
 pytz==2020.1              # via -r base.in, celery, django, flower
-quartet-capture==3.3.5    # via -r serial-lab.in
-quartet-epcis==3.0.0      # via -r serial-lab.in
+quartet-capture==3.3.6    # via -r serial-lab.in
+quartet-epcis==3.0.1      # via -r serial-lab.in
 quartet-integrations==6.1.0  # via -r serial-lab.in
 quartet-manifest==1.0.5   # via -r serial-lab.in
 quartet-masterdata==2.2.2  # via -r serial-lab.in
@@ -91,14 +93,14 @@ quartet-output==3.1.5     # via -r serial-lab.in
 quartet-templates==2.0.0  # via -r serial-lab.in
 quartet-trail==2.0.3      # via -r serial-lab.in
 random-flavorpack==2.0.1  # via -r serial-lab.in
-regex==2020.7.14          # via awesome-slugify
+regex==2020.9.27          # via awesome-slugify
 requests-oauthlib==1.3.0  # via django-allauth
 requests==2.24.0          # via coreapi, django-allauth, requests-oauthlib
 ruamel.yaml.clib==0.2.2   # via ruamel.yaml
 ruamel.yaml==0.16.12      # via drf-yasg
-serialbox==2.3.1          # via -r serial-lab.in
+serialbox==2.3.2          # via -r serial-lab.in
 simplejson==3.17.2        # via django-rest-swagger
-six==1.15.0               # via argon2-cffi, bcrypt, cryptography, django-coverage-plugin, django-rest-auth, django-simple-history, djangorestframework-csv, drf-yasg, packaging, psycopg2cffi, pynacl, python-dateutil, serialbox
+six==1.15.0               # via argon2-cffi, bcrypt, click-repl, cryptography, django-coverage-plugin, django-rest-auth, django-simple-history, djangorestframework-csv, drf-yasg, packaging, psycopg2cffi, pynacl, python-dateutil, serialbox
 sqlparse==0.3.1           # via django, django-debug-toolbar
 termcolor==1.1.0          # via pytest-sugar
 text-unidecode==1.3       # via faker
@@ -108,6 +110,10 @@ unicodecsv==0.14.1        # via djangorestframework-csv
 unidecode==0.4.21         # via awesome-slugify
 uritemplate==3.0.1        # via coreapi, drf-yasg
 urllib3==1.25.10          # via requests
-vine==1.3.0               # via amqp, celery
+vine==5.0.0               # via amqp, celery
+wcwidth==0.2.5            # via prompt-toolkit
 wheel==0.35.1             # via -r base.in
-zipp==3.1.0               # via importlib-metadata
+zipp==3.2.0               # via importlib-metadata
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
