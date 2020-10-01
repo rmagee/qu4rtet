@@ -40,7 +40,7 @@ django-simple-history==2.11.0  # via -r base.in
 django-storages==1.10.1   # via -r production.in, collectfast
 django==3.1.2             # via -r base.in, collectfast, django-allauth, django-anymail, django-cors-headers, django-filter, django-model-utils, django-rest-auth, django-storages, djangorestframework, drf-yasg, serialbox
 djangorestframework-csv==2.1.0  # via serialbox
-djangorestframework==3.12.1  # via -r base.in, django-rest-auth, django-rest-swagger, djangorestframework-csv, drf-yasg, serialbox
+djangorestframework==3.11.1  # via -r base.in, django-rest-auth, django-rest-swagger, djangorestframework-csv, drf-yasg, serialbox
 docutils==0.16            # via serialbox
 drf-yasg==1.17.1          # via -r base.in
 elastic-apm==5.9.0        # via -r production.in
