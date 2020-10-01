@@ -79,8 +79,8 @@ pyparsing==2.4.7          # via packaging
 python-dateutil==2.8.1    # via botocore, faker, quartet-epcis
 python3-openid==3.2.0     # via django-allauth
 pytz==2020.1              # via -r base.in, celery, django, flower
-quartet-capture==3.3.6    # via -r serial-lab.in
-quartet-epcis==3.0.1      # via -r serial-lab.in
+uartet-capture==3.3.7    # via -r serial-lab.in
+quartet-epcis==3.0.2      # via -r serial-lab.in
 quartet-integrations==6.1.0  # via -r serial-lab.in
 quartet-manifest==1.0.5   # via -r serial-lab.in
 quartet-masterdata==2.2.2  # via -r serial-lab.in
