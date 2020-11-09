@@ -82,6 +82,11 @@ make sure to change the `host` parameters below!**
     createuser -P -d -l -r -S -i --replication --host=localhost --port=5432 qu4rtet
     createdb -e -E UTF8 -O qu4rtet --host=localhost --port=5432  qu4rtet 'The QU4RTET database backend.'
 
+Make sure to exit the postgres user shell
+
+.. code-block::
+
+    exit
 
 Create an .env File
 -------------------
