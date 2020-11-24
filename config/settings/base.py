@@ -310,8 +310,7 @@ CELERY_BROKER_URL = env('CELERY_BROKER_URL',
                         default='amqp://guest@localhost//')
 if CELERY_BROKER_URL == 'django://':
     CELERY_RESULT_BACKEND = 'redis://'
-else:
-    CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
 ########## END CELERY
 
 # CORS specific
