@@ -65,7 +65,7 @@ that you can remember.
 .. code-block:: text
 
     psql
-    # now IN psql execute the following to change the passwords
+    # now IN psql execute tll /he following to change the passwords
     \password postgres
 
 Next.  Hit ctrl+d to exit psql.
