@@ -30,6 +30,20 @@ documentation relative to the following setting:
 
     client_max_body_size
 
+For example, you would want to modify the client_max_body_size value below in
+your config file if you were using Nginx:
+
+.. code-block:: text
+
+        server {
+        ...
+        server_name testing123.qu4rtet.io;
+        client_max_body_size 20M;
+        location = /favicon.ico { access_log off; log_not_found off; }
+        ...
+        }
+
+
 
 Task Timeout Adjustments
 ------------------------
