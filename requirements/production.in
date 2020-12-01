@@ -10,3 +10,4 @@ django-anymail
 raven
 elastic-apm
 sentry-sdk
+aiocontextvars
