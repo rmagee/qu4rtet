@@ -60,7 +60,8 @@ INSTALLED_APPS += ['django_extensions', ]
 
 # uncomment for django admin
 # -----------------------------------------------------------------------------
-INSTALLED_APPS += ['django.contrib.admin']
+if 'django.contrib.admin' not in INSTALLED_APPS:
+    INSTALLED_APPS += ['django.contrib.admin']
 
 # TESTING
 # ------------------------------------------------------------------------------
