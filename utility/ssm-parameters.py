@@ -42,25 +42,26 @@ keys = [
 
 
 @click.command()
-@click.option("--group_name", help="The Parameter Group name you'd like to "
+@click.option("--groupname", help="The Parameter Group name you'd like to "
                                    "create.")
 @click.option("--overwrite", default=False,
               help="Whether or not to overwrite an existing group's values"
-                   " with the same name as group_name.")
-def create_parameters(group_name, overwrite=False):
+                   " with the same name as groupname.")
+def create_parameters(groupname, overwrite=False):
     client = boto3.client(
         'ssm'
     )
     print(boto3.session.Config)
     for key in keys:
-        overwrite = overwrite.lower() == 'true'
+        overwrite = str(overwrite).lower() == 'true'
         client.put_parameter(
-            Name=key[0].format(group_name),
-            Description='Parameter Group %s %s value.' % (group_name, key[0]),
+            Name=key[0].format(groupname),
+            Description='Parameter Group %s %s value.' % (groupname, key[0]),
             Value=key[2],
             Type=key[1],
             Overwrite=overwrite
         )
+        print('created key %s' % key[0].format(groupname))
 
 if __name__ == '__main__':
     create_parameters()

@@ -4,8 +4,8 @@
 #
 #    pip-compile --output-file=ec2.txt ec2.in
 #
-boto3==1.16.24            # via -r ec2.in
-botocore==1.19.24         # via boto3, s3transfer
+boto3==1.16.26            # via -r ec2.in
+botocore==1.19.26         # via boto3, s3transfer
 cached-property==1.5.2    # via ec2-metadata
 certifi==2020.11.8        # via requests
 chardet==3.0.4            # via requests
