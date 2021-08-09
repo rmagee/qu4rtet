@@ -4,40 +4,41 @@
 #
 #    pip-compile --output-file=serial-lab.txt serial-lab.in
 #
-asgiref==3.3.1            # via django
-click==7.1.2              # via gs123
+asgiref==3.3.4            # via django
+click==8.0.0              # via gs123
 commonmark==0.9.1         # via epcpyyes
-decorator==4.4.2          # via serialbox
-defusedxml==0.6.0         # via djangorestframework-xml
-django-model-utils==4.1.0  # via quartet-epcis, quartet-trail
-django==3.1.4             # via django-model-utils, djangorestframework, serialbox
-djangorestframework-csv==2.1.0  # via serialbox
+decorator==5.0.9          # via serialbox
+defusedxml==0.7.1         # via djangorestframework-xml
+django-model-utils==4.1.1  # via quartet-epcis, quartet-trail
+django==3.2.3             # via django-model-utils, djangorestframework, serialbox
+djangorestframework-csv==2.1.1  # via serialbox
 djangorestframework-xml==2.0.0  # via serialbox
-djangorestframework==3.12.2  # via djangorestframework-csv, serialbox
-docutils==0.16            # via serialbox
+djangorestframework==3.12.4  # via djangorestframework-csv, serialbox
+docutils==0.17.1          # via serialbox
 eparsecis==3.1.0          # via -r serial-lab.in, quartet-epcis
 epcpyyes==2.0.5           # via -r serial-lab.in, eparsecis, quartet-epcis
 gs123==2.0.5              # via -r serial-lab.in
 haikunator==2.1.0         # via quartet-capture
-importlib-metadata==3.1.0  # via markdown
-jinja2==2.11.2            # via epcpyyes
-list-based-flavorpack==3.2.2  # via -r serial-lab.in
-lxml==4.6.2               # via eparsecis, epcpyyes
-markdown==3.3.3           # via serialbox
-markupsafe==1.1.1         # via jinja2
+importlib-metadata==4.0.1  # via markdown
+jinja2==3.0.0             # via epcpyyes
+list-based-flavorpack==3.3.1  # via -r serial-lab.in
+lxml==4.6.3               # via eparsecis, epcpyyes
+markdown==3.3.4           # via serialbox
+markupsafe==2.0.0         # via jinja2
 python-dateutil==2.8.1    # via quartet-epcis
-pytz==2020.4              # via django
-quartet-capture==3.3.8    # via -r serial-lab.in
-quartet-epcis==3.0.2      # via -r serial-lab.in
-quartet-integrations==7.0.2  # via -r serial-lab.in
+pytz==2021.1              # via django
+quartet-capture==3.6.0    # via -r serial-lab.in
+quartet-epcis==3.1.0      # via -r serial-lab.in
+quartet-integrations==9.0.0  # via -r serial-lab.in
 quartet-manifest==1.0.5   # via -r serial-lab.in
-quartet-masterdata==2.2.5  # via -r serial-lab.in
-quartet-output==3.1.6     # via -r serial-lab.in
+quartet-masterdata==2.2.6  # via -r serial-lab.in
+quartet-output==3.2.0     # via -r serial-lab.in
 quartet-templates==2.0.0  # via -r serial-lab.in
 quartet-trail==2.0.3      # via -r serial-lab.in
 random-flavorpack==2.0.1  # via -r serial-lab.in
-serialbox==2.3.2          # via -r serial-lab.in
-six==1.15.0               # via djangorestframework-csv, python-dateutil, serialbox
+serialbox==2.3.4          # via -r serial-lab.in
+six==1.16.0               # via djangorestframework-csv, python-dateutil, serialbox
 sqlparse==0.4.1           # via django
+typing-extensions==3.10.0.0  # via asgiref, importlib-metadata
 unicodecsv==0.14.1        # via djangorestframework-csv
-zipp==3.4.0               # via importlib-metadata
+zipp==3.4.1               # via importlib-metadata

@@ -14,7 +14,7 @@ git clone https://gitlab.com/serial-lab/gs123.git
 git clone https://gitlab.com/serial-lab/serialbox.git
 git clone https://gitlab.com/serial-lab/random-flavorpack.git
 git clone https://gitlab.com/serial-lab/list_based_flavorpack.git
-
+git clone https://gitlab.com/serial-lab/quartet_tracelink.git
 
 pip install -e ./quartet_epcis
 pip install -e ./quartet_capture
@@ -30,5 +30,8 @@ pip install -e ./gs123
 pip install -e ./serialbox
 pip install -e ./random_flavorpack
 pip install -e ./list_based_flavorpack
+pip install -e ./quartet_tracelink
+
+
 
 

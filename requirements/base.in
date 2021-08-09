@@ -9,7 +9,6 @@ argon2-cffi
 awesome-slugify
 pytz
 celery
-flower
 markdown
 djangorestframework
 -e git://github.com/rmagee/django-rest-framework-xml.git#egg=djangorestframework-xml

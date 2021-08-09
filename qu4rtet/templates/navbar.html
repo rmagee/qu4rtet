@@ -1,0 +1,22 @@
+{% load static %}
+<div class="container-fluid quartet-dark-bg quartet-brand-padding">
+  <img src="{% static 'images/qu4rtet-logo-small.png' %}">
+</div>
+<nav class="navbar navbar-expand-lg navbar-light quartet-green-bg" style="width: 100%">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/qu4rtetadmin">Administration</a>
+        </li>
+        {% block additional_nav %}
+
+        {% endblock %}
+      </ul>
+    </div>
+  </div>
+</nav>

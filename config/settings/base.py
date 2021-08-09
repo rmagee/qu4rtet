@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
 import platform
-
+import os
 if platform.python_implementation() == 'PyPy':
     from psycopg2cffi import compat
     compat.register()
@@ -188,6 +188,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
+            os.path.join(APPS_DIR, 'templates'),
             str(APPS_DIR.path('templates')),
         ],
         'OPTIONS': {
