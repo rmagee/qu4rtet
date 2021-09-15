@@ -4,13 +4,13 @@
 #
 #    pip-compile --output-file=serial-lab.txt serial-lab.in
 #
-asgiref==3.3.4            # via django
-click==8.0.0              # via gs123
+asgiref==3.4.1            # via django
+click==8.0.1              # via gs123
 commonmark==0.9.1         # via epcpyyes
 decorator==5.0.9          # via serialbox
 defusedxml==0.7.1         # via djangorestframework-xml
 django-model-utils==4.1.1  # via quartet-epcis, quartet-trail
-django==3.2.3             # via django-model-utils, djangorestframework, serialbox
+django==3.2.6             # via django-model-utils, djangorestframework, serialbox
 djangorestframework-csv==2.1.1  # via serialbox
 djangorestframework-xml==2.0.0  # via serialbox
 djangorestframework==3.12.4  # via djangorestframework-csv, serialbox
@@ -19,20 +19,20 @@ eparsecis==3.1.0          # via -r serial-lab.in, quartet-epcis
 epcpyyes==2.0.5           # via -r serial-lab.in, eparsecis, quartet-epcis
 gs123==2.0.5              # via -r serial-lab.in
 haikunator==2.1.0         # via quartet-capture
-importlib-metadata==4.0.1  # via markdown
-jinja2==3.0.0             # via epcpyyes
+importlib-metadata==4.6.3  # via click, markdown
+jinja2==3.0.1             # via epcpyyes
 list-based-flavorpack==3.3.1  # via -r serial-lab.in
 lxml==4.6.3               # via eparsecis, epcpyyes
 markdown==3.3.4           # via serialbox
-markupsafe==2.0.0         # via jinja2
-python-dateutil==2.8.1    # via quartet-epcis
+markupsafe==2.0.1         # via jinja2
+python-dateutil==2.8.2    # via quartet-epcis
 pytz==2021.1              # via django
 quartet-capture==3.6.0    # via -r serial-lab.in
 quartet-epcis==3.1.0      # via -r serial-lab.in
 quartet-integrations==9.0.0  # via -r serial-lab.in
 quartet-manifest==1.0.5   # via -r serial-lab.in
 quartet-masterdata==2.2.6  # via -r serial-lab.in
-quartet-output==3.2.0     # via -r serial-lab.in
+quartet-output==3.2.2     # via -r serial-lab.in
 quartet-templates==2.0.0  # via -r serial-lab.in
 quartet-trail==2.0.3      # via -r serial-lab.in
 random-flavorpack==2.0.1  # via -r serial-lab.in
@@ -41,4 +41,4 @@ six==1.16.0               # via djangorestframework-csv, python-dateutil, serial
 sqlparse==0.4.1           # via django
 typing-extensions==3.10.0.0  # via asgiref, importlib-metadata
 unicodecsv==0.14.1        # via djangorestframework-csv
-zipp==3.4.1               # via importlib-metadata
+zipp==3.5.0               # via importlib-metadata
