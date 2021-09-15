@@ -363,3 +363,4 @@ qu4rtet.iml
 
 config/local_urls.py
 /qu4rtet/local_admin.py
+/qu4rtet/static/.sass-cache/
