@@ -7,19 +7,19 @@
 -e git+git://github.com/rmagee/django-rest-framework-xml.git#egg=djangorestframework-xml  # via -r base.in, serialbox
 aiocontextvars==0.2.2     # via -r production.in
 amqp==5.0.6               # via kombu
-argon2-cffi==20.1.0       # via -r base.in
+argon2-cffi==21.1.0       # via -r base.in
 asgiref==3.4.1            # via django
 awesome-slugify==1.6.5    # via -r base.in
 bcrypt==3.2.0             # via paramiko
 billiard==3.6.4.0         # via celery
-boto3==1.18.17            # via -r production.in
-botocore==1.21.17         # via boto3, s3transfer
+boto3==1.19.4             # via -r production.in
+botocore==1.22.4          # via boto3, s3transfer
 cached-property==1.5.2    # via kombu
 celery==5.1.2             # via -r base.in
-certifi==2021.5.30        # via elastic-apm, requests, sentry-sdk
-cffi==1.14.6              # via argon2-cffi, bcrypt, cryptography, pynacl
-charset-normalizer==2.0.4  # via requests
-click-didyoumean==0.0.3   # via celery
+certifi==2021.10.8        # via elastic-apm, requests, sentry-sdk
+cffi==1.15.0              # via argon2-cffi, bcrypt, cryptography, pynacl
+charset-normalizer==2.0.7  # via requests
+click-didyoumean==0.3.0   # via celery
 click-plugins==1.1.1      # via celery
 click-repl==0.2.0         # via celery
 click==7.1.2              # via celery, click-didyoumean, click-plugins, click-repl, gs123
@@ -27,40 +27,40 @@ collectfast==2.2.0        # via -r production.in
 commonmark==0.9.1         # via epcpyyes
 coreapi==2.3.3            # via django-rest-swagger, drf-yasg, openapi-codec
 coreschema==0.0.4         # via coreapi, drf-yasg
-cryptography==3.4.7       # via paramiko, pyjwt
-decorator==5.0.9          # via serialbox
+cryptography==35.0.0      # via paramiko, pyjwt
+decorator==5.1.0          # via serialbox
 defusedxml==0.7.1         # via djangorestframework-xml, python3-openid
 django-allauth==0.45.0    # via -r base.in
 django-anymail==8.4       # via -r production.in
-django-cors-headers==3.7.0  # via -r base.in
-django-environ==0.4.5     # via -r base.in
+django-cors-headers==3.10.0  # via -r base.in
+django-environ==0.8.1     # via -r base.in
 django-extensions==3.1.3  # via -r base.in
-django-filter==2.4.0      # via -r base.in
-django-model-utils==4.1.1  # via -r base.in, quartet-epcis, quartet-trail
+django-filter==21.1       # via -r base.in
+django-model-utils==4.2.0  # via -r base.in, quartet-epcis, quartet-trail
 django-rest-auth==0.9.5   # via -r base.in
 django-rest-swagger==2.2.0  # via -r base.in
 django-simple-history==3.0.0  # via -r base.in
-django-storages==1.11.1   # via -r production.in, collectfast
-django==3.2.6             # via -r base.in, collectfast, django-allauth, django-anymail, django-cors-headers, django-extensions, django-filter, django-model-utils, django-rest-auth, django-storages, djangorestframework, drf-yasg, serialbox
+django-storages==1.12.2   # via -r production.in, collectfast
+django==3.2.8             # via -r base.in, collectfast, django-allauth, django-anymail, django-cors-headers, django-extensions, django-filter, django-model-utils, django-rest-auth, django-storages, djangorestframework, drf-yasg, serialbox
 djangorestframework-csv==2.1.1  # via serialbox
 djangorestframework==3.12.4  # via -r base.in, django-rest-auth, django-rest-swagger, djangorestframework-csv, drf-yasg, serialbox
-docutils==0.17.1          # via serialbox
+docutils==0.18            # via serialbox
 drf-yasg==1.20.0          # via -r base.in
-elastic-apm==6.3.3        # via -r production.in
+elastic-apm==6.6.0        # via -r production.in
 eparsecis==3.1.0          # via -r serial-lab.in, quartet-epcis
 epcpyyes==2.0.5           # via -r serial-lab.in, eparsecis, quartet-epcis
-factory-boy==3.2.0        # via -r base.in
-faker==8.11.0             # via factory-boy
+factory-boy==3.2.1        # via -r base.in
+faker==9.6.0              # via factory-boy
 gevent==21.8.0            # via -r production.in
-greenlet==1.1.1           # via gevent
+greenlet==1.1.2           # via gevent
 gs123==2.0.5              # via -r serial-lab.in
 gunicorn==20.1.0          # via -r production.in
 haikunator==2.1.0         # via quartet-capture
-idna==3.2                 # via requests
-importlib-metadata==4.6.3  # via kombu, markdown
+idna==3.3                 # via requests
+importlib-metadata==4.8.1  # via kombu, markdown
 inflection==0.5.1         # via drf-yasg
 itypes==1.2.0             # via coreapi
-jinja2==3.0.1             # via coreschema, epcpyyes
+jinja2==3.0.2             # via coreschema, epcpyyes
 jmespath==0.10.0          # via boto3, botocore
 kombu==5.1.0              # via celery
 list-based-flavorpack==3.3.1  # via -r serial-lab.in
@@ -70,48 +70,48 @@ markupsafe==2.0.1         # via jinja2
 oauthlib==3.1.1           # via requests-oauthlib
 openapi-codec==1.3.2      # via django-rest-swagger
 packaging==21.0           # via drf-yasg
-paramiko==2.7.2           # via -r base.in
-prompt-toolkit==3.0.19    # via click-repl
+paramiko==2.8.0           # via -r base.in
+prompt-toolkit==3.0.21    # via click-repl
 psycopg2-binary==2.9.1    # via -r postgres.in
 pycparser==2.20           # via cffi
-pyjwt[crypto]==2.1.0      # via django-allauth
+pyjwt[crypto]==2.3.0      # via django-allauth
 pynacl==1.4.0             # via paramiko
-pyparsing==2.4.7          # via packaging
+pyparsing==3.0.2          # via packaging
 python-dateutil==2.8.2    # via botocore, faker, quartet-epcis
 python3-openid==3.2.0     # via django-allauth
-pytz==2021.1              # via -r base.in, celery, django
+pytz==2021.3              # via -r base.in, celery, django
 quartet-capture==3.6.0    # via -r serial-lab.in
-quartet-epcis==3.1.0      # via -r serial-lab.in
-quartet-integrations==9.0.0  # via -r serial-lab.in
+quartet-epcis==3.2.2      # via -r serial-lab.in
+quartet-integrations==9.0.2  # via -r serial-lab.in
 quartet-manifest==1.0.5   # via -r serial-lab.in
 quartet-masterdata==2.2.6  # via -r serial-lab.in
 quartet-output==3.2.2     # via -r serial-lab.in
 quartet-templates==2.0.0  # via -r serial-lab.in
-quartet-trail==2.0.3      # via -r serial-lab.in
+quartet-trail==2.1.1      # via -r serial-lab.in
 random-flavorpack==2.0.1  # via -r serial-lab.in
 raven==6.10.0             # via -r production.in
-regex==2021.8.3           # via awesome-slugify
+regex==2021.10.23         # via awesome-slugify
 requests-oauthlib==1.3.0  # via django-allauth
 requests==2.26.0          # via coreapi, django-allauth, django-anymail, requests-oauthlib
 ruamel.yaml.clib==0.2.6   # via ruamel.yaml
-ruamel.yaml==0.17.10      # via drf-yasg
+ruamel.yaml==0.17.16      # via drf-yasg
 s3transfer==0.5.0         # via boto3
-sentry-sdk==1.3.1         # via -r production.in
-serialbox==2.3.4          # via -r serial-lab.in
-simplejson==3.17.3        # via django-rest-swagger
-six==1.16.0               # via argon2-cffi, bcrypt, click-repl, django-rest-auth, djangorestframework-csv, pynacl, python-dateutil, serialbox
-sqlparse==0.4.1           # via django
+sentry-sdk==1.4.3         # via -r production.in
+serialbox==2.4.4          # via -r serial-lab.in
+simplejson==3.17.5        # via django-rest-swagger
+six==1.16.0               # via bcrypt, click-repl, django-rest-auth, djangorestframework-csv, pynacl, python-dateutil, serialbox
+sqlparse==0.4.2           # via django
 text-unidecode==1.3       # via faker
 tornado==5.1.1            # via -r base.in
-typing-extensions==3.10.0.0  # via asgiref, collectfast, importlib-metadata
+typing-extensions==3.10.0.2  # via asgiref, collectfast, faker, importlib-metadata
 unicodecsv==0.14.1        # via djangorestframework-csv
 unidecode==0.4.21         # via awesome-slugify
-uritemplate==3.0.1        # via coreapi, drf-yasg
-urllib3==1.26.6           # via botocore, elastic-apm, requests, sentry-sdk
+uritemplate==4.1.1        # via coreapi, drf-yasg
+urllib3==1.26.7           # via botocore, elastic-apm, requests, sentry-sdk
 vine==5.0.0               # via amqp, celery, kombu
 wcwidth==0.2.5            # via prompt-toolkit
-wheel==0.36.2             # via -r base.in
-zipp==3.5.0               # via importlib-metadata
+wheel==0.37.0             # via -r base.in
+zipp==3.6.0               # via importlib-metadata
 zope.event==4.5.0         # via gevent
 zope.interface==5.4.0     # via gevent
 
