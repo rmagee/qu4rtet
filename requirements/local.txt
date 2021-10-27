@@ -107,7 +107,7 @@ quartet-masterdata==2.2.6  # via -r serial-lab.in
 quartet-output==3.2.2     # via -r serial-lab.in
 quartet-templates==2.0.0  # via -r serial-lab.in
 quartet-tracelink==1.0.26  # via -r local.in
-quartet-trail==2.0.3      # via -r serial-lab.in
+quartet-trail==2.1.1      # via -r serial-lab.in
 random-flavorpack==2.0.1  # via -r serial-lab.in
 recommonmark==0.7.1       # via -r local.in
 regex==2021.8.3           # via awesome-slugify
