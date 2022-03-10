@@ -17,22 +17,6 @@ python3_6_unit_test:
     paths:
       - htmlcov/
 
-pypy3_6_unit_test:
-  image: pypy:latest
-  stage: test-python
-  script:
-  - apt-get install -y git
-  - apt-get update
-  - apt-get install -y sqlite3=3.38.0
-  - export PYTHONPATH=$PYTHONPATH:$CI_PROJECT_DIR
-  - pip install -r ./requirements/pypy-test.txt
-  - export TESTING=True
-  - coverage run manage.py test --settings=config.settings.test
-  - coverage report -m
-  - coverage html
-  artifacts:
-    paths:
-      - htmlcov/
 
 pages:
   image: seriallab/python3.6dev
