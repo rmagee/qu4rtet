@@ -23,7 +23,7 @@ pypy3_6_unit_test:
   script:
   - apt-get install -y git
   - apt-get update
-  - apt-get install -y sqlite3
+  - apt-get install -y sqlite3==3.8.3
   - export PYTHONPATH=$PYTHONPATH:$CI_PROJECT_DIR
   - pip install -r ./requirements/pypy-test.txt
   - export TESTING=True
