@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=test.txt test.in
 #
--e git+git://github.com/rmagee/django-rest-framework-xml.git#egg=djangorestframework-xml  # via -r base.in, serialbox
+-e git+https://github.com/rmagee/django-rest-framework-xml.git#egg=djangorestframework-xml  # via -r base.in, serialbox
 amqp==5.0.6               # via kombu
 argon2-cffi==21.1.0       # via -r base.in
 asgiref==3.4.1            # via django
