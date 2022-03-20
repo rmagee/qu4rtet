@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=../requirements.txt production.in
 #
--e git+https://github.com/rmagee/django-rest-framework-xml.git#egg=djangorestframework-xml  # via -r base.in, serialbox
+djangorestframework-xml
 aiocontextvars==0.2.2     # via -r production.in
 amqp==5.0.6               # via kombu
 argon2-cffi==21.1.0       # via -r base.in
