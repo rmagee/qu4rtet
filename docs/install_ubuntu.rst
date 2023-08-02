@@ -243,6 +243,11 @@ status that's Ok.  Kill the test server with a
 
 Configure Celery Worker to Run as Daemon
 ----------------------------------------
+IMPORTANT: The example below copies the celeryd script from the QU4RTET utility 
+directory.  This script sets up environment variables for CELERY_BIN and ENV_PYTHON
+that reference a python virtual environment.  Make sure to change the paths to these
+variables either before or after you copy the file over to your /etc/default directory.
+
 QU4RTET uses the Celery Task Queue (http://www.celeryproject.org/) to
 distribute out work among multiple computers/containers, etc. should that
 be necessary.  Here we are just going to ensure that the local celery
