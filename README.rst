@@ -156,14 +156,6 @@ parsing to the rule engine:
                 parser = QuartetParser(io.BytesIO(data.encode()))
             parser.parse()
 
-Opbeat Integration
-++++++++++++++++++
-Want to monitor the performance of your QU4RTET instance in real time?
-QU4RTET comes ready with Opbeat support.  Sign up for an opbeat account and
-add the account credentials to your configuration and you're ready to go.  More is available in the
-installation documentation in the project docs.
-
-More: https://opbeat.com/
 
 Sentry Integration
 ++++++++++++++++++
