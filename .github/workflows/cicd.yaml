@@ -6,6 +6,7 @@ jobs:
     env:
       OS: ubuntu-latest
       PYTHON: '3.9'
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     steps:
     - uses: checkout@v2
       with:

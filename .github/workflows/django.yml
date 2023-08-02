@@ -8,7 +8,8 @@ on:
 
 jobs:
   build:
-
+    env:
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
