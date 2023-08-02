@@ -1,3 +1,7 @@
+[![Django CI](https://github.com/rmagee/qu4rtet/actions/workflows/django.yml/badge.svg)](https://github.com/rmagee/qu4rtet/actions/workflows/django.yml)
+
+I am the original developer of the QU4RTET system.  This is my personal repo for both advancing and maintainig the open source project going forward.
+
 QU4RTET: The Open-Source EPCIS / Level-4
 ========================================
 
