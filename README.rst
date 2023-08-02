@@ -1,11 +1,6 @@
 QU4RTET: The Open-Source EPCIS / Level-4
 ========================================
 
-.. image:: https://gitlab.com/serial-lab/qu4rtet/badges/master/pipeline.svg
-        :target: https://gitlab.com/serial-lab/qu4rtet/commits/master
-.. image:: https://gitlab.com/serial-lab/qu4rtet/badges/master/coverage.svg
-        :target: https://gitlab.com/serial-lab/qu4rtet/pipelines
-
 .. code-block:: text
 
     MWNNNWWWNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNWNWWMMMMMMMMMMMMMMMMMMMWWNNNNNNWWM
