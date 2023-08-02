@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
 import platform
-
+import os
 if platform.python_implementation() == 'PyPy':
     from psycopg2cffi import compat
     compat.register()
@@ -34,6 +34,8 @@ if READ_DOT_ENV_FILE:
     print('Loading : {}'.format(env_file))
     env.read_env(env_file)
     print('The .env file has been loaded. See base.py for more information')
+
+SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
 # if the system is running in EC2, we can check parameter store for certain
 # environment variables
@@ -76,13 +78,16 @@ LOCAL_APPS = [
     'list_based_flavorpack.apps.ListBasedFlavorpackConfig',
     'quartet_templates.apps.QuartetTemplatesConfig',
     'rest_framework',
+    'rest_framework_xml',
     'rest_framework.authtoken',
     'allauth',
     'rest_auth',
     'rest_auth.registration',
-    'rest_framework_swagger',
+    'drf_yasg',
     'corsheaders',
     'django_filters',
+    'simple_history',
+    'quartet_trail.apps.QuartetTrailConfig',
 ]
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -96,6 +101,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -120,7 +126,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = [
+ADMINS = env.list('DJANGO_ADMINS', default=None) or [
     ("""SerialLab Corp""", 'slab@serial-lab.com'),
 ]
 
@@ -182,6 +188,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
+            os.path.join(APPS_DIR, 'templates'),
             str(APPS_DIR.path('templates')),
         ],
         'OPTIONS': {
@@ -304,8 +311,7 @@ CELERY_BROKER_URL = env('CELERY_BROKER_URL',
                         default='amqp://guest@localhost//')
 if CELERY_BROKER_URL == 'django://':
     CELERY_RESULT_BACKEND = 'redis://'
-else:
-    CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
 ########## END CELERY
 
 # CORS specific
@@ -314,6 +320,19 @@ CORS_ORIGIN_ALLOW_ALL = env('CORS_ORIGIN_ALLOW_ALL', default=True)
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
 ADMIN_URL = 'qu4rtetadmin/'
 
+
+# EMAIL
+# ------------------------------------------------------------------------------
+DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
+                         default='QU4RTET <noreply@qu4rtet.io>')
+EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[QU4RTET]')
+SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
+EMAIL_HOST = env('DJANGO_EMAIL_HOST', default=None)
+EMAIL_USE_TLS = env.bool('DJANGO_EMAIL_USE_TLS', default=False)
+EMAIL_PORT = env.int('DJANGO_EMAIL_PORT', default=587)
+EMAIL_HOST_USER = env('DJANGO_EMAIL_HOST_USER', default=None)
+EMAIL_HOST_PASSWORD = env('DJANGO_EMAIL_HOST_PASSWORD', default=None)
+
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
@@ -321,7 +340,9 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.TemplateHTMLRenderer',
         'quartet_epcis.renderers.EPCPyYesXMLRenderer',
+        'quartet_epcis.renderers.EPCPyYesTextXMLRenderer',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
@@ -331,8 +352,8 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend'
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication'
     ),
     'DEFAULT_PERMISSION_CLASSES': (
@@ -341,7 +362,14 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_VERSIONING_CLASS':
         'rest_framework.versioning.NamespaceVersioning',
-    'DEFAULT_METADATA_CLASS': 'qu4rtet.api.metadata.QuartetUIMetadata'
+    'DEFAULT_METADATA_CLASS': 'qu4rtet.api.metadata.QuartetUIMetadata',
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework_xml.parsers.XMLParser',
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 SWAGGER_SETTINGS = {
@@ -356,5 +384,4 @@ SWAGGER_SETTINGS = {
         }
     }
 }
-
 

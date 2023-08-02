@@ -357,3 +357,10 @@ pip-selfcheck.json
 qu4rtet/media/
 *.dat
 
+config/settings/dev_settings.py
+config/settings/local_settings.py
+qu4rtet.iml
+
+config/local_urls.py
+/qu4rtet/local_admin.py
+/qu4rtet/static/.sass-cache/

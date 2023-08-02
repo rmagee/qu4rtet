@@ -13,8 +13,12 @@ Contents:
    readme
    development
    install_ubuntu
+   install_redhat
    install
    virtualbox
+   sftp
+   docker
+   size_timeout
 
 
 

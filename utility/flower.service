@@ -1,0 +1,13 @@
+[Unit]
+Description=Flower Celery Service
+
+[Service]
+User=www-data
+Group=celery
+WorkingDirectory=/srv/qu4rtet
+ExecStart=/home/ubuntu/.virtualenvs/qu4rtet/bin/flower -A qu4rtet.taskapp.celery:app --address=127.0.0.1 --port=5544
+Restart=on-failure
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

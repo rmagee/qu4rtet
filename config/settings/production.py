@@ -16,22 +16,8 @@ import logging
 import os
 from .base import *  # noqa
 
-# SECRET CONFIGURATION
-# ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-# Raises ImproperlyConfigured exception if DJANGO_SECRET_KEY not in os.environ
-SECRET_KEY = env.str('DJANGO_SECRET_KEY')
-
 USE_SENTRY = env.bool('USE_SENTRY', False)
 USE_ELASTIC_APM = env.bool('USE_ELASTIC_APM', False)
-
-if USE_SENTRY:
-    # raven sentry client
-    # See https://docs.sentry.io/clients/python/integrations/django/
-    INSTALLED_APPS += ['raven.contrib.django.raven_compat', ]
-    RAVEN_MIDDLEWARE = [
-        'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware']
-    MIDDLEWARE = RAVEN_MIDDLEWARE + MIDDLEWARE
 
 if USE_ELASTIC_APM:
     INSTALLED_APPS += ['elasticapm.contrib.django', ]
@@ -46,6 +32,8 @@ if USE_ELASTIC_APM:
 
 if env.bool('HTTPS_ONLY', True):
     from .secure import *
+if os.environ.get('USE_DOCKER') == 'yes':
+    SESSION_COOKIE_SECURE = False
 
 CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
@@ -81,18 +69,12 @@ if env.bool('USE_AWS', default=False):
         'CacheControl': control,
     }
     from storages.backends.s3boto3 import S3Boto3Storage
+
     MediaRootS3BotoStorage = lambda: S3Boto3Storage(location='media',
                                                     file_overwrite=False)
     DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3BotoStorage'
     MEDIA_URL = 'https://s3.amazonaws.com/%s/media/' % AWS_STORAGE_BUCKET_NAME
     AWS_PRELOAD_METADATA = True
-
-# EMAIL
-# ------------------------------------------------------------------------------
-DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
-                         default='QU4RTET <noreply@serial-lab.local>')
-EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[QU4RTET]')
-SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
 # Uncomment for Anymail with Mailgun
 # INSTALLED_APPS += ['anymail', ]
@@ -114,120 +96,84 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 # Sentry Configuration
 if USE_SENTRY:
-    SENTRY_DSN = env('DJANGO_SENTRY_DSN')
-    SENTRY_CLIENT = env('DJANGO_SENTRY_CLIENT',
-                        default='raven.contrib.django.raven_compat.DjangoClient')
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': True,
-        'root': {
-            'level': 'WARNING',
-            'handlers': ['sentry', ],
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+    from sentry_sdk.integrations.tornado import TornadoIntegration
+    from sentry_sdk.integrations.celery import CeleryIntegration
+
+    sentry_sdk.init(
+        dsn=env('DJANGO_SENTRY_DSN'),
+        integrations=[DjangoIntegration(), CeleryIntegration(),
+                      TornadoIntegration()]
+    )
+
+CELERYD_HIJACK_ROOT_LOGGER = False
+# get the logging path from the .env file
+LOGGING_PATH = env.str('LOGGING_PATH', '/tmp')
+file_path = os.path.join(LOGGING_PATH, 'quartet.log')
+print('Logging to path %s' % file_path)
+# check to make sure that there are write rights to the log location
+if not os.access(LOGGING_PATH, os.W_OK):
+    raise IOError('Logging is configured for a path (%s) which QU4RTET '
+                  'does not currently have rights to write too.  The '
+                  'account which needs these rights is typically that '
+                  'of the web server or process running the celery '
+                  'daemon.' % file_path)
+print('Logging rights are confirmed.')
+LOGGING_LEVEL = env.str('LOGGING_LEVEL', 'WARNING')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': LOGGING_LEVEL,
+        'handlers': ['file', ],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(funcName)s %(lineno)d '
+                      '%(message)s'
         },
-        'formatters': {
-            'verbose': {
-                'format': '%(levelname)s %(asctime)s %(module)s '
-                          '%(process)d %(thread)d %(message)s'
-            },
-        },
-        'handlers': {
-            'sentry': {
-                'level': 'ERROR',
-                'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-            },
-            'console': {
-                'level': 'DEBUG',
-                'class': 'logging.StreamHandler',
-                'formatter': 'verbose'
-            }
-        },
-        'loggers': {
-            'django.db.backends': {
-                'level': 'ERROR',
-                'handlers': ['console', ],
-                'propagate': False,
-            },
-            'raven': {
-                'level': 'DEBUG',
-                'handlers': ['console', ],
-                'propagate': False,
-            },
-            'sentry.errors': {
-                'level': 'DEBUG',
-                'handlers': ['console', ],
-                'propagate': False,
-            },
-            'django.security.DisallowedHost': {
-                'level': 'ERROR',
-                'handlers': ['console', 'sentry', ],
-                'propagate': False,
-            },
-        },
-    }
-    SENTRY_CELERY_LOGLEVEL = env.int('DJANGO_SENTRY_LOG_LEVEL', logging.INFO)
-    RAVEN_CONFIG = {
-        'CELERY_LOGLEVEL': env.int('DJANGO_SENTRY_LOG_LEVEL', logging.INFO),
-        'DSN': SENTRY_DSN
-    }
-else:
-    CELERYD_HIJACK_ROOT_LOGGER = False
-    # get the logging path from the .env file
-    LOGGING_PATH = env.str('LOGGING_PATH', '/tmp')
-    file_path = os.path.join(LOGGING_PATH, 'quartet.log')
-    print('Logging to path %s' % file_path)
-    # check to make sure that there are write rights to the log location
-    if not os.access(LOGGING_PATH, os.W_OK):
-        raise IOError('Logging is configured for a path (%s) which QU4RTET '
-                      'does not currently have rights to write too.  The '
-                      'account which needs these rights is typically that '
-                      'of the web server or process running the celery '
-                      'daemon.')
-    print('Logging rights are confirmed.')
-    LOGGING_LEVEL=env.str('LOGGING_LEVEL', 'WARNING')
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': True,
-        'root': {
+    },
+    'handlers': {
+        'file': {
             'level': LOGGING_LEVEL,
-            'handlers': ['file', ],
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': file_path,
+            'formatter': 'verbose',
         },
-        'formatters': {
-            'verbose': {
-                'format': '%(levelname)s %(asctime)s %(module)s '
-                          '%(process)d %(thread)d %(message)s'
-            },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
         },
-        'handlers': {
-            'file': {
-                'level': LOGGING_LEVEL,
-                'class': 'logging.handlers.WatchedFileHandler',
-                'filename': file_path,
-                'formatter': 'verbose',
-            },
+        'celery': {
+            'handlers': ['file'],
+            'level': LOGGING_LEVEL,
+            'propagate': False
         },
-        'loggers': {
-            'django': {
-                'handlers': ['file'],
-                'level': 'ERROR',
-                'propagate': True,
-            },
-            'celery': {
-                'handlers': ['file'],
-                'level': LOGGING_LEVEL,
-                'propagate': False
-            },
-            'celery.task': {
-                'handlers': ['file'],
-                'level': LOGGING_LEVEL,
-                'propagate': False
-            }
-        },
-    }
+        'celery.task': {
+            'handlers': ['file'],
+            'level': LOGGING_LEVEL,
+            'propagate': False
+        }
+    },
+}
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
-if env.bool('DJANGO_ENABLE_ADMIN', False):
+if env.bool('DJANGO_ENABLE_ADMIN', True):
     INSTALLED_APPS += ['django.contrib.admin']
 
 logging.info('Default database host: %s', database_host)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+DATA_UPLOAD_MAX_MEMORY_SIZE = env.int('MAX_UPLOAD_SIZE', 104857600)
+FILE_UPLOAD_MAX_MEMORY_SIZE = env.int('MAX_UPLOAD_SIZE', 104857600)
+
+try:
+    from config.settings.local_settings import *
+    print('LOCAL SETTINGS FOUND')
+except ImportError:
+    print('No local settings detected.')

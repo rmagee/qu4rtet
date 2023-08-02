@@ -1,11 +1,4 @@
-version: '2'
-
-volumes:
-  postgres_data: {}
-  postgres_backup: {}
-  caddy: {}
-  media:
-  static:
+version: '2.4'
 
 services:
   django: &django
@@ -15,6 +8,9 @@ services:
     depends_on:
       - postgres
       - rabbitmq
+    volumes:
+      - ./media:/app/media
+      - ./staticfiles:/app/staticfiles
     env_file: ./.envs/.production/.django
     command: /gunicorn.sh
 
@@ -23,12 +19,15 @@ services:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - postgres_backup:/backups
-    env_file: .env
+      - ./postgres_data:/var/lib/postgresql/data
+      - ./postgres_backup:/backups
+    env_file:
+      - ./.envs/.production/.postgres
 
   rabbitmq:
     image: rabbitmq:3-management
+    ports:
+      - 15672:15672
 
   celeryworker:
     <<: *django
@@ -37,12 +36,16 @@ services:
      - rabbitmq
     command: /start-celeryworker.sh
 
-  celerybeat:
-    <<: *django
-    depends_on:
-      - postgres
-      - rabbitmq
-    command: /start-celerybeat.sh
+# ********************** OPTIONAL
+# Uncomment this section along with the section in NGINX if you need to
+# implement any celery beat functionality with QU4RTET.
+#  celerybeat:
+#    <<: *django
+#    depends_on:
+#      - postgres
+#      - rabbitmq
+#    command: /start-celerybeat.sh
+# **********************
 
   nginx:
     build:
@@ -50,9 +53,11 @@ services:
       dockerfile: ./compose/production/nginx/Dockerfile
     depends_on:
       - django
-      - celerybeat
+      #- celerybeat -- see notes above in the commented out beat section.
       - celeryworker
-    volumes_from:
-      - django
+    volumes:
+      - ./staticfiles:/static
+      - ./media:/media
     ports:
       - "0.0.0.0:80:80"
+

@@ -1,0 +1,34 @@
+# here we start five celery nodes
+CELERYD_NODES="qu4rtet_worker1 qu4rtet_worker2"
+
+# Absolute or relative path to the 'celery' command:
+CELERY_BIN="/home/ec2-user/.virtualenvs/qu4rtet/bin/celery"
+
+# App instance to use
+CELERY_APP="qu4rtet.taskapp.celery:app"
+
+# Where to chdir at start.
+CELERYD_CHDIR="/srv/qu4rtet"
+
+# use the virtual env
+ENV_PYTHON="/home/ec2-user/.virtualenvs/qu4rtet/bin/python"
+
+# Extra command-line arguments to the worker
+CELERYD_OPTS="--time-limit=11000 --soft-time-limit=10800" #three hours
+
+# Only set logging level to DEBUG if you're having problems
+#CELERYD_LOG_LEVEL="DEBUG"
+
+# %n will be replaced with the first part of the nodename.
+CELERYD_LOG_FILE="/var/log/celery/%n%I.log"
+CELERYD_PID_FILE="/var/run/celery/%n.pid"
+
+#   Workers should run as an unprivileged user.
+#   You need to create this user manually (or you can choose
+#   a user/group combination that already exists (e.g., nobody).
+CELERYD_USER="ec2-user"
+CELERYD_GROUP="ec2-user"
+
+# If enabled pid and log directories will be created if missing,
+# and owned by the userid/group configured.
+CELERY_CREATE_DIRS=1

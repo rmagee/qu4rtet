@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-sudo supervisorctl stop guni:gunicorn
+sudo systemctl stop gunicorn.socket
+sudo systemctl stop gunicorn.service
 sudo systemctl stop nginx
-sudo /etc/init.d/celeryd stop
-sudo supervisorctl stop flower
+sudo systemctl stop celery.service
+sudo systemctl stop flower.service
 

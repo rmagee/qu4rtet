@@ -1,0 +1,66 @@
+
+// Custom.scss
+// Option B: Include parts of Bootstrap
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../node_modules/bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+
+$quartet-green: #95D600;
+$quartet-light: #FFF;
+$quartet-gray: #77777A;
+$quartet-bg: #272b30;
+
+$body-bg:                           $quartet-bg;
+$body-color:                        $quartet-light;
+$table-color:                       $quartet-gray;
+$table-bg:                          #FFF;
+$navbar-light-color:                $quartet-light;
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+// 4. Include any optional Bootstrap components as you like
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/tables";
+
+// 5. Add additional custom code here
+$table-bg:                          #FFF;
+.quartet-green-bg{
+  background-color: $quartet-green;
+}
+
+.quartet-gray-bg{
+  background-color: $quartet-gray;
+  height: 40px;
+}
+
+.quartet-dark-bg{
+  background-color: $quartet-bg;
+  height: 40px;
+}
+
+.quartet-brand-padding{
+  height: 60px;
+  padding: 7px;
+}
+
+.quartet-padding-sm{
+  padding: 5px;
+}
+
+.quartet-padding-md{
+  padding: 10px;
+}
+
+.quartet-padding-lg{
+  padding: 15px;
+}
+

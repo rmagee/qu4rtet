@@ -15,7 +15,7 @@ from os import path
 
 # DEBUG
 # ------------------------------------------------------------------------------
-DEBUG = env.bool('DJANGO_DEBUG', default=False)
+DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 print('Debug set to: %s' % env.bool('DJANGO_DEBUG', True))
 # SECRET CONFIGURATION
@@ -26,10 +26,10 @@ SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
 # Mail settings
 # ------------------------------------------------------------------------------
-
-EMAIL_PORT = 1025
-
-EMAIL_HOST = env('EMAIL_HOST', default='localhost')
+#
+# EMAIL_PORT = 1025
+#
+# EMAIL_HOST = env('EMAIL_HOST', default='localhost')
 
 # CACHING
 # ------------------------------------------------------------------------------
@@ -40,10 +40,7 @@ CACHES = {
     }
 }
 
-# django-debug-toolbar
-# ------------------------------------------------------------------------------
-MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
-INSTALLED_APPS += ['debug_toolbar',]
+
 
 INTERNAL_IPS = ['127.0.0.1', '10.0.2.2', ]
 
@@ -55,12 +52,7 @@ if os.environ.get('USE_DOCKER') == 'yes':
     ip = socket.gethostbyname(socket.gethostname())
     INTERNAL_IPS += [ip[:-1] + '1']
 
-DEBUG_TOOLBAR_CONFIG = {
-    'DISABLE_PANELS': [
-        'debug_toolbar.panels.redirects.RedirectsPanel',
-    ],
-    'SHOW_TEMPLATE_CONTEXT': True,
-}
+
 
 # django-extensions
 # ------------------------------------------------------------------------------
@@ -68,7 +60,8 @@ INSTALLED_APPS += ['django_extensions', ]
 
 # uncomment for django admin
 # -----------------------------------------------------------------------------
-# INSTALLED_APPS += ['django.contrib.admin']
+if 'django.contrib.admin' not in INSTALLED_APPS:
+    INSTALLED_APPS += ['django.contrib.admin']
 
 # TESTING
 # ------------------------------------------------------------------------------
@@ -80,12 +73,12 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 ########## END CELERY
 
 # When not running in debug mode
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 # get the logging path from the .env file
 CELERYD_HIJACK_ROOT_LOGGER = False
 # get the logging path from the .env file
-LOGGING_PATH = env.str('LOGGING_PATH', '/var/quartet')
+LOGGING_PATH = env.str('LOGGING_PATH', '/tmp')
 file_path = os.path.join(LOGGING_PATH, 'quartet.log')
 print('Logging to path %s' % file_path)
 # check to make sure that there are write rights to the log location
@@ -94,7 +87,7 @@ if not os.access(LOGGING_PATH, os.W_OK):
                   'does not currently have rights to write too.  The '
                   'account which needs these rights is typically that '
                   'of the web server or process running the celery '
-                  'daemon.')
+                  'daemon.' % file_path)
 print('Logging rights are confirmed.')
 LOGGING_LEVEL=env.str('LOGGING_LEVEL', 'WARNING')
 LOGGING = {
@@ -107,7 +100,8 @@ LOGGING = {
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s '
-                      '%(process)d %(thread)d %(message)s'
+                      '%(process)d %(thread)d %(funcName)s %(lineno)d '
+                      '%(message)s'
         },
     },
     'handlers': {
@@ -141,3 +135,8 @@ pil_logger.setLevel(logging.INFO)
 
 # allow restful registration API endpoints
 ENABLE_REGISTRATION = False
+
+try:
+    from .dev_settings import * # noqa
+except ImportError:
+    print('No dev settings found.')

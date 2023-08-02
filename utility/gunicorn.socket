@@ -1,0 +1,9 @@
+[Unit]
+Description=gunicorn qu4rtet socket
+
+[Socket]
+ListenStream=/run/qu4rtet.sock
+User=www-data
+
+[Install]
+WantedBy=sockets.target

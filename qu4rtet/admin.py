@@ -12,16 +12,38 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Copyright 2018 SerialLab Corp.  All rights reserved.
-from django.contrib.admin import AdminSite
-from quartet_epcis.models import entries
-from quartet_epcis import admin
+from quartet_epcis import admin as epcis_admin
+from quartet_capture import admin as capture_admin
+from list_based_flavorpack import admin as lbf_admin
+from serialbox import admin as sb_admin
+from quartet_output import admin as output_admin
+from quartet_masterdata import admin as md_admin
+from quartet_templates import admin as t_admin
+from django.contrib.auth.models import User, Group
+from django.contrib.auth.admin import GroupAdmin, UserAdmin
+from django.contrib import admin
 
-class Qu4rtetAdminSite(AdminSite):
-    site_header = 'QU4RTET Administration'
+class QuartetAdminSite(admin.AdminSite):
+    site_header = "QU4RTET Administration"
 
+class QUserAdmin(UserAdmin):
+    list_filter = ()
+    filter_horizontal = ()
 
+admin_site = QuartetAdminSite(name='qu4rtetadmin')
+admin_site.register(Group, GroupAdmin)
+admin_site.register(User, QUserAdmin)
 
+epcis_admin.register_to_site(admin_site)
+capture_admin.register_to_site(admin_site)
+lbf_admin.register_to_site(admin_site)
+output_admin.register_to_site(admin_site)
+md_admin.register_to_site(admin_site)
+t_admin.register_to_site(admin_site)
+sb_admin.register_to_site(admin_site)
 
-admin_site = Qu4rtetAdminSite(name='qu4rtetadmin')
-
-admin.register_to_site(admin_site)
+try:
+    from qu4rtet.local_admin import register_admins
+    register_admins(admin_site)
+except ImportError:
+    print('No local_admin module detected.')

@@ -1,0 +1,18 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/srv/qu4rtet
+ExecStart=/home/ec2-user/.virtualenvs/qu4rtet/bin/gunicorn --workers 3 --bind unix:/srv/qu4rtet/qu4rtet.sock config.wsgi:application
+EnvironmentFile=/srv/qu4rtet/.env
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+

@@ -92,6 +92,7 @@ def get_values():
             'DJANGO_AWS_STORAGE_BUCKET_NAME',
             'DJANGO_MAILGUN_API_KEY',
             'DJANGO_SERVER_EMAIL',
+            'DJANGO_ENABLE_ADMIN',
             'MAILGUN_SENDER_DOMAIN',
             'USE_SENTRY',
             'DJANGO_SENTRY_DSN',
@@ -105,6 +106,14 @@ def get_values():
             'ELASTIC_APM',
             'INTERNAL_IPS',
             'LOGGING_LEVEL',
+            'DJANGO_ADMINS',
+            'DJANGO_EMAIL_HOST',
+            'DJANGO_EMAIL_USE_TLS',
+            'DJANGO_EMAIL_PORT',
+            'DJANGO_EMAIL_HOST_USER',
+            'DJANGO_EMAIL_HOST_PASSWORD',
+            'DJANGO_DEFAULT_FROM_EMAIL',
+            'DJANGO_EMAIL_SUBJECT_PREFIX'
         ]
         names = ['/%s/%s' % (parameter_group, name) for name in names]
         lists = list(chunks(names, 10))
@@ -119,8 +128,7 @@ def get_values():
                 name = os.path.basename(parameter['Name'])
                 os.environ[name] = parameter['Value']
                 found_parameters[name] = parameter['Value']
-                logger.info('Setting os.environ key %s to %s',
-                            name, parameter['Value'])
+                logger.info('Setting os.environ key %s', name)
     else:
         print('No parameter group was defined in the user-data.')
 

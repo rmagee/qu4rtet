@@ -1,0 +1,19 @@
+[Unit]
+Description=the qu4rtet gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+Type=notify
+User=www-data
+# uses the celery group since synchronous task execution utilizes all of the same resources
+Group=celery
+WorkingDirectory=/srv/qu4rtet
+ExecStart=/home/ubuntu/.virtualenvs/qu4rtet/bin/gunicorn --workers 3 --bind unix:/run/qu4rtet.sock config.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
