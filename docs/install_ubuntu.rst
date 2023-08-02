@@ -187,11 +187,10 @@ First switch out of the postgres user account by typing exit:
 
     exit
 
-Then run the makemigrationsm, nigrate and collectstatic commands
+Then run the migrate and collectstatic commands
 
 .. code-block:: text
 
-    sudo python3 manage.py makemigrations
     sudo python3 manage.py migrate
     sudo python3 manage.py collectstatic --no-input
 
